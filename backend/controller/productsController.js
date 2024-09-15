@@ -1,5 +1,6 @@
 /* Since exporting Single Function, we need to destructure */
 import Product from "../models/products.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
 /* 
     Do not miss await for Storage Operations
@@ -16,14 +17,16 @@ export const newProduct = async(req, res) => {
 }
 
 // Get single product details => /api/v1/products/:id
-export const getProductDetails = async(req, res) => {
+export const getProductDetails = async(req, res, next) => {
     const product = await Product.findById(req?.params?.id)
     /* 
         Notice how we are sending back an Error
      */
     if(!product){
-       return res.status(404).json({error : "Product not found"})
+        console.log(`Calling the Error`)
+       return next(new ErrorHandler("Product not found", 404))
     }
+    
     return res.status(200).json({product})
 }
 
