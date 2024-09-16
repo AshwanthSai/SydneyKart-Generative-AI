@@ -3,6 +3,16 @@ const app = express();
 
 
 import dotenv from "dotenv"
+
+// Handling Unhandled Exception Error
+process.on("uncaughtException", (err) => {
+    console.log(`Error : ${err}`)
+    console.log(`Shutting down error due to Uncaught Exception`)
+    process.exit(1)
+})
+
+
+
 dotenv.config({path : "backend/config/.env"})
 
 // Connect to DB
@@ -14,7 +24,8 @@ app.use(express.json())
 
 //Import All Routes
 import productRoutes from "./routes/products.js"
-import { errorMiddleware } from "./middlewears/errors.js";
+import { errorMiddleware } from "./middlewares/errors.js";
+
 
 app.use("/api/v1",productRoutes)
 /* 
@@ -27,6 +38,7 @@ const server = app.listen(process.env.PORT, () => {
     console.log(`Server Listening ${process.env.PORT}, on ${process.env.NODE_ENV}`)
 })
 
+// Handling unHandled Rejection
 process.on("unhandledRejection", (err) => {
     console.log(`Error : ${err}`)
     console.log(`Server shutting down due to unhandled Rejection`)
@@ -41,3 +53,6 @@ process.on("unhandledRejection", (err) => {
         process.exit(1)
     })
 })
+
+
+
