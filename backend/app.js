@@ -24,10 +24,12 @@ app.use(express.json())
 
 //Import All Routes
 import productRoutes from "./routes/products.js"
+import auth from "./routes/auth.js"
 import { errorMiddleware } from "./middlewares/errors.js";
 
 
 app.use("/api/v1",productRoutes)
+app.use("/api/v1",auth)
 /* 
 If you attach to APP configuration, console.log will not pop up,
 because it is a different process.
