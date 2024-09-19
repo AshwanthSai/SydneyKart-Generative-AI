@@ -88,6 +88,11 @@ const productSchema = new mongoose.Schema({
             },
         },
     ],
+    user : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User",
+        required: true
+    },
 }, {timestamps : true}); // TimeStamps adds an CreatedAt and UpdatedAt field to the Document.
 
 /* A document called products will be created in the Collection */

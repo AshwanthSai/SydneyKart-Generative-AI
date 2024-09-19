@@ -22,6 +22,11 @@ connectDB();
 //Parses data in Chunks and appends it to the Body
 app.use(express.json())
 
+
+// Reading Cookies in Chunk and Appending to Req Body
+import cookieParser from 'cookie-parser'
+app.use(cookieParser())
+
 //Import All Routes
 import productRoutes from "./routes/products.js"
 import auth from "./routes/auth.js"

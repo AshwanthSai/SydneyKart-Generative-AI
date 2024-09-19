@@ -28,6 +28,9 @@ export const getProducts = catchAsyncError(async(req, res,next) => {
 
 // Create a New Product => /api/v1/admin/products
 export const newProduct = catchAsyncError(async(req, res,next) => {
+    //req.user is added via isAuthenticated Middleware
+    req.body.user = req.user._id;
+
     const product = await Product.create(req.body)
     return res.status(200).json(product);
 })
