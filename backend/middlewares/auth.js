@@ -2,6 +2,10 @@ import User from "../models/users.js";
 import ErrorHandler from "../utils/errorHandler.js"
 import jwt from "jsonwebtoken";
 
+/* 
+    Middleware = Auxillary Controllers  
+*/
+
 export const isAuthenticatedUser = async(req,res,next) => {
     const {token} = req.cookies
 

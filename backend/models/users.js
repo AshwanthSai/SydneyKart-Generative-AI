@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import crypto from crypto;
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -61,7 +61,8 @@ userSchema.methods.getJwtToken = function() {
 
 /* Comparing entered password and hashed password */
 userSchema.methods.comparePassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password)
+    console.log(enteredPassword)
+    return await bcrypt.compare(String(enteredPassword), this.password)
 }
 
 /* Generating a Password Reset Token */
@@ -72,12 +73,9 @@ userSchema.methods.getResetPasswordToken = function() {
     //Random Hexadecimal string that is 64 characters long.
     this.resetPasswordToken = hash;
     this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
-    
+
     return token;
 }
-
-
-
 
 
 export default mongoose.model("User", userSchema);

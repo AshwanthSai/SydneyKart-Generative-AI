@@ -5,6 +5,7 @@ import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth.js";
 
 const router = express.Router()
 
+//If logged in, the cookie will have JWT.
 //isAuthenticated Middleware will add user object to req, if authenticated.
 router.route("/products").get(getProducts)
 router.route("/products/:id").get(getProductDetails)
