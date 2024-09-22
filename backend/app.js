@@ -29,12 +29,14 @@ app.use(cookieParser())
 
 //Import All Routes
 import productRoutes from "./routes/products.js"
-import auth from "./routes/auth.js"
+import authRoutes from "./routes/auth.js"
+import orderRoutes from "./routes/order.js"
 import { errorMiddleware } from "./middlewares/errors.js";
 
 
 app.use("/api/v1",productRoutes)
-app.use("/api/v1",auth)
+app.use("/api/v1",authRoutes)
+app.use("/api/v1",orderRoutes)
 /* 
 If you attach to APP configuration, console.log will not pop up,
 because it is a different process.
