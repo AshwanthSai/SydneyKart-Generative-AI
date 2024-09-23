@@ -13,7 +13,8 @@ const seedProducts = async() => {
         await Product.deleteMany();
         console.log("Products Collection Cleared")
 
-        await Product.insertMany(products)
+        // Because initial data does not have a User ID
+        await Product.insertMany(products, { validateBeforeSave: false })
         console.log("Products are inserted")
 
         process.exit();
