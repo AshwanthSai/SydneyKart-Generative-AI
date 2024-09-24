@@ -66,6 +66,9 @@ const productSchema = new mongoose.Schema({
         type : Number, 
         default : 0
     },
+    /* 
+        Array of user reviews 
+    */
     reviews : [
         {
             user : {

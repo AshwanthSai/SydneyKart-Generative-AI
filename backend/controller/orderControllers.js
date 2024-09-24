@@ -170,5 +170,3 @@ export const deleteOrder = catchAsyncErrors(async(req,res,next) => {
         message : `Order ${orderId} has not been deleted`
     })
 })
-
-
