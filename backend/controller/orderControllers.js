@@ -153,4 +153,22 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+// Update Order Status - //{{DOMAIN}}/api/v1/admin/orders/:id
+// This is a Protected Admin Only Route. 
+export const deleteOrder = catchAsyncErrors(async(req,res,next) => {
+    const orderId = req.params.id; 
+    const order = await Order.findById(orderId);
+
+    if(!order) {
+        return next(new ErrorHandler(`Order ${orderId} not found`, 404))
+    }
+
+    await order.deleteOne()
+
+    res.status(200).json({
+        success : true,
+        message : `Order ${orderId} has not been deleted`
+    })
+})
+
 

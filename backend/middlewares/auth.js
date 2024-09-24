@@ -27,7 +27,7 @@ export const authorizeRoles = (...roles) => {
    // Step 1: Higher-order function
    return (req, res, next) => { // Step 2: Middleware function
     // Check if the user's role is included in the allowed roles
-    console.log(req.user)
+    // console.log(req.user)
         if (!roles.includes(req.user.role)) { // Step 3: Role validation
             return next(new ErrorHandler(`Role ${req.user.role} is not allowed to access this resource`, 403));
         }
