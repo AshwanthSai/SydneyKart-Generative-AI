@@ -3,7 +3,6 @@ import {registerUser,loginUser,logoutUser,forgotPassword,resetPassword, getUserP
 import {isAuthenticatedUser,authorizeRoles} from "../middlewares/auth.js"
 
 const router = express.Router()
-/* Create a /register endpoint and Match get requests with getProducts function*/
 
 router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)

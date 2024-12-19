@@ -1,11 +1,10 @@
 import express from "express";
 //Import all Controllers
 import {getProductDetails, getProducts, newProduct, updateProduct, deleteProduct, createProductReview, getProductReviews, deleteProductReview} from "../controller/productsController.js";
-import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth.js";
+import {isAuthenticatedUser, authorizeRoles} from "../middlewares/auth.js";
 
 const router = express.Router()
 
-//If logged in, the cookie will have JWT.
 //isAuthenticated Middleware will add user object to req, if authenticated.
 router.route("/products").get(getProducts)
 router.route("/products/:id").get(getProductDetails)

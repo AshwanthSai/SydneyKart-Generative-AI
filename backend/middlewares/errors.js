@@ -3,7 +3,6 @@ import ErrorHandler from "../utils/errorHandler.js";
 
 // Middleware for handling errors
 export const errorMiddleware = (err, req, res, next) => {
-
     let error = {
         statusCode : err?.statusCode || 500,
         message : err?.message || "Internal Server Error",
@@ -26,9 +25,11 @@ export const errorMiddleware = (err, req, res, next) => {
     }
     
     // Duplicate entry found in db, when there is a Unique Constraint
-    if(err.code == "11000") {
-        const resource = Object.keys(err.keyPattern)
-        error = new ErrorHandler(`Duplicate ${resource}`, 404)
+    if(err?.code === 11000) {
+        const resource = Object.keys(err?.errorResponse?.keyPattern)
+        req.error = new ErrorHandler(`Duplicate ${resource}`, 409)
+        return next();
+        console.log(`Here`)
     } 
 
     // Expired JWT Token
@@ -50,7 +51,7 @@ export const errorMiddleware = (err, req, res, next) => {
             stack : err.stack
         })
     } 
-    // Process is Global, env is the field we are interested in.
+    // If in production, send back a JSON response.
     if(process.env.NODE_ENV==="PRODUCTION")  {
       return res.status(error.statusCode).json({
             message : error.message,
