@@ -7,7 +7,6 @@ export const errorMiddleware = (err, req, res, next) => {
         statusCode : err?.statusCode || 500,
         message : err?.message || "Internal Server Error",
     }
-
     // For Handling Mongoose ID Error 
     if(err.name == "CastError") {
         // 404 == Invalid ID
@@ -29,7 +28,6 @@ export const errorMiddleware = (err, req, res, next) => {
         const resource = Object.keys(err?.errorResponse?.keyPattern)
         req.error = new ErrorHandler(`Duplicate ${resource}`, 409)
         return next();
-        console.log(`Here`)
     } 
 
     // Expired JWT Token
@@ -41,9 +39,7 @@ export const errorMiddleware = (err, req, res, next) => {
      if(err.message == "JsonWebTokenError") {
         error = new ErrorHandler(`JSON Web Token is invalid`, 404)
     } 
-
-
-
+    
     if(process.env.NODE_ENV==="DEVELOPMENT") {
       return res.status(error.statusCode).json({
             message : error.message,
@@ -51,12 +47,20 @@ export const errorMiddleware = (err, req, res, next) => {
             stack : err.stack
         })
     } 
+
     // If in production, send back a JSON response.
     if(process.env.NODE_ENV==="PRODUCTION")  {
       return res.status(error.statusCode).json({
             message : error.message,
         })
     }
+
+    // Default case for any other environment
+    return res.status(error.statusCode).json({
+        message: error.message,
+        error: err,
+        stack: err.stack
+    });
 }
 
 

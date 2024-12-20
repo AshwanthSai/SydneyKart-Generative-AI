@@ -34,16 +34,6 @@ app.use("/api/v1",orderRoutes)
 // Sanitizes the error and appends to req.error
 app.use(errorMiddleware)
 
-app.use((err, req, res, next) => {
-    console.log(`Here`)
-    if (req.error) {
-        return res.status(req.error.statusCode).json({
-            message: req.error.message,
-        });
-    }
-    next(err); // Pass the error to the default Express error handler
-});
-
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server Listening ${process.env.PORT}, on ${process.env.NODE_ENV}`)
 })

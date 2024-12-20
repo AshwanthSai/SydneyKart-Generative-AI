@@ -6,17 +6,21 @@ import { getResetPasswordTemplate } from "../utils/emailTemplate.js"
 import { sendEmail } from "../utils/sendEmail.js"
 import crypto from "crypto";
 
-
 // {{DOMAIN}}/api/v1/register
-export const registerUser = catchAsyncErrors(async(req,res,next) => {
-    const {name,email,password} = req.body
-    const user = await User.create({name,email,password})
-    /* 
-        In summary, status code **201** signifies that a request has been fulfilled 
-        and has resulted in the creation of one or more resources.
-    */
-   const token = user.getJwtToken();
-   sendToken(user,201,res)
+export const registerUser = catchAsyncErrors(async (req,res,next) => {
+     const {name,email,password} = req.body
+     // Check if user already exists
+     const existingUser = await User.findOne({ email });
+     if (existingUser) {
+         return next(new ErrorHandler(400, "User already exists with this email"))
+     }
+     const user = await User.create({name,email,password})
+     /* 
+         In summary, status code **201** signifies that a request has been fulfilled 
+         and has resulted in the creation of one or more resources.
+     */
+    const token = user.getJwtToken();
+    sendToken(user,201,res)
 })
 
 // {{DOMAIN}}/api/v1/login
@@ -76,6 +80,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
     // Redirect Link within Email Template
     const resetUrl = `${process.env.DOMAIN}/api/v1/password/reset/${resetToken}`;
+    // Returns HTML as a JS String.
     const message = getResetPasswordTemplate(user?.name, resetUrl);
 
     // Send Email
@@ -89,7 +94,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
         // Remember any form of Network write or db write is Async  
         await sendEmail(options);
 
-        res.status(200).json({
+        return res.status(200).json({
             message: `Email sent to ${user.email}`,
         });
     } catch (error) {
@@ -97,11 +102,12 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save();
-
+        console.log(`Here`)
         // Return the error through next
-        return next(new ErrorHandler(error.message, 500));
+        return next(new ErrorHandler(error?.message, 500));
     }
 });
+
 
 // Reset Password - {{DOMAIN}}/api/v1/password/reset/:resetToken`
 export const resetPassword = catchAsyncErrors(async (req, res, next) => {

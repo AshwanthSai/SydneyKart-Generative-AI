@@ -10,9 +10,9 @@ export const sendToken = (user, statusCode, res) => {
             7 days * 24 hours/day * 60 minutes/hour * 60 seconds/minute * 1000 milliseconds/second 
         */
         expiry : Date.now() + process.env.COOKIE_EXPIRE *  24 * 60 * 60 * 1000,
-        // httpOnly : true
+        // httpOnly : true, 
+        secure: process.env.NODE_ENV === 'production' // Ensures the cookie is only sent over HTTPS in production
     }
-
     // Create a JWT Token
     const token  = user.getJwtToken();
     const message = res.locals.data;

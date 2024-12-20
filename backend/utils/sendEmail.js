@@ -24,4 +24,5 @@ export const sendEmail = async (options) => {
     };
 
     await transport.sendMail(message)
+    console.log(`Here`)
 }
