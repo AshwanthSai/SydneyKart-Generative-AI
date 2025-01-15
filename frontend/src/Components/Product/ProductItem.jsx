@@ -10,7 +10,7 @@ const ProductItem = ({product}) => {
             <div className="card p-3 rounded"> {/* Card Photo */}
                 <img
                 className="card-img-top mx-auto"
-                src={product?.images[0]?.url}
+                src={product?.images ? `${product.images[0].url}` : "/images/default_product.png"}
                 alt={product?.name}
                 />
             <div className="card-body ps-3 d-flex justify-content-center flex-column">
@@ -18,7 +18,6 @@ const ProductItem = ({product}) => {
                 <Link to = {`products/${product._id}`}>{product?.name}</Link>
             </h5>
             <div className="ratings mt-auto d-flex"> {/* Adds Five Stars to the Product Card */}
-
                 <ReactStars
                     count={5}
                     size={24}
@@ -27,7 +26,6 @@ const ProductItem = ({product}) => {
                     value={product?.ratings}
                     edit={false}
                  />
-
                 <span id="no_of_reviews" className="pt-2 ps-2"> {/* {""} Used to add a Space */}
                 {" "}
                 ({product?.numOfReviews})

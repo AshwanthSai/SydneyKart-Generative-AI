@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MetaData from "./MetaData";
 import { useGetProductsQuery } from "../services/productAPI";
 import ProductItem from "./Product/ProductItem";
 import { Loader } from "./Layout/Loader";
+import { toast } from 'react-toastify';
+import CustomPagination from "./Layout/CustomPagination";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
-  const {data, isLoading, error} = useGetProductsQuery();
-  
+  /* 
+    Fetch params from URL and send request
+    Aux Pagination Component
+  */
+  let [searchParams] = useSearchParams();
+  let page = Number(searchParams.get("page")) || 1;
+  let params = {page}
+  const {data, isLoading, error, isError} = useGetProductsQuery(params);
+
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(error.data.message)
+    }
+  }, [isError,error])
+
   if(isLoading) {
     return <Loader/>
   }
@@ -28,6 +45,7 @@ const Home = () => {
             </div>
           </section>
         </div>
+        <CustomPagination filteredProductsCount = {data?.filteredProductsCount} resPerPage = {data?.resPerPage} />
       </div>
     </>
   );
