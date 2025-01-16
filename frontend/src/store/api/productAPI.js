@@ -4,18 +4,26 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({
   reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: String(process.env.REACT_APP_BACKEND_URL),
+  }),
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (params) => ({
-          url : "products", 
+          url : "/products", 
           params : {
-            page : params?.page  
+            page : params?.page,
+            keyword : params?.keyword,
+            /* Greater than min value, less than max value, (x,y) */
+            "price[gte]": params?.min,
+            "price[lte]": params?.max,
+            category: params?.category,
+            ratings: params?.ratings,
           }
         })
     }),
     getProductDetails: builder.query({
-      query: (id) => `products/${id}`,
+      query: (id) => `/products/${id}`,
     }),
 
   }),

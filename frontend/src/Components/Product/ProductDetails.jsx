@@ -2,7 +2,7 @@ import React, { act, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Loader } from "../Layout/Loader";
 import { toast } from "react-toastify";
-import { useGetProductDetailsQuery } from "../../services/productAPI";
+import { useGetProductDetailsQuery } from "../../store/api/productAPI";
 import ReactStars from 'react-stars'
 
 const ProductDetails = () => {

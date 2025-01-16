@@ -1,22 +1,37 @@
 import React, { useEffect } from "react";
 import MetaData from "./MetaData";
-import { useGetProductsQuery } from "../services/productAPI";
+import { useGetProductsQuery } from "../store/api/productAPI";
 import ProductItem from "./Product/ProductItem";
 import { Loader } from "./Layout/Loader";
 import { toast } from 'react-toastify';
 import CustomPagination from "./Layout/CustomPagination";
 import { useSearchParams } from "react-router-dom";
+import Filters from "./Layout/Filters";
 
 const Home = () => {
   /* 
     Fetch params from URL and send request
-    Aux Pagination Component
+    Aux Pagination
   */
   let [searchParams] = useSearchParams();
   let page = Number(searchParams.get("page")) || 1;
-  let params = {page}
-  const {data, isLoading, error, isError} = useGetProductsQuery(params);
+  let keyword = searchParams.get("keyword") || "";
+  let min = Number(searchParams.get("min")) || "";
+  let max = Number(searchParams.get("max")) || "";
+  let category = searchParams.get("category") || "";
+  let ratings = searchParams.get("ratings") || "";
 
+
+  let params = {page, keyword}
+  /* 
+    - If min or max is empty, do no append as search query 
+  */
+  if(min) params.min = min;
+  if(max) params.max = max;
+  if(category) params.category = category;
+  if(ratings) params.ratings = ratings;
+  const {data, isLoading, error, isError} = useGetProductsQuery(params);
+  const columnSize = keyword ? 3 : 4;
 
   useEffect(() => {
     if(isError) {
@@ -32,15 +47,22 @@ const Home = () => {
     <>
     <MetaData title = "Buy Best Products Online "/>
       <div className="row">
-        <div className="col-6 col-md-12">
+        {keyword && (
+          <div className="col-6 col-md-3 mt-5">
+            <Filters/>
+          </div>
+        )}
+        <div className={`col-6 ${keyword ? "col-md-9" : "col-md-12"}`} >
           <h1 id="products_heading" className="text-secondary"> 
-            Latest Products
+          {keyword
+              ? `${data?.products?.length} Products found with keyword: ${keyword}`
+              : "Latest Products"}
           </h1>
           <section id="products" className="mt-5">
             <div className="row">
             {/* my is top and bottom */}
             {data && data.products.map(product => {
-                return <ProductItem product = {product}/>
+                return <ProductItem product = {product} columnSize ={columnSize}/>
               })}
             </div>
           </section>

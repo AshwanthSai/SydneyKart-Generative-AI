@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
 
-const ProductItem = ({product}) => {
-  console.log(product);
+const ProductItem = ({product, columnSize}) => {
   return (
     <>
-        <div className="col-sm-12 col-md-6 col-lg-3 my-3">
+        <div className={`col-sm-12 col-md-6 col-lg-${columnSize} my-3`}>
             <div className="card p-3 rounded"> {/* Card Photo */}
                 <img
                 className="card-img-top mx-auto"
