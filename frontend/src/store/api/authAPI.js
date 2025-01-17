@@ -28,7 +28,6 @@ export const authApi = createApi({
       query: (body) => ({
         url: `/login`,
         method: 'POST',
-        keepUnusedDataFor: 1,
         body,
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
@@ -48,7 +47,6 @@ export const authApi = createApi({
       query: (body) => ({
         url: `/register`,
         method: 'POST',
-        keepUnusedDataFor: 1,
         body,
     }),
     async onQueryStarted(id, { dispatch, queryFulfilled }) {
@@ -79,10 +77,33 @@ export const authApi = createApi({
         }
       }
     }),
-    
+    updatePassword: build.mutation({
+      query: (body) => ({
+        url: `/password/update`,
+        method: 'PUT',
+        body,
+      })
+   }),
+   forgotPassword: build.mutation({
+      query: (body) => ({
+        url: `/password/forgot`,
+        method: 'POST',
+        body,
+      })
+   }),
+   resetPassword: build.mutation({
+    query: ({token, body}) => ({
+      url: `/password/reset/${token}`,
+      method: 'PUT',
+      body: body
+    })
   }),
+  })
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery} = authApi  
+export const { useLoginMutation, useRegisterMutation,
+               useLazyLogoutQuery, useUpdatePasswordMutation,
+               useForgotPasswordMutation, useResetPasswordMutation
+              } = authApi  

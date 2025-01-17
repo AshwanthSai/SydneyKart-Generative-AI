@@ -34,8 +34,6 @@ const Login = () => {
           Error will be set to false. Triggering useEffect
       */
       if(isAuthenticated) {
-        console.log(isAuthenticated)
-        console.log(error)
         navigate("/")
       }
       if(isError) {
