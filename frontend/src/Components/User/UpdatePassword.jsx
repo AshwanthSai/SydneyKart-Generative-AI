@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useUpdatePasswordMutation } from "../../store/api/authAPI";
 import { toast } from "react-toastify";
+import MetaData from "../Layout/MetaData";
 
 const UpdatePassword = () => {
     /* For Handling Form */
@@ -41,6 +42,8 @@ const UpdatePassword = () => {
     }, [isSuccess, error, user])
 
   return (
+    <>
+    <MetaData title={"Update Password"} />
     <UserLayout>
     <div className="row wrapper">
         <div className="col-10 col-lg-8">
@@ -78,6 +81,7 @@ const UpdatePassword = () => {
         </div>
         </div>
     </UserLayout>
+    </>
   )
 }
 export default UpdatePassword;

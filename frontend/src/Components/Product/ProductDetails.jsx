@@ -4,11 +4,16 @@ import { Loader } from "../Layout/Loader";
 import { toast } from "react-toastify";
 import { useGetProductDetailsQuery } from "../../store/api/productAPI";
 import ReactStars from 'react-stars'
+import { useDispatch, useSelector } from "react-redux";
+import { setCartItem } from "../../store/features/cartSlice";
+import MetaData from "../Layout/MetaData";
 
 const ProductDetails = () => {
       const {id} = useParams();
       const {data, isLoading, error, isError} = useGetProductDetailsQuery(id);
       const product = data?.product;
+      const dispatch = useDispatch();
+      const [productCount, setProductCount] = useState(1);
 
       useEffect(() => {
         if(isError) {
@@ -27,9 +32,43 @@ const ProductDetails = () => {
       if(isLoading) {
           return <Loader/>
       }
+
+      const increaseQty = () => {
+        let quantity = document.getElementById("product_quantity").value;
+        if(quantity == product?.stock) {
+          return;
+        } else {
+          setProductCount((productCount) => productCount + 1)
+        }
+      }
+
+      const decreaseQty = () => {
+        let quantity = document.getElementById("product_quantity").value;
+        if(quantity == 1) {
+          return;
+        } else {
+          setProductCount((productCount) => productCount - 1)
+        }
+      }
+
+    const setItemToCart = async() => {
+        const cartItem = {
+          product: product?._id,
+          name: product?.name,
+          price: product?.price,
+          image: product?.images[0]?.url,
+          stock: product?.stock,
+          productCount,
+        };
+
+      await dispatch(setCartItem(cartItem));
+      toast.success("Item added to Cart");
+    }
         
 
       return (
+        <>
+        <MetaData title={"Product Details"} />
         <div className="row d-flex justify-content-around">
         <div className="col-12 col-lg-5 img-fluid" id="product_image">
           <div className="p-3">
@@ -85,20 +124,21 @@ const ProductDetails = () => {
   
           <p id="product_price">#{product?.price}</p>
           <div className="stockCounter d-inline">
-            <span className="btn btn-danger minus">-</span>
+            <span className="btn btn-danger minus" disabled = {productCount == 1 ? true : false} onClick={decreaseQty}>-</span>
             <input
+              id= "product_quantity"
               type="number"
               className="form-control count d-inline"
-              value="1"
+              value={productCount}
               readonly
             />
-            <span className="btn btn-primary plus">+</span>
+            <span className="btn btn-primary plus" disabled={productCount == product?.stock ? true : false} onClick={increaseQty}>+</span>
           </div>
           <button
             type="button"
             id="cart_btn"
             className="btn btn-primary d-inline ms-4"
-            disabled=""
+            onClick={setItemToCart}
           >
             Add to Cart
           </button>
@@ -123,6 +163,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      </>
       );
     };
     

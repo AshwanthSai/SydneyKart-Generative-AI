@@ -2,11 +2,14 @@ import React from "react";
 import UserLayout from "../Layout/UserLayout";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 
 const Profile = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth); 
   console.log(user)
   return (
+    <>
+    <MetaData title={"Profile"} />
     <UserLayout>
         <div className="container container-fluid">
         <h2 className="mt-5 ml-5">My Profile</h2>
@@ -30,6 +33,7 @@ const Profile = () => {
             </div>
         </div>
     </UserLayout>
+    </>
   )
 };
 

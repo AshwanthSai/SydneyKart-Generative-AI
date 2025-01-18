@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import UserLayout from "../Layout/UserLayout";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 
 const UploadAvatar = () => {
   const {user} = useSelector(state => state.auth)
@@ -45,6 +46,8 @@ const UploadAvatar = () => {
   }
 
   return (
+    <>
+    <MetaData title={"Upload Avatar"} />
     <UserLayout>
       <div className="row wrapper">
         <div className="col-10 col-lg-8">
@@ -87,6 +90,7 @@ const UploadAvatar = () => {
         </div>
       </div>
     </UserLayout>
+    </>
   )
 };
 

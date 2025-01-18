@@ -10,7 +10,7 @@ const MetaData = ({title}) => {
     <>
     <Helmet>
         <meta charSet="utf-8" />
-        <title>{title} - Shop IT</title>
+        <title>{title} - SydneyKart</title>
     </Helmet>
     </>
   )

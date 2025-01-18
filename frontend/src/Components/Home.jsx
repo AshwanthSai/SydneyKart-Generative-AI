@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MetaData from "./MetaData";
+import MetaData from "../Components/Layout/MetaData";
 import { useGetProductsQuery } from "../store/api/productAPI";
 import ProductItem from "./Product/ProductItem";
 import { Loader } from "./Layout/Loader";

@@ -3,6 +3,7 @@ import { useRegisterMutation } from "../../store/api/authAPI";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 
 const Register = () => {
     const [register, {data, isLoading, error, isError}] = useRegisterMutation();
@@ -41,6 +42,7 @@ const Register = () => {
 
   return (
     <>  
+        <MetaData title={"Register"} />
         <div className="row wrapper">
         <div className="col-10 col-lg-5">
             <form

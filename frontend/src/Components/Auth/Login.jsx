@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../store/api/authAPI";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import MetaData from "../Layout/MetaData";
 
 const Login = () => {
   const[email, setEmail] = useState("");
@@ -43,6 +44,7 @@ const Login = () => {
 
   return (
     <>
+        <MetaData title={"Login"} />
         <div className="row wrapper">
         <div className="col-10 col-lg-5">
             <form

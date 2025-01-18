@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "../../store/api/authAPI";
 import { toast } from "react-toastify";
+import MetaData from "../Layout/MetaData";
 
 const ForgotPassword = () => {
   
@@ -27,6 +28,8 @@ const ForgotPassword = () => {
     }, [isError, isSuccess])
 
   return ( 
+    <>
+    <MetaData title={"Forgot Password"} />
     <div className="row wrapper">
       <div className="col-10 col-lg-5">
         <form
@@ -55,6 +58,7 @@ const ForgotPassword = () => {
         </form>
       </div>
     </div>
+    </>
   )
 };
 

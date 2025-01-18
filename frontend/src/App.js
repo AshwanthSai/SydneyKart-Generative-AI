@@ -13,12 +13,14 @@ import UploadAvatar from './Components/User/UploadAvatar';
 import UpdatePassword from './Components/User/UpdatePassword';
 import ForgotPassword from './Components/Auth/ForgotPassword';
 import ResetPassword from './Components/Auth/ResetPassword';
+import Cart from './Components/Cart/Cart';
+import ShippingInfo from './Components/Cart/ShippingInfo';
 
 function App() {
   return (
     <>
         <Router>
-        <ToastContainer position="top-center" />
+        <ToastContainer autoClose={1500} position="top-center" />
           <Header/>
           <div className='container'>
             <Routes>
@@ -52,6 +54,17 @@ function App() {
                     <UpdatePassword />
                 </ProtectedComponent>
               }/>  
+
+            <Route path = "/cart" element={
+                    <Cart />
+            }/>  
+
+            <Route path = "/shipping" element={
+                <ProtectedComponent>
+                    <ShippingInfo />
+                </ProtectedComponent>}
+            />  
+
             </Routes>
           </div>
           <Footer/>

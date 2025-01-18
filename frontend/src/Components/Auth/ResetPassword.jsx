@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useResetPasswordMutation } from "../../store/api/authAPI";
 import { toast } from "react-toastify";
+import MetaData from "../Layout/MetaData";
 
 const ResetPassword = () => {
     const[passwordOne, setPasswordOne] = useState("");
@@ -38,6 +39,8 @@ const ResetPassword = () => {
     }, [isError, isSuccess])
 
   return (
+    <>
+    <MetaData title={"Reset Password"} />
     <div className="row wrapper">
       <div className="col-10 col-lg-5">
         <form
@@ -76,6 +79,7 @@ const ResetPassword = () => {
         </form>
       </div>
     </div>
+    </>
   )
 };
 
