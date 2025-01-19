@@ -15,6 +15,8 @@ import ForgotPassword from './Components/Auth/ForgotPassword';
 import ResetPassword from './Components/Auth/ResetPassword';
 import Cart from './Components/Cart/Cart';
 import ShippingInfo from './Components/Cart/ShippingInfo';
+import ConfirmOrder from './Components/Cart/ConfirmOrder';
+import PaymentMethod from './Components/Cart/PaymentMethod';
 
 function App() {
   return (
@@ -62,6 +64,18 @@ function App() {
             <Route path = "/shipping" element={
                 <ProtectedComponent>
                     <ShippingInfo />
+                </ProtectedComponent>}
+            />  
+
+            <Route path = "/confirm_order" element={
+                <ProtectedComponent>
+                    <ConfirmOrder />
+                </ProtectedComponent>}
+            />  
+
+            <Route path = "/payment_method" element={
+                <ProtectedComponent>
+                    <PaymentMethod />
                 </ProtectedComponent>}
             />  
 

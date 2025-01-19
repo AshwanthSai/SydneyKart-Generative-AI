@@ -23,7 +23,6 @@ export const userApi = createApi({
           // Checking if request is fulfilled
           const { data } = await queryFulfilled;
           // `onSuccess` side-effect
-          console.log(data);
           dispatch(setUser(data));
           dispatch(setIsAuthenticated(true));
         } catch (err) {

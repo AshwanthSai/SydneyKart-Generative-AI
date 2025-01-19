@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getPriceQuery } from "../../utils/filterHelper";
+import { getPriceQuery } from "../../utils/helper";
 import {PRODUCT_CATEGORIES} from "../../utils/constants";
 import ReactStars from "react-stars";
 

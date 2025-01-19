@@ -11,10 +11,6 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    if(cartItems.length === 0) {
-      return <h2>Your Cart is Empty</h2>
-    }
-
     const increaseQty = (item, itemQuantity) => () => {
       let newQuantity = itemQuantity + 1;
       if(newQuantity > item.stock) {
@@ -58,9 +54,11 @@ const Cart = () => {
 
   return (
     <>
-        <MetaData title={"Update Password"} />
-        <h2  className="my-3">Your Cart: <b>{cartItems.length}</b></h2>
-        <div className="row d-flex justify-content-between">
+        <MetaData title={"Cart"} />
+        {cartItems?.length == 0  ? <h2 className="mt-5">Your Cart is Empty</h2> : (
+          <>
+          <h2  className="mt-5">Your Cart: <b>{cartItems.length}</b></h2>
+          <div className="row d-flex justify-content-between">
         <div className="col-12 col-lg-8">
         <hr />
         {cartItems.map((item) => {
@@ -77,7 +75,7 @@ const Cart = () => {
                         />
                         </div>
                         <div className="col-5 col-lg-3">
-                        <Link to="/products/product1"> {item.name} </Link>
+                        <Link to={`/products/${item.product}`}> {item.name} </Link>
                         </div>
                         <div className="col-4 col-lg-2 mt-4 mt-lg-0">
                         <p id="card_item_price">${item.price}</p>
@@ -116,7 +114,9 @@ const Cart = () => {
               </button>
               </div>
           </div>
-        </div>
+          </div>
+          </>
+        )}
     </>
   )
 };

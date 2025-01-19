@@ -14,7 +14,6 @@ const ProductDetails = () => {
       const product = data?.product;
       const dispatch = useDispatch();
       const [productCount, setProductCount] = useState(1);
-
       useEffect(() => {
         if(isError) {
           toast.error(error?.data?.message)
@@ -35,7 +34,7 @@ const ProductDetails = () => {
 
       const increaseQty = () => {
         let quantity = document.getElementById("product_quantity").value;
-        if(quantity == product?.stock) {
+        if(quantity >= product?.stock) {
           return;
         } else {
           setProductCount((productCount) => productCount + 1)
@@ -44,7 +43,7 @@ const ProductDetails = () => {
 
       const decreaseQty = () => {
         let quantity = document.getElementById("product_quantity").value;
-        if(quantity == 1) {
+        if(quantity <= 1) {
           return;
         } else {
           setProductCount((productCount) => productCount - 1)
@@ -58,7 +57,7 @@ const ProductDetails = () => {
           price: product?.price,
           image: product?.images[0]?.url,
           stock: product?.stock,
-          productCount,
+          quantity : productCount,
         };
 
       await dispatch(setCartItem(cartItem));
@@ -134,11 +133,13 @@ const ProductDetails = () => {
             />
             <span className="btn btn-primary plus" disabled={productCount == product?.stock ? true : false} onClick={increaseQty}>+</span>
           </div>
+  
           <button
             type="button"
             id="cart_btn"
             className="btn btn-primary d-inline ms-4"
             onClick={setItemToCart}
+            disabled = {product?.stock <= 0 ? true : false}
           >
             Add to Cart
           </button>

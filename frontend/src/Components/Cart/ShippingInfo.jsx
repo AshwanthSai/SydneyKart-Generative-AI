@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import {countries} from 'countries-list'
 import { useDispatch, useSelector } from "react-redux";
 import {saveShippingData} from "../../store/features/cartSlice"
+import MetaData from "../Layout/MetaData";
+import { useNavigate } from "react-router-dom";
+import CheckoutSteps from "./CheckoutSteps";
 
 const countryList = Object.values(countries).map(country => country.name);
 
 const ShippingInfo = () => {
   const dispatch = useDispatch();
   const { shippingData : preExistingShippingdata } = useSelector(store => store.cart)
+  const navigate = useNavigate();
 
   const [shippingInfo, setShippingInfo] = useState({
     address : "",
@@ -20,15 +24,17 @@ const ShippingInfo = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(saveShippingData(shippingInfo))
+    navigate("/confirm_order")
   }
 
   useEffect(() => {
-    console.log(preExistingShippingdata)
     setShippingInfo(preExistingShippingdata)
   }, [preExistingShippingdata])
 
   return (
     <>
+    <CheckoutSteps shipping/>
+    <MetaData title="Shipping Info" />
      <div className="row wrapper mb-5">
       <div className="col-10 col-lg-5">
         <form
@@ -95,12 +101,11 @@ const ShippingInfo = () => {
               name="country"
               required
               value={shippingInfo.country}
-              onChange={e => setShippingInfo({...shippingInfo, country : e.target.value})}
+              onChange = {(e) => setShippingInfo({...shippingInfo, country : e.target.value})}
             >
-             {countryList.map((country) => {
-                return <option value="country">{country}</option>
-              })} 
-              
+             {countryList.map((country, index) => (
+                <option key={index} value={country}>{country}</option>
+              ))}
             </select>
           </div>
           <button id="shipping_btn" type="submit" className="btn w-100 py-2">

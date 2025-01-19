@@ -42,6 +42,7 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     saveShippingData: (state, action) => {
+      console.log(action.payload)
       state.shippingData = action.payload
       localStorage.setItem("shippingData", JSON.stringify(state.shippingData));
     },
