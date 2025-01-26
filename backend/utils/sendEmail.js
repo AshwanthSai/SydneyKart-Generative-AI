@@ -1,28 +1,26 @@
 import nodemailer from "nodemailer";
+/* 
+  - Mailtrap is the service which provides a server to send emails.
+  - Nodemailer is the library which we use to send emails from node.
+*/
+const sendEmail = async (options) => {
+  const transport = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    auth: {
+      user: process.env.SMTP_EMAIL,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
 
-export const sendEmail = async (options) => {
-    /* From Mailtrap Doc */
-    let transport = nodemailer.createTransport({
-        host: process.env.SMTP_HOST ,
-        port: process.env.SMTP_PORT,
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-        },
-    });
+  const message = {
+    from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
+    to: options.email,
+    subject: options.subject,
+    html: options.message,
+  };
 
-    /* From Nodemailer Doc */
-    /* 
-        Since we are testing, it is advisable to use a Dummy Server Email instead of 
-        Organization email.
-    */
-    let message = {
-        from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
-        to: options.email,
-        subject: options.subject,
-        html: options.message,
-    };
+  await transport.sendMail(message);
+};
 
-    await transport.sendMail(message)
-    console.log(`Here`)
-}
+export default sendEmail;

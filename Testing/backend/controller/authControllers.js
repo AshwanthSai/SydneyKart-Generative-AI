@@ -7,33 +7,49 @@ import { sendEmail } from "../utils/sendEmail.js"
 import crypto from "crypto";
 
 // {{DOMAIN}}/api/v1/register
-export const registerUser = catchAsyncErrors(async (req,res,next) => {
-     const {name,email,password} = req.body
-     // Check if user already exists
-     const existingUser = await User.findOne({ email });
-     if (existingUser) {
-         return next(new ErrorHandler(400, "User already exists with this email"))
-     }
-     const user = await User.create({name,email,password})
-     /* 
-         In summary, status code **201** signifies that a request has been fulfilled 
-         and has resulted in the creation of one or more resources.
-     */
-    const token = user.getJwtToken();
-    sendToken(user,201,res)
-})
+export const registerUser = catchAsyncErrors(async (req, res, next) => {
+    // 1. Track initial state
+    const debugState = {
+        initial: res._headersSent,
+        afterQuery: null,
+        afterCreate: null,
+        beforeResponse: null
+    };
+
+    // 2. User existence check
+    const existingUser = await User.exists({ email: req.body.email });
+    debugState.afterQuery = res._headerSent;
+
+    if (existingUser) {
+        return next(new ErrorHandler("User already exists", 409));
+    }
+
+    // 3. User creation
+    const user = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    });
+    debugState.afterCreate = res._headerSent;
+
+    // 4. Send response
+    debugState.beforeResponse = res._headerSent;
+    console.table(debugState);
+
+    return sendToken(user, 201, res);
+});
 
 // {{DOMAIN}}/api/v1/login
-export const loginUser = catchAsyncErrors(async(req,res,next) => {
+export const loginUser = catchAsyncErrors(async (req,res,next) => {
     const {email,password} = req.body
-
+    
     // Check if email & password has been sent.
     if(!email || !password) {
         return next(new ErrorHandler("Please enter email & password"), 400)
     }
-
+    console.log("res-here 1", res._headerSent)
     const user = await User.findOne({email}).select("+password")
-    
+    console.log("res-here 2", res._headerSent)
     // Check if user exists.
     if(!user) {
         return next(new ErrorHandler("Invalid email & password"), 401)
@@ -45,11 +61,11 @@ export const loginUser = catchAsyncErrors(async(req,res,next) => {
         return next(new ErrorHandler("Invalid password"), 401)
     }
 
-   const token = user.getJwtToken();
-   res.locals.data = {
-       request: "Success",
-       message: "Login successful",
-   }
+   // Means to pass data
+    res.locals.data = {
+        request: "Success",
+        message: "Login successful",
+    }
    sendToken(user,200,res)
 })
 
@@ -59,7 +75,7 @@ export const logoutUser = catchAsyncErrors(async(req,res,next) => {
         expires : new Date(Date.now()),
         httpOnly :true
     })
-    res.status(200).json({
+    return res.status(200).json({
         message : "Success"
     })
 })
@@ -140,7 +156,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
 // This is a Protected Route
 export const getUserProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user._id)
-    res.status(200).json({
+    return res.status(200).json({
         user
     })
 })
@@ -159,7 +175,7 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
     user.password = req.body.password;
     await user.save()
 
-    res.status(200).json({
+    return res.status(200).json({
         message : "Password updated successfully"
     })
 })
@@ -186,7 +202,7 @@ export const updateDetails = catchAsyncErrors(async (req, res, next) => {
         document returned and it does not pose any security or performance issues,
         then it is a good practice to send it back.
     */
-    res.status(200).json({
+    return res.status(200).json({
         message: "User details successfully updated",
         user, // Optionally return the updated user details
     });
@@ -202,7 +218,7 @@ export const getAllUsers = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("No users found"))
     }
 
-    res.status(200).json({
+    return res.status(200).json({
         users
     })
 });
@@ -219,7 +235,7 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler(`User not found with ${req.params.id}`, 404))
     }
 
-    res.status(200).json({
+    return res.status(200).json({
         user
     })
 });
@@ -244,7 +260,7 @@ export const updateUser = catchAsyncErrors(async (req, res, next) => {
         { new: true}
     )
     
-    res.status(200).json({
+    return res.status(200).json({
        user : {
         name : user.name,
         email : user.email,
@@ -269,8 +285,38 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) => {
     //! Remove user avatar from Cloudinary 
     await user.deleteOne()
 
-    res.status(200).json({
+    return res.status(200).json({
         message : "User deleted successfully",
     })
 });
 
+
+export const debugResponse = (req, res, next) => {
+    const steps = [];
+    const originalMethods = {
+        end: res.end.bind(res)
+    };
+
+    // Properly bound end method
+    res.end = function(...args) {
+        try {
+            steps.push({
+                method: 'end',
+                headersSent: this._headersSent,
+                timestamp: Date.now(),
+                stack: new Error().stack
+            });
+            return originalMethods.end.apply(this, args);
+        } catch (error) {
+            console.error('Error in end method:', error);
+            return originalMethods.end.apply(this, args);
+        }
+    }.bind(res);
+
+    // Log on finish with error handling
+    res.on('finish', () => {
+        console.table(steps);
+    });
+
+    next();
+};

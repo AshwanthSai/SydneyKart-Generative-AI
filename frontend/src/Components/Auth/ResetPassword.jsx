@@ -34,9 +34,9 @@ const ResetPassword = () => {
             toast.error(error.data.message)
         }
         if(isSuccess) {
-            toast.success("Email sent successfully")
+            toast.success("Password updated successfully")
         }
-    }, [isError, isSuccess])
+    }, [isError, isSuccess, error])
 
   return (
     <>

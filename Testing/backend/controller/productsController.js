@@ -138,7 +138,7 @@ export const createProductReview = catchAsyncError(async(req,res,next) => {
    await product.save({validateBeforeSave: false})
 
    /* Response code 200 for updating */
-   res.status(isReviewed ? 201 : 200).json({
+   return res.status(isReviewed ? 201 : 200).json({
     success : true
    })
 })
@@ -152,7 +152,7 @@ export const getProductReviews = catchAsyncError(async(req,res,next) => {
     return next(new ErrorHandler(`Product ${product} does not exist`, 404))
    }
 
-   res.status(200).json({
+   return res.status(200).json({
     success:"true",
     reviews : product.reviews
    })
@@ -175,7 +175,7 @@ export const deleteProductReview = catchAsyncError(async(req,res,next) => {
     product.reviews = modifiedReviews
 
     await product.save()
-    res.status(200).json({
+    return res.status(200).json({
         success : "true"
     })
 })

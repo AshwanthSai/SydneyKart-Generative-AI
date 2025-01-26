@@ -41,7 +41,7 @@ export const createOrder = catchAsyncErrors(async(req,res,next) => {
          // We only care of the User ID and not the entire object
     })
 
-    res.status(201).json({
+    return res.status(201).json({
         success: true,
         order
     })
@@ -59,7 +59,7 @@ export const getOrderDetails = catchAsyncErrors(async(req,res,next) => {
         return next(new ErrorHandler(`Order ${orderId} is invalid`, 404))
     }
 
-    res.status(200).json({
+    return res.status(200).json({
         order
     })
 })
@@ -74,7 +74,7 @@ export const myOrders = catchAsyncErrors(async(req,res,next) => {
     }
     
     /* When fetching items, return a Success or false statement */
-    res.status(200).json({
+    return res.status(200).json({
         success: true, // Optional: Indicate success
         orders
     })
@@ -89,7 +89,7 @@ export const getAllOrders = catchAsyncErrors(async(req,res,next) => {
         return next(new ErrorHandler("No Orders found", 404))
     }
 
-    res.status(200).json(orders)
+    return res.status(200).json(orders)
 })
 
 // Get All Orders - //{{DOMAIN}}/api/v1/admin/orders
@@ -101,7 +101,7 @@ export const updateOrderDetails = catchAsyncErrors(async(req,res,next) => {
         return next(new ErrorHandler("No Orders found", 404))
     }
 
-    res.status(200).json(orders)
+    return res.status(200).json(orders)
 })
 
 
@@ -143,7 +143,7 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
         await order.save(); // Save with the transaction session
 
         // await session.commitTransaction(); // Commit the transaction
-        res.status(200).json({ success: true, order });
+        return res.status(200).json({ success: true, order });
     } catch (error) {
         // await session.abortTransaction(); // Abort the transaction on error
         return next(error);
@@ -165,7 +165,7 @@ export const deleteOrder = catchAsyncErrors(async(req,res,next) => {
 
     await order.deleteOne()
 
-    res.status(200).json({
+    return res.status(200).json({
         success : true,
         message : `Order ${orderId} has not been deleted`
     })

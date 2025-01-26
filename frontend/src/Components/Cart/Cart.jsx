@@ -46,7 +46,7 @@ const Cart = () => {
         price: product?.price,
         image: product?.image,
         stock: product?.stock,
-        productCount,
+        quantity: productCount,
       };
 
       await dispatch(setCartItem(cartItem));
@@ -62,6 +62,7 @@ const Cart = () => {
         <div className="col-12 col-lg-8">
         <hr />
         {cartItems.map((item) => {
+          console.log(item)
             return (
                 <>
                     <div className="cart-item" data-key="product1">
@@ -82,14 +83,14 @@ const Cart = () => {
                         </div>
                         <div className="col-4 col-lg-3 mt-4 mt-lg-0">
                         <div className="stockCounter d-inline">
-                            <span className="btn btn-danger minus" onClick={decreaseQty(item, item.productCount)}> - </span>
+                            <span className="btn btn-danger minus" onClick={decreaseQty(item, item.quantity)}> - </span>
                             <input
                             type="number"
                             className="form-control count d-inline"
-                            value={item.productCount}
+                            value={item.quantity}
                             readonly
                             />
-                            <span className="btn btn-primary plus" onClick={increaseQty(item, item.productCount)}> + </span>
+                            <span className="btn btn-primary plus" onClick={increaseQty(item, item.quantity)}> + </span>
                         </div>
                         </div>
                         <div className="col-4 col-lg-1 mt-4 mt-lg-0" onClick={deleteItem(item)}>
@@ -106,8 +107,8 @@ const Cart = () => {
               <div id="order_summary">
               <h4>Order Summary</h4>
               <hr />
-              <p>Units: <span className="order-summary-values">{cartItems.reduce((acc, item) => (item.productCount + acc), 0)} (Units)</span></p>
-              <p>Est. total: <span className="order-summary-values">${cartItems.reduce((acc, item) => (item.price * item.productCount + acc), 0).toFixed(2)}</span></p>
+              <p>Units: <span className="order-summary-values">{cartItems.reduce((acc, item) => (item.quantity + acc), 0)} (Units)</span></p>
+              <p>Est. total: <span className="order-summary-values">${cartItems.reduce((acc, item) => (item.price * item.quantity + acc), 0).toFixed(2)}</span></p>
               <hr />
               <button id="checkout_btn" className="btn btn-primary w-100" onClick={() => navigate("/shipping")}>
                   Check out

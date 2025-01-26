@@ -5,17 +5,12 @@ import { toast } from "react-toastify";
 import MetaData from "../Layout/MetaData";
 
 const ForgotPassword = () => {
-  
   const[email, setEmail] = useState("");    
-  const navigate = useNavigate();
   const [forgotPassword, {isSuccess, isError, error}] = useForgotPasswordMutation();
   
   const submitHandler = async(e) => {
     e.preventDefault(); 
     await forgotPassword({email})
-    // send email to user
-    navigate("/me/profile");
-
   }
 
   useEffect(() => {
@@ -25,7 +20,7 @@ const ForgotPassword = () => {
         if(isSuccess) {
             toast.success("Email sent successfully")
         }
-    }, [isError, isSuccess])
+    }, [isError, isSuccess, error])
 
   return ( 
     <>

@@ -1,28 +1,30 @@
 {
-  "name": "sydneykart",
-  "version": "1.0.0",
-  "description": "",
-  "type": "module",
-  "main": "backend/app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon backend/app.js",
-    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/app.js",
-    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/app.js",
-    "seeder": "node backend/seeder/seeder.js"
-  },
-  "author": "AshwanthSai",
-  "license": "ISC",
-  "devDependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.6.1",
-    "nodemon": "^3.1.4"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cookie-parser": "^1.4.6",
-    "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.9.15"
-  }
+    "name": "shopit-v2",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "Ecommerce App",
+    "main": "app.js",
+    "scripts": {
+        "start": "node backend/app.js",
+        "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/app.js",
+        "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/app.js",
+        "seeder": "node backend/seeder/seeder.js"
+    },
+    "author": "Ghulam Abbas",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.41.3",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^7.5.2",
+        "nodemailer": "^6.9.5",
+        "stripe": "^17.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
 }

@@ -103,7 +103,7 @@ const ProductDetails = () => {
   
         <div className="col-12 col-lg-5 mt-5">
           <h3>{product?.name}</h3>
-          <p id="product_id">Product # {product?._id}</p>
+          <p id="product_id">Product #{product?._id}</p>
   
           <hr />
   
@@ -121,7 +121,7 @@ const ProductDetails = () => {
           </div>
           <hr />
   
-          <p id="product_price">#{product?.price}</p>
+          <p id="product_price">${product?.price}</p>
           <div className="stockCounter d-inline">
             <span className="btn btn-danger minus" disabled = {productCount == 1 ? true : false} onClick={decreaseQty}>-</span>
             <input

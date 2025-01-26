@@ -1,58 +1,60 @@
-import express from "express"
-import dotenv from "dotenv"
-// Connect to DB
-import { connectDB } from "./config/dbConnect.js";
-// Reading Cookies in Chunk and Appending to Req Body
-import cookieParser from 'cookie-parser'
-//Import All Routes
-import productRoutes from "./routes/products.js"
-import authRoutes from "./routes/auth.js"
-import orderRoutes from "./routes/order.js"
-import { errorMiddleware } from "./middlewares/errors.js";
-
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import { connectDatabase } from "./config/dbConnect.js";
+import errorMiddleware from "./middlewares/errors.js";
+import cors from 'cors'
 
 const app = express();
-// Handling Unhandled Exception Error
+// Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
-    console.log(`Error : ${err}`)
-    console.log(`Shutting down error due to Uncaught Exception`)
-    process.exit(1)
-})
-// Pull all .env variables into process
-dotenv.config({path : "backend/config/.env"})
-connectDB();
-// Parses data in Chunks and appends it to the Body
-app.use(express.json())
-// Read cookies send by req and append to req.cookies
-app.use(cookieParser())
+  console.log(`ERROR: ${err}`);
+  console.log("Shutting down due to uncaught expection");
+  process.exit(1);
+});
 
-// Attaching Routes
-app.use("/api/v1",authRoutes)
-app.use("/api/v1",productRoutes)
-app.use("/api/v1",orderRoutes)
+dotenv.config({ path: "backend/config/config.env" });
 
-// Sanitizes the error and appends to req.error
-app.use(errorMiddleware)
+// Connecting to database
+connectDatabase();
+
+// When using RTK Mutations, Wildcard CORS policy is not accepted
+// app.use(cors())
+app.use(cors({
+   // Include cookies in the request from backend to frontend
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
+//  The default req.body limit is 1mb, to bypass this.
+//  We need to increase the limit.
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(cookieParser());
+
+// Import all routes
+import productRoutes from "./routes/products.js";
+import authRoutes from "./routes/auth.js";
+import orderRoutes from "./routes/order.js";
+
+app.use("/api/v1", productRoutes);
+app.use("/api/v1", authRoutes);
+app.use("/api/v1", orderRoutes);
+
+// Using error middleware
+app.use(errorMiddleware);
 
 const server = app.listen(process.env.PORT, () => {
-    console.log(`Server Listening ${process.env.PORT}, on ${process.env.NODE_ENV}`)
-})
+  console.log(
+    `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
+  );
+});
 
-// Handling unHandled Rejection
+//Handle Unhandled Promise rejections
 process.on("unhandledRejection", (err) => {
-    console.log(`Error : ${err}`)
-    console.log(`Server shutting down due to unhandled Rejection`)
-    /* 
-        The  close  method stops the server from accepting new 
-        connections and keeps existing connections open until 
-        they are handled. This is important for gracefully 
-        shutting down the server to avoid abruptly terminating 
-        ongoing requests. 
-    */
-    server.close(() => {
-        process.exit(1)
-    })
-})
-
-
-
+  console.log(`ERROR: ${err}`);
+  console.log("Shutting down server due to Unhandled Promise Rejection");
+  server.close(() => {
+    process.exit(1);
+  });
+});

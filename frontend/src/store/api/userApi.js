@@ -41,8 +41,8 @@ export const userApi = createApi({
     }),
     updateAvatar: builder.mutation({
       query: (body) => ({
-        url: `/password/forgot`,
-        method: 'POST',
+        url: `/me/update_avatar`,
+        method: 'PUT',
         body,
       }),
     }),
