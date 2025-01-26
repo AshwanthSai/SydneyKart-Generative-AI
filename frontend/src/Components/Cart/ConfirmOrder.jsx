@@ -9,7 +9,7 @@ const ConfirmOrder = () => {
   const {cartItems,shippingData} = useSelector((state) => state.cart);
 
   const {user} = useSelector((state) => state.auth);
-  const {subtotal,shipping,tax,total} = calculateOrderCost(cartItems)
+  const {shippingAmount,subtotalAmount, taxAmount,totalAmount } = calculateOrderCost(cartItems)
 
   return (
     <>  
@@ -60,13 +60,13 @@ const ConfirmOrder = () => {
             <div id="order_summary">
             <h4>Order Summary</h4>
             <hr />
-            <p>Subtotal: <span className="order-summary-values">${subtotal}</span></p>
-            <p>Shipping: <span className="order-summary-values">${shipping}</span></p>
-            <p>Tax: <span className="order-summary-values">${tax}</span></p>
+            <p>Subtotal: <span className="order-summary-values">${subtotalAmount}</span></p>
+            <p>Shipping: <span className="order-summary-values">${shippingAmount}</span></p>
+            <p>Tax: <span className="order-summary-values">${taxAmount}</span></p>
 
             <hr />
 
-            <p>Total: <span className="order-summary-values">${total}</span></p>
+            <p>Total: <span className="order-summary-values">${totalAmount}</span></p>
 
             <hr />
             <Link to="/payment_method" id="checkout_btn" className="btn btn-primary w-100">
