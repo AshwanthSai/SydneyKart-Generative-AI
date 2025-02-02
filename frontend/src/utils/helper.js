@@ -24,7 +24,7 @@ export const getPriceQuery = (searchParams, key, value) => {
 export const calculateOrderCost  = (cartItems) => {
  const subtotalAmount = Number(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2));
  const shippingAmount = Number(subtotalAmount > 100 ? 0 : 25);
- const taxAmount = Number((subtotalAmount * 0.15).toFixed(2));
+ const taxAmount = Number((subtotalAmount * 0.18).toFixed(2));
  const totalAmount = subtotalAmount + shippingAmount + taxAmount;
  return {
    subtotalAmount,

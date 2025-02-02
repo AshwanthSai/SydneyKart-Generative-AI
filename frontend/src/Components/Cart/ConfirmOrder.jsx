@@ -66,7 +66,7 @@ const ConfirmOrder = () => {
 
             <hr />
 
-            <p>Total: <span className="order-summary-values">${totalAmount}</span></p>
+            <p>Total: <span className="order-summary-values">${totalAmount.toFixed(2)}</span></p>
 
             <hr />
             <Link to="/payment_method" id="checkout_btn" className="btn btn-primary w-100">

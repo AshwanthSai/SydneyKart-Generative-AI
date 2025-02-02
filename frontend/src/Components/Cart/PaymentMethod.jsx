@@ -2,19 +2,30 @@ import React, { useEffect, useState } from "react";
 import MetaData from "../Layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import {useSelector} from "react-redux";
-import { useCreateNewOrderMutation } from "../../store/api/orderAPI";
+import { useCreateNewOrderMutation, useStripeCheckoutSessionMutation } from "../../store/api/orderAPI";
 import { toast } from "react-toastify";
 import { calculateOrderCost } from "../../utils/helper";
 
 const PaymentMethod = () => {
-  const [method, setMethod] = useState("");
-  const {user} = useSelector((state) => state.auth);
+  const [method, setMethod] = useState("COD");
   const {shippingData} = useSelector((state) => state.cart);
   const {cartItems} = useSelector((state) => state.cart);
-
   const [createNewOrder, {error, isError, isSuccess}] = useCreateNewOrderMutation()
+  const [stripeCheckoutSession, {data : stripeData, isError : stripeError, isLoading : stripeIsLoading}] = useStripeCheckoutSessionMutation();
 
-  const submitHandler = (e) => {
+  useEffect(() => {
+    if(stripeError) {
+      toast.error(stripeError.data.message)
+    }
+    if(stripeData){
+      // If you use useNavigate, base url remains the same.
+      // Redirect to stripe will not work
+      window.location.href = stripeData.url
+    }
+  }, [stripeData])
+
+
+  const submitHandler = async(e) => {
      const {subtotalAmount, shippingAmount, taxAmount, totalAmount} = calculateOrderCost(cartItems)
       e.preventDefault();
       if(method == "COD"){
@@ -30,20 +41,19 @@ const PaymentMethod = () => {
             status: "Not Paid",
           }
         }
-
-
-
-        /* 
-          Quanity and Country not found, tried to fix that. 
-          But got stuck in Shipping Information Form
-        */
-
-        createNewOrder(orderData)
+        await createNewOrder(orderData)
       } else {
-        
-        
-      }
+        const orderData = {
+          orderItems : cartItems,
+          shippingInfo : shippingData,
+          itemsPrice : subtotalAmount,
+          taxAmount,
+          shippingAmount,
+          totalAmount,
+        }
+        await stripeCheckoutSession(orderData)
     }
+  }
 
   useEffect(() => {
     if(isError) {
@@ -91,7 +101,7 @@ const PaymentMethod = () => {
                 Card - VISA, MasterCard
               </label>
             </div>
-            <button id="shipping_btn" type="submit" className="btn py-2 w-100">
+            <button id="shipping_btn" type="submit" className="btn py-2 w-100" disabled = {stripeIsLoading} >
               CONTINUE
             </button>
           </form>

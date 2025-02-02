@@ -15,9 +15,16 @@ export const orderAPI = createApi({
         body,
       }),
     }),
+    stripeCheckoutSession: builder.mutation({
+      query: (body) => ({
+        url: `/payment/checkout_session`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useCreateNewOrderMutation } = orderAPI
+export const {useCreateNewOrderMutation, useStripeCheckoutSessionMutation} = orderAPI

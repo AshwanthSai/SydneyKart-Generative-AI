@@ -31,6 +31,14 @@ const ShippingInfo = () => {
     setShippingInfo(preExistingShippingdata)
   }, [preExistingShippingdata])
 
+  const handleCountryChange = (e) => {
+    const newValue = e.target.value;
+    setShippingInfo(prevState => ({
+      ...prevState,
+      country: newValue
+    }));
+  };
+
   return (
     <>
     <CheckoutSteps shipping/>
@@ -101,7 +109,7 @@ const ShippingInfo = () => {
               name="country"
               required
               value={shippingInfo.country}
-              onChange = {(e) => setShippingInfo({...shippingInfo, country : e.target.value})}
+              onChange = {handleCountryChange}
             >
              {countryList.map((country, index) => (
                 <option key={index} value={country}>{country}</option>

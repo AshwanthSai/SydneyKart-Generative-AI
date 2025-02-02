@@ -28,7 +28,19 @@ app.use(cors({
 
 //  The default req.body limit is 1mb, to bypass this.
 //  We need to increase the limit.
-app.use(express.json({ limit: '50mb' }));
+app.use(
+  express.json({ 
+    limit: '50mb', 
+    /* 
+      Stores unparsed request body as string
+      Required for Stripe webhook signature verification
+      Must be set before any body parsing occurs
+    */
+    verify : (req, res, buf) => {
+      req.rawBody = buf.toString()
+    }
+  })
+);
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
@@ -36,10 +48,12 @@ app.use(cookieParser());
 import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/auth.js";
 import orderRoutes from "./routes/order.js";
+import paymentRoutes from "./routes/payment.js";
 
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes);
+app.use("/api/v1", paymentRoutes);
 
 // Using error middleware
 app.use(errorMiddleware);
