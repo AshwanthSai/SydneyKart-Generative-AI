@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import { useCreateNewOrderMutation, useStripeCheckoutSessionMutation } from "../../store/api/orderAPI";
 import { toast } from "react-toastify";
 import { calculateOrderCost } from "../../utils/helper";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const PaymentMethod = () => {
   const [method, setMethod] = useState("COD");
@@ -12,6 +13,7 @@ const PaymentMethod = () => {
   const {cartItems} = useSelector((state) => state.cart);
   const [createNewOrder, {error, isError, isSuccess}] = useCreateNewOrderMutation()
   const [stripeCheckoutSession, {data : stripeData, isError : stripeError, isLoading : stripeIsLoading}] = useStripeCheckoutSessionMutation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if(stripeError) {
@@ -60,7 +62,9 @@ const PaymentMethod = () => {
       toast.error(error.data.message)
     }
     if(isSuccess) {
+      alert("Hit")
       toast.success("Order Processed")
+      navigate("/me/orders?order_success=true")
     }
   }, [error, isSuccess])
 

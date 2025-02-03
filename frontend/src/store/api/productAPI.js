@@ -6,6 +6,7 @@ export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ 
     baseUrl: String(process.env.REACT_APP_BACKEND_URL),
+    credentials: 'include',
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -25,10 +26,13 @@ export const productApi = createApi({
     getProductDetails: builder.query({
       query: (id) => `/products/${id}`,
     }),
-
-  }),
+    canUserReviewOrder: builder.query({
+      query: (id) => `/can_review?productId=${id}`,
+    }),
+  })
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProductsQuery, useGetProductDetailsQuery} = productApi
+export const { useGetProductsQuery, useGetProductDetailsQuery,
+   useGetProductReviewsQuery, useCanUserReviewOrderQuery} = productApi

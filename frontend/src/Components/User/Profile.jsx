@@ -6,7 +6,6 @@ import MetaData from "../Layout/MetaData";
 
 const Profile = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth); 
-  console.log(user)
   return (
     <>
     <MetaData title={"Profile"} />

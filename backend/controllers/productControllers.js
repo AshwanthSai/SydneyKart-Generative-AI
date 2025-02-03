@@ -1,4 +1,5 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import Order from "../models/order.js";
 import Product from "../models/product.js";
 import APIFilters from "../utils/apiFilters.js";
 import ErrorHandler from "../utils/errorHandler.js";
@@ -34,7 +35,10 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 
 // Get single product details   =>  /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req?.params?.id);
+
+  const product = await Product.findById(req?.params?.id).populate(
+    "reviews.user" // Go one level deeper and retrieve this object
+  );
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -120,9 +124,10 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get product reviews   =>  /api/v1/reviews
+// Get product reviews   =>  /api/v1/reviews/:id
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const productOne = await Product.findById(req?.query?.id)
+
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -162,5 +167,21 @@ export const deleteReview = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     product,
+  });
+});
+
+// Can user review   =>  /api/v1/can_review
+export const canUserReviewOrder = catchAsyncErrors(async (req, res) => {
+  const orders = await Order.find({
+    user: req.user._id,
+    "orderItems.product": req.query.productId,
+  });
+
+  if (orders.length === 0) {
+    return res.status(200).json({ canReview: false });
+  }
+
+  res.status(200).json({
+    canReview: true,
   });
 });

@@ -1,23 +1,31 @@
-import React, { act, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Loader } from "../Layout/Loader";
 import { toast } from "react-toastify";
-import { useGetProductDetailsQuery } from "../../store/api/productAPI";
+import { useCanUserReviewOrderQuery, useGetProductDetailsQuery } from "../../store/api/productAPI";
 import ReactStars from 'react-stars'
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../store/features/cartSlice";
 import MetaData from "../Layout/MetaData";
+import NewReview from "../Reviews/NewReview";
+import ListReview from "../Reviews/ListReview";
 
 const ProductDetails = () => {
       const {id} = useParams();
       const {data, isLoading, error, isError} = useGetProductDetailsQuery(id);
+      const {data: userPurchased } = useCanUserReviewOrderQuery(id)
+      const canReview = userPurchased?.canReview || false;
+
       const product = data?.product;
       const dispatch = useDispatch();
       const [productCount, setProductCount] = useState(1);
+      const isAuthenticated = useSelector(store => store.auth.isAuthenticated);
+    
       useEffect(() => {
         if(isError) {
           toast.error(error?.data?.message)
         }
+       
       }, [isError,error])
 
       const [activeImage, setActiveImage] = useState("")
@@ -63,12 +71,11 @@ const ProductDetails = () => {
       await dispatch(setCartItem(cartItem));
       toast.success("Item added to Cart");
     }
-        
 
       return (
         <>
         <MetaData title={"Product Details"} />
-        <div className="row d-flex justify-content-around">
+          <div className="row d-flex justify-content-around">
         <div className="col-12 col-lg-5 img-fluid" id="product_image">
           <div className="p-3">
             {/* Carousel Primary Image */}
@@ -82,7 +89,7 @@ const ProductDetails = () => {
           </div>
           <div className="row justify-content-start mt-5">
           {/* Sub image within Carousel */}
-          {product.images.map((img) => {
+          {product?.images?.map((img) => {
             return (<>
                 <div className="col-2 ms-4 mt-2 ">
                 <Link role="button">
@@ -158,12 +165,21 @@ const ProductDetails = () => {
           </p>
           <hr />
           <p id="product_seller mb-3">Sold by: <strong>{product?.seller}</strong></p>
-  
-          <div className="alert alert-danger my-5" type="alert">
-            Login to post your review.
-          </div>
+          {!isAuthenticated ? (
+            <div className="alert alert-danger my-5" type="alert">
+              Login to post your review.
+            </div>
+          ) : (
+            (canReview &&
+            <NewReview productId={id}/>)
+          )}
         </div>
-      </div>
+          {
+           product?.reviews.length > 0 && (
+              <ListReview reviews={product?.reviews}/>
+            )
+          }
+          </div>
       </>
       );
     };

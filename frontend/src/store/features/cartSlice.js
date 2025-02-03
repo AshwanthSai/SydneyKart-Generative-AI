@@ -41,13 +41,16 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     saveShippingData: (state, action) => {
-      console.log(action.payload)
       state.shippingData = action.payload
       localStorage.setItem("shippingData", JSON.stringify(state.shippingData));
+    },
+    clearCart: (state, action) => {
+      localStorage.removeItem("cartItems");
+      state.cartItems = []
     },
   },
 });
 
 export default cartSlice.reducer;
 
-export const { setCartItem, removeCartItem, saveShippingData} = cartSlice.actions;
+export const { setCartItem, removeCartItem, saveShippingData, clearCart} = cartSlice.actions;
