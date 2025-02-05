@@ -38,10 +38,16 @@ export const orderAPI = createApi({
       }),
       invalidatesTags: ['Refetch Reviews'],
     }),
+    getSales: builder.query({
+      query: ({startDate, endDate}) => `/admin/get_sales?startDate=${startDate}&endDate=${endDate}`,  
+    }),
   }),
 })
+
+
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {useCreateNewOrderMutation, useStripeCheckoutSessionMutation,
-              useMyOrdersQuery, useOrderDetailsQuery, useSubmitReviewMutation} = orderAPI
+              useMyOrdersQuery, useOrderDetailsQuery, useSubmitReviewMutation, useLazyGetSalesQuery
+            } = orderAPI

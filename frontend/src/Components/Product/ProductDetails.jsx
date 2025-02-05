@@ -32,7 +32,7 @@ const ProductDetails = () => {
       
       useEffect(() => {
         /* On component mount, set 1st imag as default image */
-        setActiveImage(product?.images ? `${product.images[0].url}` : "/images/default_product.png")
+        setActiveImage(product?.images ? `${product?.images[0]?.url}` : "/images/default_product.png")
         /* Product because data is not received instantaneously */
       },[product])
 
@@ -97,7 +97,7 @@ const ProductDetails = () => {
                         className={`d-block border rounded p-3 cursor-pointer ${img.url == activeImage ? "border-warning" : ""}`}
                         height="100"
                         width="100"
-                        src={img.url}
+                        src={img?.url}
                         alt={product?.name}
                         onClick = {() => setActiveImage(img.url)}
                     />

@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import MetaData from "../Layout/MetaData";
 
 const Profile = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth); 
+  const { user } = useSelector((state) => state.auth); 
+  
   return (
     <>
     <MetaData title={"Profile"} />

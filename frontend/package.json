@@ -12,6 +12,8 @@
     "jspdf": "^2.5.2",
     "mdbreact": "^5.2.0",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-datepicker": "^8.0.0",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-js-pagination": "^3.0.3",

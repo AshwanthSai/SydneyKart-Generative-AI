@@ -2,11 +2,13 @@ import Footer from './Components/Layout/Footer';
 import Header from './Components/Layout/Header';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import AppRoutes from './Components/Routes/UserRoutes';
+import useUserRoutes from './Components/Routes/UserRoutes';
+import useAdminRoutes from './Components/Routes/AdminRoutes';
 
 
 function App() {
-  const UserRoutes = AppRoutes();
+  const UserRoutes = useUserRoutes();
+  const Adminroutes = useAdminRoutes();
 
   return (
     <>
@@ -16,6 +18,7 @@ function App() {
           <div className='container'>
             <Routes>
             {UserRoutes}
+            {Adminroutes}
             </Routes>
           </div>
           <Footer/>

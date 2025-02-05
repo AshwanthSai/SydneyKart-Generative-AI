@@ -6,6 +6,7 @@ import {
   allOrders,
   deleteOrder,
   getOrderDetails,
+  getSales,
   myOrders,
   newOrder,
   updateOrder,
@@ -23,6 +24,10 @@ router
   .route("/admin/orders/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
+
+  router
+  .route("/admin/get_sales")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getSales);
   
 
   

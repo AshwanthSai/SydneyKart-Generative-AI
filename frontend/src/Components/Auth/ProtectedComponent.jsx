@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Loader } from "../Layout/Loader";
 
-const ProtectedComponent = ({children}) => {
-   const {isAuthenticated, isLoading} = useSelector(store => store.auth)
+const ProtectedComponent = ({children, admin}) => {
+   const {isAuthenticated, user, isLoading} = useSelector(store => store.auth)
 
     if(isLoading){
         return <Loader/>
@@ -15,6 +15,11 @@ const ProtectedComponent = ({children}) => {
     if(!isAuthenticated) {
         //* Replace the entire url   
        return <Navigate to="/login" replace/>
+    }
+    
+    if(admin && user.role !== "admin"){
+        //* Replace the entire url   
+        return <Navigate to="/login" replace/>
     }
     
     return children;

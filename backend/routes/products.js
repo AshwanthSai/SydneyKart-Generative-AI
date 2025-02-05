@@ -4,6 +4,7 @@ import {
   createProductReview,
   deleteProduct,
   deleteReview,
+  getAdminProducts,
   getProductDetails,
   getProductReviews,
   getProducts,
@@ -17,7 +18,8 @@ const router = express.Router();
 router.route("/products").get(getProducts);
 router
   .route("/admin/products")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct);
+  .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct)
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
 
 router.route("/products/:id").get(getProductDetails);
 

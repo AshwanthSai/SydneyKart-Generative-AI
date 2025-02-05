@@ -49,8 +49,23 @@ export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get single product Admin   =>  /api/v1/Admin/products
+export const getAdminProducts   = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find()
+  if (!products) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  res.status(200).json({
+    products,
+  });
+});
+
 // Update product details   =>  /api/v1/products/:id
 export const updateProduct = catchAsyncErrors(async (req, res) => {
+  console.log(req?.params?.id)
+  console.log(req?.body)
+
   let product = await Product.findById(req?.params?.id);
 
   if (!product) {
@@ -61,6 +76,7 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
     new: true,
   });
 
+  console.log(product)
   res.status(200).json({
     product,
   });
@@ -184,4 +200,37 @@ export const canUserReviewOrder = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     canReview: true,
   });
+});
+
+// Upload product images   =>  /api/v1/admin/products/:id/upload_images
+export const uploadProductImages = catchAsyncErrors(async (req, res) => {
+  let product = await Product.findById(req?.params?.id)
+  if(!product) {
+    return new ErrorHandler("Product not found",404)
+  }
+  
+  /* Fetch image Data URLS */
+  const images = req?.body?.images
+  /* Creating an image upload function */
+  const uploadImages = async(image) => await upload_file(image, "SydneyKart/products")
+
+  // Without Promise.all - Sequential
+  /* 
+    for (const image of images) {
+      await uploadImages(image); // Each upload waits for previous
+    } 
+  */
+
+  // With Promise.all - Parallel
+  // All uploads start simultaneously
+  const imageUrls = await Promise.all(images.map(uploadImages))
+
+  /* Replacing Images */
+  product?.images?.push(...imageUrls)
+  await product?.save({ validateBeforeSave: false })
+
+  return res.status(200).json({
+    product
+  })
+
 });
