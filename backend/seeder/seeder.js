@@ -9,8 +9,14 @@ const seedProducts = async () => {
     await Product.deleteMany();
     console.log("Products are deleted");
 
-    await Product.insertMany(products);
-    console.log("Products are added");
+    // Add default user ID to all products
+    const productsWithUser = products.map(product => ({
+        ...product,
+        user: "678a9690784c2844400dec65" // Replace with valid admin user ID
+    }));
+  
+    await Product.insertMany(productsWithUser);
+    console.log("Products are added");;
 
     process.exit();
   } catch (error) {

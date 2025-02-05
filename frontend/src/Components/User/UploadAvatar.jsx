@@ -26,7 +26,7 @@ const UploadAvatar = () => {
 
   useEffect(() => {
     if(isError) {
-      toast.error(error.data.message)
+      toast.error(error?.data?.message)
     }
     if(isSuccess){
       toast.success("Avatar updated")

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
 import {
+  useDeleteProductMutation,
   useGetAdminProductsQuery,
 } from "./../../store/api/productAPI";
 import AdminLayout from "../Layout/AdminLayout"
@@ -11,14 +12,25 @@ import MetaData from "../Layout/MetaData";
 
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
- 
+  const [deleteProduct, {isError: deleteProductIsError, isLoading : deleteProductIsLoading, error : deleteProductError, isSuccess : deleteProductSucess }]
+     = useDeleteProductMutation();
+
+  const deleteProductHandler = (product) => () => {
+    deleteProduct({id : product?._id})
+  }
+
   useEffect(() => {
-    console.log(data)
     if (error) {
       toast.error(error?.data?.message);
     }
+    if (deleteProductIsError) {
+      toast.error(deleteProductError?.data?.message);
+    }
+    if(deleteProductSucess){
+      toast.success("Product Deleted Successfully")
+    }
 
-  }, [error]);
+  }, [error, deleteProductIsError,deleteProductSucess ]);
 
 
   const setProducts = () => {
@@ -70,6 +82,8 @@ const ListProducts = () => {
             </Link>
             <button
               className="btn btn-outline-danger ms-2"
+              onClick={deleteProductHandler(product)}
+              disabled={deleteProductIsLoading}
             >
               <i className="fa fa-trash"></i>
             </button>

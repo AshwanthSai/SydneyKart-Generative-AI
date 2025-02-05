@@ -3,6 +3,7 @@ import {
   canUserReviewOrder,
   createProductReview,
   deleteProduct,
+  deleteProductImages,
   deleteReview,
   getAdminProducts,
   getProductDetails,
@@ -10,6 +11,7 @@ import {
   getProducts,
   newProduct,
   updateProduct,
+  uploadProductImages,
 } from "../controllers/productControllers.js";
 import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 
@@ -26,6 +28,7 @@ router.route("/products/:id").get(getProductDetails);
 router
   .route("/admin/products/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct);
+  
 router
   .route("/admin/products/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
@@ -42,6 +45,14 @@ router
 router
   .route("/can_review")
   .get(isAuthenticatedUser, canUserReviewOrder)
+
+router
+  .route("/admin/products/:id/upload_images")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), uploadProductImages)
+
+router
+  .route("/admin/products/:id/delete_images")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), deleteProductImages)
   
 
 export default router;

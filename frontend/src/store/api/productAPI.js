@@ -52,6 +52,29 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['AdminProducts', "Products", "SpecificProduct"],
     }),
+    productUploadImage: builder.mutation({
+      query: ({id, uploadImages}) => ({
+        url: `/admin/products/${id}/upload_images`,
+        method: 'PUT',
+        body : {images : uploadImages},
+      }),
+      invalidatesTags: ['AdminProducts', "Products", "SpecificProduct"],
+    }),
+    deleteProductImage: builder.mutation({
+      query: ({id, imgId}) => ({
+        url: `/admin/products/${id}/delete_images`,
+        method: 'PUT',
+        body : {imgId},
+      }),
+      invalidatesTags: ['AdminProducts', "Products", "SpecificProduct"],
+    }),
+    deleteProduct: builder.mutation({
+      query: ({id}) => ({
+        url: `/admin/products/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['AdminProducts', "Products", "SpecificProduct"],
+    }),
   })
 })
 
@@ -59,4 +82,6 @@ export const productApi = createApi({
 // auto-generated based on the defined endpoints
 export const { useGetProductsQuery, useGetProductDetailsQuery,
    useCanUserReviewOrderQuery, useGetAdminProductsQuery,
-  useNewProductMutation, useUpdateProductMutation} = productApi
+  useNewProductMutation, useUpdateProductMutation,
+  useProductUploadImageMutation, useDeleteProductImageMutation,
+  useDeleteProductMutation} = productApi
