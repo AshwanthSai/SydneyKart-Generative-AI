@@ -4,8 +4,20 @@ import cookieParser from "cookie-parser";
 import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import cors from 'cors'
+import multer from "multer";
 
 const app = express();
+
+// Configure multer for file uploads
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 4 * 1024 * 1024, // 4MB max file size
+  }
+});
+
+
+
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err}`);
@@ -17,6 +29,8 @@ dotenv.config({ path: "backend/config/config.env" });
 
 // Connecting to database
 connectDatabase();
+
+
 
 // When using RTK Mutations, Wildcard CORS policy is not accepted
 // app.use(cors())
@@ -49,11 +63,26 @@ import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/auth.js";
 import orderRoutes from "./routes/order.js";
 import paymentRoutes from "./routes/payment.js";
+import { OpenAI } from "./controllers/AI_Controller.js";
 
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoutes);
+
+// ------------------ OPENAI API ------------------
+app.post('/api/v1/openai-chat', async (req, res, next) => {
+  OpenAI.chat(req.body, res, next)
+})
+
+app.post('/api/v1/openai-chat-stream', async (req, res, next) => {
+  OpenAI.chatStream(req.body, res, next)
+})
+
+app.post('/api/v1/openai-image', upload.array('files'), async (req, res, next) => {
+  OpenAI.imageVariation(req, res, next)
+})
+// ------------------ OPENAI API ------------------
 
 // Using error middleware
 app.use(errorMiddleware);
