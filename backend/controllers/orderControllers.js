@@ -81,21 +81,24 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Update products stock
-  order?.orderItems?.forEach(async (item) => {
+  await Promise.all(
+  order?.orderItems?.map(async (item) => {
     const product = await Product.findById(item?.product?.toString());
     if (!product) {
-      return next(new ErrorHandler("No Product found with this ID", 404));
+      throw new ErrorHandler("No Product found with this ID", 404);
     }
     product.stock = product.stock - item.quantity;
     await product.save({ validateBeforeSave: false });
-  });
+  })
+);
+
 
   order.orderStatus = req.body.status;
   order.deliveredAt = Date.now();
 
   await order.save();
 
-  res.status(200).json({
+  return res.status(200).json({
     success: true,
   });
 });
@@ -115,14 +118,12 @@ export const deleteOrder = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-
-
-  /* 
+/* 
     The Goal is to send back an object with 
     Array of Sales, Number of Orders and Total Sales for each day.
     and 
     Aggregated Total Sales and Number of Orders for the entire period.
-  */
+*/
 const getSalesData  = async(startDate,endDate) => {
 
   /* 
