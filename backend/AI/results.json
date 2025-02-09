@@ -1,0 +1,596 @@
+{
+  "experiments": [
+    {
+      "name": "Integration Tests",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_LdsNBk1OINHSrO21sacwlUG1",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:06:31.541Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:06:31.541Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_oGFKpUi2VBQc9LPBLyrwqYgc",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:07:58.810Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:07:58.810Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_C01NEr4Gegduqtcz2nwF1k7b",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:12:19.410Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:12:19.410Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_jwMvJ00WzkpT2uu3E9tUo4jv",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:14:07.908Z"
+            },
+            {
+              "input": "Show me the last 5 posts from Reddit",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_JmJbAifgLUQblpArR5vN3xIl",
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:14:07.908Z"
+            },
+            {
+              "input": "Generate the image of a monk in a monastery",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_hhvvjXTwWERgu96FdQKLRxKm",
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages",
+                      "arguments": "{\"prompt\":\"A serene monk in a traditional monastery, surrounded by ancient stone walls, soft candlelight illuminating the space, and a peaceful atmosphere. The monk is wearing simple robes, meditating in a tranquil setting with wooden benches and religious artifacts around.\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:14:07.908Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:14:07.908Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_uiRThIAL4u0SkRuL0Sy4mQTG",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:15:39.598Z"
+            },
+            {
+              "input": "Show me the last 5 posts from Reddit",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_ktLgxgkcswLxycNEoatkzKJS",
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:15:39.598Z"
+            },
+            {
+              "input": "of a monk in a monastery",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_3GTZGUb6B8DI852ZOrO854Zp",
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages",
+                      "arguments": "{\"prompt\":\"A serene scene of a monk in a traditional monastery, surrounded by ancient stone walls, lush greenery, and soft sunlight filtering through the trees. The monk is in meditation, wearing simple robes, with a peaceful expression, embodying tranquility and spirituality.\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:15:39.598Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:15:39.598Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_GIa5Pq0xgzYJzPkTCvqmzK6M",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:17:45.234Z"
+            },
+            {
+              "input": "Show me the last 5 posts from Reddit",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_4GTAydzPwADyQV5w22uqziDg",
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:17:45.234Z"
+            },
+            {
+              "input": "My name is martin and tom is a",
+              "output": {
+                "role": "assistant",
+                "content": "It looks like your message got cut off. Could you please provide more details or complete your thought?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-01-29T14:17:45.234Z"
+            }
+          ],
+          "score": 0.6666666666666666,
+          "createdAt": "2025-01-29T14:17:45.234Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_4FjGvhn4zKxA9CTg3oWOMynN",
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getDadJokes"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:19:46.802Z"
+            },
+            {
+              "input": "Show me the last 5 posts from Reddit",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_9LwuirwBqXnztADQ3G8B62Cy",
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost",
+                      "arguments": "{}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getRedditPost"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:19:46.802Z"
+            },
+            {
+              "input": "Generate the image of a monk in a monastery",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_n2S2DH3aLeu267mGhwoOiDD3",
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages",
+                      "arguments": "{\"prompt\":\"A serene monk in a traditional monastery, surrounded by ancient stone walls, wooden beams, and soft candlelight. The monk is wearing simple robes, meditating peacefully, with a backdrop of a tranquil garden visible through an open window.\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generateImages"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-01-29T14:19:46.802Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-01-29T14:19:46.802Z"
+        }
+      ]
+    }
+  ]
+}
