@@ -27,12 +27,8 @@ var userId = '67a8d8d68305f334b067d89c'
 export const handleImageApprovalFlow = async ({ userMessage }) => {
   // The UI Spinner on logging the name of the Tool during a Tool Call message by AI
   // Automatically console.logs an approval prompt.
-  console.log("handleImageFlow Entered")
-  console.log(userId)
   const history = await getMessagesFromDb(userId)
-  console.log("history", history)
   const latestMessage = history.at(-1)
-  console.log(`latestMessage`, latestMessage)
   const toolCall = latestMessage?.tool_calls?.[0] // Grab the tool call
   // We only need approval for generateImages tool
   if (!toolCall || toolCall.function.name != generateImagesDefinition.name) {
@@ -44,9 +40,10 @@ export const handleImageApprovalFlow = async ({ userMessage }) => {
     loader.update(`Executing Tool, ${toolCall.function.name}`)
     const toolCallResult = await runTool(userMessage, toolCall)
     loader.update(`Completed Tool Call, ${toolCall.function.name}`)
-    await saveToolResponse(toolCall.id, toolCallResult)
+    await saveToolResponse(userId, toolCall.id, toolCallResult)
   } else {
     await saveToolResponse(
+      userId,
       toolCall.id,
       'User did not approve image generation at this time'
     )
@@ -61,16 +58,14 @@ export const handleImageApprovalFlow = async ({ userMessage }) => {
 
 export const runAgent = async ({ userMessage, tools }) => {
   // If in a Generate Image tool call state, we will send in a Yes or No as prompt to restart Chat
-  console.log(`Run Agent Entered`)
   const isApprovalState = await handleImageApprovalFlow({ userMessage })
-  console.log(`Here 2`)
 
   /* 
     If our present state is not a Generate Image Tool Call State, 
     Continue Normal Flow, Add user message to Context and runLLM 
   */
   if (!isApprovalState) {
-    await addMessagesToDb({userId,messages:[{ role: 'user', content: userMessage }]})
+    await addMessagesToDb({userId, messages:[{ role: 'user', content: userMessage }]})
   }
 
   const loader = showLoader('Thinking...\n')
@@ -81,7 +76,7 @@ export const runAgent = async ({ userMessage, tools }) => {
     const messages = await getMessagesFromDb(userId)
     const response = await runLLM(messages, tools)
     //Save response to memory
-    await addMessagesToDb({messages :[response], userId})
+    await addMessagesToDb({messages: [response], userId})
 
     if (response.content) {
       loader.stop()
@@ -105,9 +100,9 @@ export const runAgent = async ({ userMessage, tools }) => {
         loader.stop()
         return getMessagesFromDb(userId)
       }
-
+      // Run the first suggested tool
       const toolCallResult = await runTool(userMessage, response.tool_calls[0])
-      await saveToolResponse(response, toolCallResult)
+      await saveToolResponse(userId, response, toolCallResult)
       loader.update(`done: ${response.tool_calls[0].function.name}`)
     }
     loader.stop()

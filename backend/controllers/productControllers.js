@@ -147,10 +147,9 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get product reviews   =>  /api/v1/reviews/:id
+// Get product reviews   =>  /api/v1/reviews?id=productId
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const productOne = await Product.findById(req?.query?.id)
-
+  const product = await Product.findById(req?.query?.id)
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -266,4 +265,5 @@ export const deleteProductImages = catchAsyncErrors(async (req, res) => {
     product
   })
 });
+
 

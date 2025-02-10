@@ -17,7 +17,6 @@ const upload = multer({
 });
 
 
-
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err}`);
@@ -25,11 +24,12 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-dotenv.config({ path: "backend/config/config.env" });
+if(process.env.NODE_ENV !== 'PRODUCTION') {
+  dotenv.config({ path: "backend/config/config.env" });
+}
 
 // Connecting to database
 connectDatabase();
-
 
 
 // When using RTK Mutations, Wildcard CORS policy is not accepted

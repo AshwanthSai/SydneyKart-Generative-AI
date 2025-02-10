@@ -17,8 +17,6 @@ var userId = '67a8d8d68305f334b067d89c'
 
 export const runLLM = async (messages, tools) => {
   const summary = await getSummaryFromDb(userId)
-  console.log("Messages", messages)
-  console.log("Tools", tools)
   const response = await openai.chat.completions.create({
     // Prefer using 4o-mini
     model: 'gpt-4o-mini',

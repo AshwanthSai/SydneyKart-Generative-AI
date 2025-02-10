@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv";
-import Product from "../models/product.js";
+import Product from "../../models/product.js";
 import products from "./data.js";
 
 dotenv.config({path : "backend/config/.env"})

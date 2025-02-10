@@ -12,5 +12,6 @@ export const getDadJokes = async () => {
     },
   })
   const data = await response.json()
+  console.log(`Passing Result From Dad Joke`)
   return data['joke']
 }
