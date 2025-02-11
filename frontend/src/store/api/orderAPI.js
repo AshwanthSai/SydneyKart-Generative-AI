@@ -7,7 +7,7 @@ export const orderAPI = createApi({
     baseUrl: String(process.env.REACT_APP_BACKEND_URL),
     credentials: 'include',
   }),
-  tagTypes: ['Refetch Reviews'],
+  tagTypes: ['Refetch Details', "Refetch List"],
   endpoints: (builder) => ({
     createNewOrder: builder.mutation({
       query: (body) => ({
@@ -28,7 +28,7 @@ export const orderAPI = createApi({
     }),
     orderDetails: builder.query({
       query: (id) => `/orders/${id}`,  
-      providesTags: ['Refetch Reviews']
+      providesTags: ['Refetch Details']
     }),
     submitReview: builder.mutation({
       query: (body) => ({
@@ -36,18 +36,39 @@ export const orderAPI = createApi({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Refetch Reviews'],
+      invalidatesTags: ['Refetch Details'],
     }),
     getSales: builder.query({
       query: ({startDate, endDate}) => `/admin/get_sales?startDate=${startDate}&endDate=${endDate}`,  
+    }),
+    getOrders: builder.query({
+      query: () => `/admin/orders`,  
+      providesTags: ['Refetch List']
+    }),
+    updateOrderStatus: builder.mutation({
+      query: ({id, body}) => ({
+        url: `/admin/orders/${id}`,
+        method: 'PUT',
+        body,
+      }),
+      providesTags: ['Refetch Details']
+    }),
+    deleteOrder: builder.mutation({
+      query: ({id}) => ({
+        url: `/admin/orders/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Refetch List']
     }),
   }),
 })
 
 
 
+
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {useCreateNewOrderMutation, useStripeCheckoutSessionMutation,
-              useMyOrdersQuery, useOrderDetailsQuery, useSubmitReviewMutation, useLazyGetSalesQuery
+              useMyOrdersQuery, useOrderDetailsQuery, useSubmitReviewMutation, useLazyGetSalesQuery,
+              useGetOrdersQuery, useUpdateOrderStatusMutation, useDeleteOrderMutation,
             } = orderAPI

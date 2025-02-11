@@ -1,5 +1,6 @@
 class APIFilters {
   constructor(query, queryStr) {
+    // Query is resource name, product, user etc
     this.query = query;
     this.queryStr = queryStr;
   }

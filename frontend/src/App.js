@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import useUserRoutes from './Components/Routes/UserRoutes';
 import useAdminRoutes from './Components/Routes/AdminRoutes';
+import { ChatBot } from './Components/AIChat/ChatBot';
+import NotFound from './Components/Admin/NotFound';
 
 
 function App() {
@@ -19,8 +21,10 @@ function App() {
             <Routes>
             {UserRoutes}
             {Adminroutes}
+            <Route path="*" element={<NotFound/>} />
             </Routes>
           </div>
+          <ChatBot/>
           <Footer/>
         </Router>
     </>

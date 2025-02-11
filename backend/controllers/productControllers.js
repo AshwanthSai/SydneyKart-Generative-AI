@@ -5,9 +5,10 @@ import APIFilters from "../utils/apiFilters.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
-// Create new Product   =>  /api/v1/products
+// Get all products   =>  /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
-  const resPerPage = 4;
+  // TODO fix pagination logic
+  const resPerPage = 1000;
   const apiFilters = new APIFilters(Product, req.query).search().filters();
 
   let products = await apiFilters.query;
@@ -16,13 +17,14 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
   apiFilters.pagination(resPerPage);
   products = await apiFilters.query.clone();
 
-  
+
   return res.status(200).json({
     resPerPage,
     filteredProductsCount,
     products,
   });
 });
+
 
 // Create new Product   =>  /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {

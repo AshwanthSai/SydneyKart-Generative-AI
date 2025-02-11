@@ -1,0 +1,675 @@
+{
+  "job_id": "67ab19e0c6ccde480ec807cb",
+  "status": "finished",
+  "free_credits": 1,
+  "paid_credits": 0,
+  "results": [
+    {
+      "query": {
+        "source": "google_shopping",
+        "country": "au",
+        "topic": "product_and_offers",
+        "key": "term",
+        "value": "{\"productName\":\"iphone 6\"}",
+        "max_pages": 1,
+        "max_age": 1440,
+        "sort_by": "ranking_descending",
+        "condition": "any",
+        "shipping": "any"
+      },
+      "success": true,
+      "metadata": {
+        "from_cache": true,
+        "page_count_requested": 1,
+        "page_count_delivered": 1,
+        "page_count_from_cache": 1,
+        "page_count_live": 0,
+        "request_count": 0,
+        "updated_at": "2025-02-11T09:00:30Z"
+      },
+      "content": {
+        "id": "2289783515473770913",
+        "name": "Apple iPhone 6 - Smartphone - 4G LTE - 16 GB - 4.7\" - 1334 x 750 pixels (326 ppi) - Retina HD - Ram 1 GB 1.2 MP Front Camera - 8 MP - Silver",
+        "image_url": "https://lh3.googleusercontent.com/spp/AHdTjje_b2mobD8CSGa_ZHA5-83AZV3iH5nadwu4Kw6bu1pbYIVRCSIBeT8FnQCH3JJodwHyaUVntuETECu33rWITyLSj40Cytysfhw0pBbDY2keUI2pOmHjV0gUQSwrGJszzZ0Gs6avmDj3s6n6qWdW0a0cjzNJtq_9UDWRQsrs1_i1S7XEg1-4YCvfVUrIY3PY8wDeMHKxdn4=s512-rw-pd-pc0x00ffffff",
+        "description": "iPhone 6 is perfect in every way. Large, yet dramatically thin. Powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the Retina HD display. It’s one continuous form where hardware and software function in per...",
+        "feature_bullets": [
+          "IPhone at its largest and thinnest",
+          "A better display",
+          "Enormously efficient",
+          "The camera that changed photos now does the same for video",
+          "Faster wireless"
+        ],
+        "properties": [
+          "September 2014",
+          "Smartphone",
+          "Single SIM",
+          "4G",
+          "iOS",
+          "GSM Network",
+          "Fingerprint Scanner",
+          "1334 x 750",
+          "Lightning",
+          "Headphone Jack"
+        ],
+        "url": "https://www.google.com.au/shopping/product/2289783515473770913?hl=en&gl=au&sfr=compass",
+        "review_count": 49319,
+        "review_rating": 88,
+        "price": null,
+        "gtins": null,
+        "eans": null,
+        "brand_name": null,
+        "category_path": null,
+        "category_name": null,
+        "specifications": [
+          {
+            "label": "Product Type",
+            "value": [
+              "Smartphone"
+            ]
+          },
+          {
+            "label": "Manufacturer Model Number",
+            "value": [
+              "A1586"
+            ]
+          },
+          {
+            "label": "Form Factor",
+            "value": [
+              "Touch"
+            ]
+          },
+          {
+            "label": "Width",
+            "value": [
+              "67 mm"
+            ]
+          },
+          {
+            "label": "Depth",
+            "value": [
+              "6.9 mm"
+            ]
+          },
+          {
+            "label": "Height",
+            "value": [
+              "138.1 mm"
+            ]
+          },
+          {
+            "label": "Weight",
+            "value": [
+              "129 g"
+            ]
+          },
+          {
+            "label": "Body Colour",
+            "value": [
+              "Silver"
+            ]
+          },
+          {
+            "label": "Body Material",
+            "value": [
+              "Stainless steel",
+              "glass",
+              "anodised aluminium"
+            ]
+          },
+          {
+            "label": "SAR Value",
+            "value": [
+              "0.98 W/kg (body)",
+              "0.97 W/kg (head)"
+            ]
+          },
+          {
+            "label": "SAR Category (Belgium)",
+            "value": [
+              "C"
+            ]
+          },
+          {
+            "label": "Technology",
+            "value": [
+              "WCDMA (UMTS) / GSM"
+            ]
+          },
+          {
+            "label": "Mobile Broadband Generation",
+            "value": [
+              "4G"
+            ]
+          },
+          {
+            "label": "Service Provider",
+            "value": [
+              "Not specified"
+            ]
+          },
+          {
+            "label": "Operating System",
+            "value": [
+              "iOS 8"
+            ]
+          },
+          {
+            "label": "Navigation",
+            "value": [
+              "A-GPS",
+              "GLONASS"
+            ]
+          },
+          {
+            "label": "SIM Card Type",
+            "value": [
+              "Nano SIM"
+            ]
+          },
+          {
+            "label": "Payment Technology",
+            "value": [
+              "Apple Pay"
+            ]
+          },
+          {
+            "label": "Input Device",
+            "value": [
+              "Multi-touch"
+            ]
+          },
+          {
+            "label": "Messaging Services",
+            "value": [
+              "SMS",
+              "MMS"
+            ]
+          },
+          {
+            "label": "Supported Social Networks and Blogs",
+            "value": [
+              "Twitter",
+              "Flickr",
+              "Facebook",
+              "Vimeo"
+            ]
+          },
+          {
+            "label": "Data Transmission",
+            "value": [
+              "GPRS",
+              "EDGE",
+              "HSDPA",
+              "HSUPA",
+              "HSPA+",
+              "LTE",
+              "DC-HSDPA",
+              "VoLTE"
+            ]
+          },
+          {
+            "label": "2G Band",
+            "value": [
+              "850 GSM",
+              "900 GSM",
+              "1800 GSM",
+              "1900 GSM",
+              "1700 CDMA2000 1X (AWS)",
+              "2100 CDMA2000 1X (AWS)"
+            ]
+          },
+          {
+            "label": "4G LTE Band",
+            "value": [
+              "Band 1",
+              "Band 2",
+              "Band 3",
+              "Band 4",
+              "Band 5",
+              "Band 7",
+              "Band 8",
+              "Band 13",
+              "Band 17",
+              "Band 18",
+              "Band 19",
+              "Band 20",
+              "Band 25",
+              "Band 26",
+              "Band 28",
+              "Band 29"
+            ]
+          },
+          {
+            "label": "4G LTE Frequency",
+            "value": [
+              "FDD 2100",
+              "FDD 1900 PCS",
+              "FDD 1800+",
+              "FDD 1700 - 2110 AWS",
+              "FDD 850",
+              "FDD 2600",
+              "FDD 900",
+              "FDD 700c",
+              "FDD 700b",
+              "FDD 800 lower",
+              "FDD 800 upper",
+              "FDD 800 DD",
+              "FDD 1900+",
+              "FDD 850+",
+              "FDD 700 APT",
+              "FDD 700d"
+            ]
+          },
+          {
+            "label": "Wireless Interface",
+            "value": [
+              "NFC",
+              "Bluetooth 4.0",
+              "IEEE 802.11a/b/g/n/ac"
+            ]
+          },
+          {
+            "label": "Communication Features",
+            "value": [
+              "Mobile Email client",
+              "Internet browser"
+            ]
+          },
+          {
+            "label": "Phone Functions",
+            "value": [
+              "Speakerphone",
+              "voice control",
+              "call timer",
+              "conference call",
+              "flight mode",
+              "voice dialing",
+              "vibrating alert"
+            ]
+          },
+          {
+            "label": "Sensors",
+            "value": [
+              "Accelerometer",
+              "ambient light sensor",
+              "proximity sensor",
+              "3-axis gyro sensor",
+              "digital compass",
+              "barometer"
+            ]
+          },
+          {
+            "label": "Security Devices",
+            "value": [
+              "Fingerprint reader"
+            ]
+          },
+          {
+            "label": "Additional Features",
+            "value": [
+              "TTY compatible",
+              "E-911 compliant",
+              "multitasking",
+              "AirPlay wireless streaming",
+              "AirPrint wireless printing",
+              "iCloud Photo Sharing",
+              "AirDrop function",
+              "Apple TV support (2nd",
+              "3rd)",
+              "Wi-Fi Calling",
+              "M8 motion coprocessor",
+              "iBeacon microlocation",
+              "CarPlay function",
+              "Family Sharing feature",
+              "QuickType keyboard",
+              "64-bit architecture",
+              "Handoff"
+            ]
+          },
+          {
+            "label": "Personal Information Management",
+            "value": [
+              "Calendar",
+              "synchronization with PC",
+              "calculator",
+              "reminder",
+              "countdown timer",
+              "stopwatch",
+              "alarm clock"
+            ]
+          },
+          {
+            "label": "Supported Digital Audio Standards",
+            "value": [
+              "WAV",
+              "AAC",
+              "AIFF",
+              "PCM",
+              "Audible",
+              "MP3",
+              "Apple Lossless",
+              "AAC-LC",
+              "HE-AAC",
+              "Audible AAX",
+              "Audible AAX+",
+              "protected AAC"
+            ]
+          },
+          {
+            "label": "Supported Digital Video Standards",
+            "value": [
+              "AVI",
+              "MOV",
+              "M-JPEG",
+              "MPEG-4",
+              "H.264",
+              "M4V",
+              "HEVC"
+            ]
+          },
+          {
+            "label": "Type",
+            "value": [
+              "Apple A8"
+            ]
+          },
+          {
+            "label": "64-bit Architecture",
+            "value": [
+              "Yes"
+            ]
+          },
+          {
+            "label": "RAM",
+            "value": [
+              "1 GB"
+            ]
+          },
+          {
+            "label": "Internal Memory Capacity",
+            "value": [
+              "16 GB"
+            ]
+          },
+          {
+            "label": "Sensor Resolution",
+            "value": [
+              "1.2 Megapixel"
+            ]
+          },
+          {
+            "label": "Sensor Resolution",
+            "value": [
+              "8 Megapixel"
+            ]
+          },
+          {
+            "label": "Sensor Type",
+            "value": [
+              "BSI"
+            ]
+          },
+          {
+            "label": "Lens Aperture",
+            "value": [
+              "F/2.2"
+            ]
+          },
+          {
+            "label": "Focus Adjustment",
+            "value": [
+              "Automatic"
+            ]
+          },
+          {
+            "label": "Digital Zoom",
+            "value": [
+              "3"
+            ]
+          },
+          {
+            "label": "Self-Timer Delay",
+            "value": [
+              "10 sec",
+              "3sec"
+            ]
+          },
+          {
+            "label": "Camera Modes",
+            "value": [
+              "Burst mode",
+              "panoramic pictures",
+              "Time-lapse mode"
+            ]
+          },
+          {
+            "label": "Face Detection",
+            "value": [
+              "Face detection",
+              "smile detection"
+            ]
+          },
+          {
+            "label": "HDR Mode",
+            "value": [
+              "Auto HDR mode"
+            ]
+          },
+          {
+            "label": "Light Source",
+            "value": [
+              "LED light"
+            ]
+          },
+          {
+            "label": "Video Resolutions",
+            "value": [
+              "1920 x 1080 (1080p)"
+            ]
+          },
+          {
+            "label": "Features",
+            "value": [
+              "Sapphire crystal lens cover",
+              "auto exposure",
+              "Cinematic video stabilisation",
+              "Focus Pixels",
+              "exposure compensation",
+              "noise reduction",
+              "blink detection",
+              "tap to control exposure for video or stills"
+            ]
+          },
+          {
+            "label": "Type",
+            "value": [
+              "LCD display"
+            ]
+          },
+          {
+            "label": "Technology",
+            "value": [
+              "Retina HD display with IPS technology"
+            ]
+          },
+          {
+            "label": "Diagonal Size",
+            "value": [
+              "4.7\""
+            ]
+          },
+          {
+            "label": "Display Resolution",
+            "value": [
+              "1334 x 750 pixels"
+            ]
+          },
+          {
+            "label": "Pixel Density",
+            "value": [
+              "326 ppi"
+            ]
+          },
+          {
+            "label": "Contrast Ratio",
+            "value": [
+              "1400:1"
+            ]
+          },
+          {
+            "label": "Protection",
+            "value": [
+              "Fingerprint-resistant oleophobic coating"
+            ]
+          },
+          {
+            "label": "Display Languages",
+            "value": [
+              "Danish",
+              "Hindi",
+              "Hebrew",
+              "Hungarian",
+              "Czech",
+              "Croatian",
+              "Indonesian",
+              "Thai",
+              "Slovak",
+              "Chinese (traditional)",
+              "Chinese (simplified)",
+              "Vietnamese",
+              "Ukrainian",
+              "Brazilian Portuguese",
+              "English",
+              "German",
+              "French",
+              "Italian",
+              "Norwegian",
+              "Portuguese",
+              "Polish",
+              "Finnish",
+              "Swedish",
+              "Russian",
+              "Spanish",
+              "Dutch",
+              "Greek",
+              "Turkish",
+              "Arabic",
+              "Romanian",
+              "Catalan",
+              "Japanese",
+              "Korean",
+              "Malay",
+              "UK English",
+              "US English"
+            ]
+          },
+          {
+            "label": "Features",
+            "value": [
+              "Dual-domain pixels",
+              "Display Zoom",
+              "Reachability (screen shifting)"
+            ]
+          },
+          {
+            "label": "Connector Type",
+            "value": [
+              "Headset jack - mini-phone 3.5mm ¦ Lightning"
+            ]
+          },
+          {
+            "label": "Technology",
+            "value": [
+              "Lithium Ion"
+            ]
+          },
+          {
+            "label": "Talk Time",
+            "value": [
+              "840 minutes"
+            ]
+          },
+          {
+            "label": "Standby Time",
+            "value": [
+              "250 hours"
+            ]
+          },
+          {
+            "label": "Run Time Details",
+            "value": [
+              "Talk (WCDMA): up to 840 min ¦ Standby: up to 250 hrs ¦ Active online usage (WCDMA): up to 10 hrs ¦ Active online usage (LTE): up to 10 hrs ¦ Active online usage (Wi-Fi): up to 11 hrs ¦ Playback (video): up to 11 hrs ¦ Playback (audio): up to 50 hrs"
+            ]
+          },
+          {
+            "label": "Compliant Standards",
+            "value": [
+              "HAC (Hearing Aid Compatible)"
+            ]
+          },
+          {
+            "label": "Included Accessories",
+            "value": [
+              "USB cable",
+              "power adapter",
+              "Apple EarPods"
+            ]
+          },
+          {
+            "label": "Service & Support",
+            "value": [
+              "Limited warranty - 1 year ¦ Technical support - consulting - 90 days"
+            ]
+          },
+          {
+            "label": "Min Operating Temperature",
+            "value": [
+              "0 °C"
+            ]
+          },
+          {
+            "label": "Max Operating Temperature",
+            "value": [
+              "35 °C"
+            ]
+          },
+          {
+            "label": "Humidity Range Operating",
+            "value": [
+              "5 - 95% (non-condensing)"
+            ]
+          }
+        ],
+        "offer_count": 1,
+        "offers_url": "https://www.google.com.au/shopping/product/2289783515473770913/offers?hl=en&prds=sgro:oo&sfr=compass&gl=au",
+        "offers": [
+          {
+            "id": null,
+            "product_id": "2289783515473770913",
+            "price": "91.32",
+            "price_additional_info": [],
+            "price_with_shipping": "157.02",
+            "shipping_costs": "65.7",
+            "tax": null,
+            "currency": "AUD",
+            "condition_text": null,
+            "condition_code": "new",
+            "url": "https://stock4less.com/products/apple-iphone-6-16gb-silver?currency=USD&variant=50726922715439&utm_source=google&utm_medium=cpc&utm_campaign=Google%20Shopping&stkn=c560d42fd077&srsltid=AfmBOop0uoAefGDX8o4PIrfc4BX5Ir6-LoZ8lSEE2_M7xKrffjx8lMGiyUU",
+            "shop_name": "Stock4Less.com",
+            "shop_review_count": 0,
+            "shop_review_rating": null,
+            "shop_id": "priceapi-e176b8071ee",
+            "shop_sub_id": null,
+            "shop_extended_source_id": "priceapi-e176b8071ee",
+            "shop_url": "stock4less.com",
+            "shop_domain": "stock4less.com",
+            "shop_matching_id": "stock4less.com",
+            "page": 1,
+            "position": 1
+          }
+        ]
+      }
+    }
+  ]
+}

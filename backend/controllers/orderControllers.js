@@ -63,7 +63,7 @@ export const getOrderDetails = catchAsyncErrors(async (req, res, next) => {
 export const allOrders = catchAsyncErrors(async (req, res, next) => {
   const orders = await Order.find();
 
-  res.status(200).json({
+  return res.status(200).json({
     orders,
   });
 });

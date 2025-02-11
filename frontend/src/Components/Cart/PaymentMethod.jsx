@@ -62,7 +62,6 @@ const PaymentMethod = () => {
       toast.error(error.data.message)
     }
     if(isSuccess) {
-      alert("Hit")
       toast.success("Order Processed")
       navigate("/me/orders?order_success=true")
     }

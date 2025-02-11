@@ -9,8 +9,8 @@ import { jsPDF } from "jspdf";
 import MetaData from "../Layout/MetaData";
 
 const Invoice = () => {
-    const {productId} = useParams();
-    const {data,error,isLoading,isError} = useOrderDetailsQuery(productId);
+    const {id} = useParams();
+    const {data,error,isLoading,isError} = useOrderDetailsQuery(id);
     // If large payload, destructuring the first time will lead to errors, because the data has not arrived
     // The below helps, prevent it.
     const order = data?.order || {};
@@ -133,7 +133,7 @@ const Invoice = () => {
                 <td colspan="4" className="grand total">
                   <b>GRAND TOTAL</b>
                 </td>
-                <td className="grand total">${totalAmount.toFixed(2)}</td>
+                <td className="grand total">${totalAmount?.toFixed(2)}</td>
               </tr>
             </tbody>
           </table>

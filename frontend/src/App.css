@@ -565,6 +565,53 @@ footer {
 }
 
 
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: height 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #f1f1f1;
+  border-radius: 10px 10px 0 0;
+  height: 50px;
+  flex-shrink: 0;
+  outline: none;  /* Add this line */
+  border: none;   /* Add this if you want to remove borders too */
+}
+
+.chat-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.chat-content > div {
+  flex: 1;
+}
+
+.chat-container.minimized {
+  height: 50px;
+}
+
+.minimized .chat-content {
+  display: none;
+}
+
+
 /* 
 BootStrap Testing Classes
 */

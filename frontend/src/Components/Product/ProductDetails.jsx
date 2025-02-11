@@ -9,6 +9,7 @@ import { setCartItem } from "../../store/features/cartSlice";
 import MetaData from "../Layout/MetaData";
 import NewReview from "../Reviews/NewReview";
 import ListReview from "../Reviews/ListReview";
+import NotFound from "../Admin/NotFound";
 
 const ProductDetails = () => {
       const {id} = useParams();
@@ -40,6 +41,10 @@ const ProductDetails = () => {
           return <Loader/>
       }
 
+      if (error && error?.status == 404) {
+        return <NotFound />;
+      }
+    
       const increaseQty = () => {
         let quantity = document.getElementById("product_quantity").value;
         if(quantity >= product?.stock) {

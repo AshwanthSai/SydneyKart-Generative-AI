@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import CustomPagination from "./Layout/CustomPagination";
 import { useSearchParams } from "react-router-dom";
 import Filters from "./Layout/Filters";
+import NotFound from "./Admin/NotFound";
 
 const Home = () => {
   /* 
@@ -41,6 +42,10 @@ const Home = () => {
 
   if(isLoading) {
     return <Loader/>
+  }
+
+  if (error && error?.status == 404) {
+    return <NotFound />;
   }
 
   return (

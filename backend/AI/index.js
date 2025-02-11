@@ -1,10 +1,10 @@
 import { runAgent } from './src/agent.js'
-import { dadJokeDefinition } from './src/tools/dadJokes.js'
+import { priceComparisonDefinition } from './src/tools/priceComparison.js'
 import { generateImagesDefinition } from './src/tools/generateImages.js'
-import { movieSearchDefinition } from './src/tools/movieSearch.js'
 import { redditToolDefinition } from './src/tools/reddit.js'
 import { connectDatabase } from "../config/dbConnect.js";
 import dotenv from "dotenv";
+import { productSearchDefinition } from './src/tools/productSearch.js';
 
 dotenv.config({ path: "../../backend/config/config.env" });
 
@@ -26,7 +26,7 @@ if (!userMessage) {
 export const tools = [
   {
     type: 'function',
-    function: dadJokeDefinition,
+    function: priceComparisonDefinition,
   },
   {
     type: 'function',
@@ -38,7 +38,7 @@ export const tools = [
   },
   {
     type: 'function',
-    function: movieSearchDefinition,
+    function: productSearchDefinition,
   },
 ]
 

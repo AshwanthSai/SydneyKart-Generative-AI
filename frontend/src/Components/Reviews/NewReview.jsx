@@ -20,9 +20,10 @@ const NewReview = ({productId}) => {
         }
     }, [isError,error,isSuccess])
 
-  const submitReviewHandler = () => {
+  const submitReviewHandler = async(e) => {
+    e.preventDefault();
     const reviewData = { rating, comment, productId };
-    submitReview(reviewData)
+    await submitReview(reviewData)
   }
 
   return (

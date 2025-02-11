@@ -8,7 +8,7 @@ export const productApi = createApi({
     baseUrl: String(process.env.REACT_APP_BACKEND_URL),
     credentials: 'include',
   }),
-  tagTypes: ["AdminProducts", "Products", "SpecificProduct"],
+  tagTypes: ["AdminProducts", "Products", "SpecificProduct", "Reviews"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (params) => ({
@@ -75,6 +75,17 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['AdminProducts', "Products", "SpecificProduct"],
     }),
+    getReviews: builder.query({
+      query: (id) => `/reviews?id=${id}`,
+      providesTags: ["Reviews"],
+    }),
+    deleteReview: builder.mutation({
+      query: ({id, productId}) => ({ 
+        url : `/admin/reviews?id=${id}&productId=${productId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ["Reviews", "Products", "SpecificProduct", "AdminProducts"],
+    }),
   })
 })
 
@@ -84,4 +95,4 @@ export const { useGetProductsQuery, useGetProductDetailsQuery,
    useCanUserReviewOrderQuery, useGetAdminProductsQuery,
   useNewProductMutation, useUpdateProductMutation,
   useProductUploadImageMutation, useDeleteProductImageMutation,
-  useDeleteProductMutation} = productApi
+  useDeleteProductMutation, useLazyGetReviewsQuery, useDeleteReviewMutation} = productApi

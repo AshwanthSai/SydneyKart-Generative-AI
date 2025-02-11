@@ -38,6 +38,7 @@ export const userApi = createApi({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: ["User"]
     }),
     updateAvatar: builder.mutation({
       query: (body) => ({
@@ -45,10 +46,42 @@ export const userApi = createApi({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: ["User"]
+    }),
+    getUsers: builder.query({
+      query: () => ({
+        url: `/admin/users`,
+      }),
+      providesTags: ['User'],
+    }),
+    getAdminUserDetails: builder.query({
+      query: (id) => ({
+        url: `/admin/users/${id}`,
+      }),
+      providesTags: ['User'],
+    }),
+    updateUserDetails: builder.mutation({
+      query: ({id, body}) => ({
+        url: `/admin/users/${id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ["User"]
+    }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `admin/users/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ["User"]
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserDetailsQuery, useUpdateDetailsMutation, useUpdateAvatarMutation} = userApi;
+export const { 
+  useGetUserDetailsQuery, useUpdateDetailsMutation, 
+  useUpdateAvatarMutation, useGetUsersQuery, useGetAdminUserDetailsQuery,
+  useUpdateUserDetailsMutation, useDeleteUserMutation}
+= userApi;

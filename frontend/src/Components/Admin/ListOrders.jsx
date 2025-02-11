@@ -1,40 +1,36 @@
 import React, { useEffect } from "react";
 import { MDBDataTable } from "mdbreact";
-import { Link } from "react-router-dom";
-import {
-  useDeleteProductMutation,
-  useGetAdminProductsQuery,
-} from "./../../store/api/productAPI";
+import { Link  } from "react-router-dom";
 import AdminLayout from "../Layout/AdminLayout"
 import { toast } from "react-toastify";
 import { Loader } from "../Layout/Loader";
 import MetaData from "../Layout/MetaData";
+import { useDeleteOrderMutation, useGetOrdersQuery } from "../../store/api/orderAPI";
 
 const ListProducts = () => {
-  const { data, isLoading, error } = useGetAdminProductsQuery();
-  const [deleteProduct, {isError: deleteProductIsError, isLoading : deleteProductIsLoading, error : deleteProductError, isSuccess : deleteProductSucess }]
-     = useDeleteProductMutation();
-
-  const deleteProductHandler = (product) => () => {
-    deleteProduct({id : product?._id})
-  }
+  const { data, isLoading, error } = useGetOrdersQuery();
+  const [deleteOrder, {isError: deleteOrderIsError, isLoading : deleteOrderIsLoading, error : deleteOrderError, isSuccess : deleteOrderSuccess }]
+     = useDeleteOrderMutation();
+  
+  const deleteOrderHandler = (id) => () => {
+    deleteOrder({id })
+  } 
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-    if (deleteProductIsError) {
-      toast.error(deleteProductError?.data?.message);
+    if (deleteOrderIsError) {
+      toast.error(deleteOrderError?.data?.message);
+    } 
+   if(deleteOrderSuccess){
+      toast.success("Order Deleted Successfully")
     }
-    if(deleteProductSucess){
-      toast.success("Product Deleted Successfully")
-    }
-
-  }, [error, deleteProductIsError,deleteProductSucess ]);
+  }, [error, deleteOrderIsError,deleteOrderSuccess, deleteOrderError]);
 
 
-  const setProducts = () => {
-    const products = {
+  const setOrders = () => {
+    const orders = {
       columns: [
         {
           label: "ID",
@@ -42,13 +38,13 @@ const ListProducts = () => {
           sort: "asc",
         },
         {
-          label: "Name",
-          field: "name",
+          label: "Payment Status", 
+          field: "paymentStatus",
           sort: "asc",
         },
         {
-          label: "Stock",
-          field: "stock",
+          label: "Order Status",
+          field: "orderStatus",
           sort: "asc",
         },
 
@@ -61,29 +57,23 @@ const ListProducts = () => {
       rows: [],
     };
 
-    data?.products?.forEach((product) => {
-      products.rows.push({
-        id: product?._id,
-        name: `${product?.name?.substring(0, 20)}...`,
-        stock: product?.stock,
+    data?.orders?.forEach((order) => {
+      orders.rows.push({
+        id: order?._id,
+        paymentStatus: `${order?.paymentInfo?.status}`,
+        orderStatus: order?.orderStatus,
         actions: (
           <>
             <Link
-              to={`/admin/products/${product?._id}`}
+              to={`/admin/orders/${order?._id}`}
               className="btn btn-outline-primary"
             >
               <i className="fa fa-pencil"></i>
             </Link>
-            <Link
-              to={`/admin/products/${product?._id}/upload_images`}
-              className="btn btn-outline-success ms-2"
-            >
-              <i className="fa fa-image"></i>
-            </Link>
             <button
-              className="btn btn-outline-danger ms-2"
-              onClick={deleteProductHandler(product)}
-              disabled={deleteProductIsLoading}
+              className= "btn btn-outline-danger ms-2"
+              onClick  = {deleteOrderHandler(order?._id)}
+              disabled = {deleteOrderIsLoading}
             >
               <i className="fa fa-trash"></i>
             </button>
@@ -92,19 +82,19 @@ const ListProducts = () => {
       });
     });
 
-    return products;
+    return orders;
   };
 
   if (isLoading) return <Loader />;
 
   return (
     <AdminLayout>
-      <MetaData title={"All Products"} />
+      <MetaData title={"All Orders"} />
 
-      <h1 className="my-5">{data?.products?.length} Products</h1>
+      <h1 className="my-5">{data?.orders?.length} Orders</h1>
 
       <MDBDataTable
-        data={setProducts()}
+        data={setOrders()}
         className="px-3"
         bordered
         striped
