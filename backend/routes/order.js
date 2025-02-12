@@ -7,6 +7,7 @@ import {
   deleteOrder,
   getOrderDetails,
   getSales,
+  getSalesAI,
   myOrders,
   newOrder,
   updateOrder,
@@ -26,9 +27,12 @@ router
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
 
   router
+  .route("/admin/get_salesAI")
+  .get(getSalesAI);
+  
+  router
   .route("/admin/get_sales")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSales);
-  
 
   
 export default router;

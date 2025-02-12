@@ -5,6 +5,7 @@ import { redditToolDefinition } from './src/tools/reddit.js'
 import { connectDatabase } from "../config/dbConnect.js";
 import dotenv from "dotenv";
 import { productSearchDefinition } from './src/tools/productSearch.js';
+import { analyzeSalesDefinition } from './src/tools/analyzeSales.js';
 
 dotenv.config({ path: "../../backend/config/config.env" });
 
@@ -30,11 +31,15 @@ export const tools = [
   },
   {
     type: 'function',
-    function: generateImagesDefinition,
+    function: analyzeSalesDefinition,
   },
   {
     type: 'function',
     function: redditToolDefinition,
+  },
+  {
+    type: 'function',
+    function: generateImagesDefinition,
   },
   {
     type: 'function',

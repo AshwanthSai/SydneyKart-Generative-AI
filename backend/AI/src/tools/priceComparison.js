@@ -146,7 +146,6 @@ const fetchJobResults = async (jobId, token) => {
 
 
 export const priceComparisonFromInternet = async (productName) => {
-  console.log(`priceComparison Called`)
   const options = {
     method: 'POST',
     headers: {accept: 'application/json', 'content-type': 'application/json'},

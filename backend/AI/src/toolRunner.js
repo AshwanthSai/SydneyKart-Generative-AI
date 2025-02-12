@@ -1,5 +1,6 @@
 import { priceComparisonFromInternet } from './../src/tools/priceComparison.js'
-import { generateImages } from './tools/generateImages.js'
+import { analyzeSales } from './tools/analyzeSales.js'
+import { generateSalesChart } from './tools/generateImages.js'
 import { productSearch } from './tools/productSearch.js'
 import { getRedditPost } from './tools/reddit.js'
 
@@ -9,18 +10,23 @@ export const runTool = (userMessage, tool) => {
     tool,
   }
 
+  
   console.log("tool name is", tool.function.name)
+  console.log("Argument")
+  console.log(tool.function.arguments)
 
   switch (tool.function.name) {
     case 'priceComparisonFromInternet':
       return priceComparisonFromInternet(tool.function.arguments)
-    case 'generateImages':
+    case 'analyzeSales':
       // GPT rewrites your request as a descriptive prompt for your Tool Call Parameter.
-      return generateImages(tool.function.arguments)
+      return analyzeSales(tool.function.arguments)
     case 'getRedditPost':
       return getRedditPost()
-    case 'productSearch':
-      return productSearch(userMessage)
+    case 'getRedditPost':
+      return getRedditPost()
+    case 'generateSalesChart':
+      return generateSalesChart(tool.function.arguments)
     default:
       throw new Error(`Tool not found ${tool.function.type}`)
   }

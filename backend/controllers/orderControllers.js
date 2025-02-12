@@ -119,21 +119,19 @@ export const deleteOrder = catchAsyncErrors(async (req, res, next) => {
 });
 
 /* 
-    The Goal is to send back an object with 
-    Array of Sales, Number of Orders and Total Sales for each day.
-    and 
-    Aggregated Total Sales and Number of Orders for the entire period.
+  The Goal is to send back an object with 
+  Array of Sales, Number of Orders and Total Sales for each day.
+  and 
+  Aggregated Total Sales and Number of Orders for the entire period.
 */
-const getSalesData  = async(startDate,endDate) => {
+const getSalesData = async (startDate, endDate, analytics = false) => {
+  // Generate array of all dates in range for complete timeline
+  const datesBetween = getDatesBetween(startDate, endDate);
 
-  /* 
-    - Aggregation is means to perform operations on data one by one.
-    - Like a nested operations list. 
-    - The output of the first operation is passed to the second operation and so on.
-  */
+  // MongoDB Aggregation Pipeline
   const salesData = await Order.aggregate([
+    // Stage 1: Filter orders within date range
     {
-      // Stage 1 - Filter results as per date ranges
       $match: {
         createdAt: {
           $gte: new Date(startDate),
@@ -141,60 +139,97 @@ const getSalesData  = async(startDate,endDate) => {
         },
       },
     },
+    // Stage 2: Group and calculate metrics by date
     {
-      // Stage 2 - Group Data
-      // Group Total Sales and Number of Orders for each date.
       $group: {
+        // Group by date (converted from ISO to YYYY-MM-DD format)
         _id: {
-        // Converts "2024-03-15T10:30:00Z" to "2024-03-15"
-        // Required for $group stage to work with dates effectively
-          date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } }
         },
+        // Calculate financial metrics
         totalSalesPerDay: { $sum: "$totalAmount" },
-        numOrdersPerDay: { $sum: 1 }, // count the number of orders
-      },
+        numOrdersPerDay: { $sum: 1 }, // Count of orders
+        
+        // Collect unique order statuses (Processing, Shipped, Delivered)
+        orderStatuses: { $addToSet: "$orderStatus" },
+        
+        // Collect unique payment methods (COD, Card)
+        paymentMethods: { $addToSet: "$paymentMethod" },
+        
+        // Collect unique delivery locations
+        locations: {
+          $addToSet: {
+            city: "$shippingInfo.city",
+            country: "$shippingInfo.country",
+            zipCode: "$shippingInfo.zipCode"
+          }
+        },
+        
+        // Sum of all items quantities across all orders
+        totalQuantity: { $sum: { $sum: "$orderItems.quantity" } }
+      }
     },
+    // Stage 3: Sort results by date descending
+    {
+      $sort: { "_id.date": -1 }
+    }
   ]);
-  
-  /*  
-    When we create a graph
-    We need entire dates including dates with no sales and no orders.
-    So we need to fill in the missing dates.
-    Why create a hashmap ?
-    Aux to creating an Array of dates between the start and end dates.
-  */
-  const salesMap = new Map()
-  let totalSales = 0;
-  let totalOrders = 0;
-  
-  salesData.forEach((eachDate) => {
-    const date = eachDate?._id.date;
-    const totalSalesPerDay = eachDate?.totalSalesPerDay
-    const numOrdersPerDay = eachDate?.numOrdersPerDay
-    // Date is the key and values are results of total sales and number of orders.
-    salesMap.set(date, { totalSalesPerDay, numOrdersPerDay });
-    totalSales += totalSalesPerDay;
-    totalOrders += numOrdersPerDay;
-  })
 
-  // Generate an array of dates between start & end Date
-  const datesBetween = getDatesBetween(startDate, endDate);
+  // If analytics flag is true, return raw aggregation data for AI processing
+  if(analytics) {
+    return { salesData };
+  }
+
+  // Initialize data structures for processing
+  const salesMap = new Map(); // Store daily data for O(1) lookup
+  let totalSales = 0;        // Running total of all sales
+  let totalOrders = 0;       // Running count of all orders
+
+  // Process each day's aggregation results
+  salesData.forEach((entry) => {
+    const date = entry._id.date;
+    // Create standardized format for each day's data
+    const salesForDay = {
+      totalSalesPerDay: entry.totalSalesPerDay,
+      numOrdersPerDay: entry.numOrdersPerDay,
+      orderStatuses: entry.orderStatuses,
+      paymentMethods: entry.paymentMethods,
+      locations: entry.locations,
+      totalQuantity: entry.totalQuantity
+    };
+
+    // Store in map and update running totals
+    salesMap.set(date, salesForDay);
+    totalSales += entry.totalSalesPerDay;
+    totalOrders += entry.numOrdersPerDay;
+  });
+
+  // Generate final dataset with all dates (including those with no sales)
   const finalSalesData = datesBetween.map((date) => {
-    // If date exists in salesMap return it else return 0
+    // Get data for this date or use default empty values
+    const dateData = salesMap.get(date) || {
+      totalSalesPerDay: 0,
+      numOrdersPerDay: 0,
+      orderStatuses: [],
+      paymentMethods: [],
+      locations: [],
+      totalQuantity: 0
+    };
+
     return {
       date,
-      // If data exists in hashmap then fetch, else 0.
-      totalSalesPerDay: salesMap.get(date)?.totalSalesPerDay ||  0,
-      numOrdersPerDay: salesMap.get(date)?.numOrdersPerDay || 0
-    }
-  })
-  
-  return ({
-    finalSalesData,
-    totalSales,
-    totalOrders
-  })
-}
+      ...dateData
+    };
+  });
+
+  // Return processed data with totals
+  return {
+    finalSalesData,  // Array of daily data
+    totalSales,      // Aggregate sales amount
+    totalOrders      // Total number of orders
+  };
+};
+
 
 // Return an array of dates between start and end date
 const getDatesBetween = (startDate, endDate) => {
@@ -215,31 +250,52 @@ const getDatesBetween = (startDate, endDate) => {
   return dates;
 }
 
-
-// Get Sales Data  =>  /api/v1/admin/get_sales
+// Route - `/admin/get_sales?startDate=${startDate}&endDate=${endDate}`
+// Return Sales Data for a given date range
 export const getSales = catchAsyncErrors(async (req, res, next) => {
-
   const startDate = new Date(req?.query?.startDate);
   const endDate = new Date(req?.query?.endDate);
 
-  if(!startDate || !endDate){
+  if (!startDate || !endDate) {
     return res.status(400).json({
       message: "Date Range Not Complete"
-    })
+    });
   }
 
-  // Set start date to beginning of month
-  // You have to set as UTC when using ISO Strings
-  // All timezones are a reference to coordinated Universal Time with hour differences.
   startDate.setUTCHours(0, 0, 0, 0);
-  // Set end date to end of month
   endDate.setUTCHours(23, 59, 59, 999);
 
-  const salesData = await getSalesData(startDate, endDate);
+  const result = await getSalesData(startDate, endDate);
 
   res.status(200).json({
-    salesData : salesData?.finalSalesData,
-    totalSales : salesData?.totalSales,
-    totalOrders: salesData?.totalOrders
+    salesData: result.finalSalesData,
+    totalSales: result.totalSales,
+    totalOrders: result.totalOrders
   });
 });
+
+
+
+// Route - `/admin/get_salesAI?startDate=${startDate}&endDate=${endDate}`
+// Return Sales Data for Analytics
+export const getSalesAI = catchAsyncErrors(async (req, res, next) => {
+  const startDate = new Date(req?.query?.startDate);
+  const endDate = new Date(req?.query?.endDate);
+
+  if (!startDate || !endDate) {
+    return res.status(400).json({
+      message: "Date Range Not Complete"
+    });
+  }
+
+  startDate.setUTCHours(0, 0, 0, 0);
+  endDate.setUTCHours(23, 59, 59, 999);
+
+  //Set analytics flag to true
+  const result = await getSalesData(startDate, endDate, true);
+
+  res.status(200).json({
+    salesData: result.salesData,
+  });
+});
+
