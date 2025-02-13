@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {SalesChart} from "../Charts/SalesChart";
 import { useLazyGetSalesQuery } from "../../store/api/orderAPI";
 import { toast } from "react-toastify";
+import MetaData from "../Layout/MetaData";
 
 
 const Dashboard = () => {
@@ -48,6 +49,7 @@ const Dashboard = () => {
   return (
     <>
         <AdminLayout> 
+        <MetaData title={"Dashboard"} />
             <div className="d-flex justify-content-start align-items-center">
             <div className="mb-3 me-4">
                 <label className="form-label d-block">Start Date</label>

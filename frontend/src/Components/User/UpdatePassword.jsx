@@ -45,7 +45,7 @@ const UpdatePassword = () => {
     <>
     <MetaData title={"Update Password"} />
     <UserLayout>
-    <div className="row wrapper">
+    <div className="row wrapper mt-3">
         <div className="col-10 col-lg-8">
             <form className="shadow rounded bg-body" onSubmit={submitHandler}>
             <h2 className="mb-4">Update Password</h2>

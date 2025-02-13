@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import AdminLayout from "../Layout/AdminLayout";
 import { Navigate, useNavigate } from "react-router-dom";
 import { use } from "react";
+import MetaData from "../Layout/MetaData";
 
 const NewProduct = () => {
     const navigate = useNavigate();
@@ -45,7 +46,8 @@ const NewProduct = () => {
   return(
     <>
     <AdminLayout>
-    <div className="row wrapper">
+    <MetaData title={"New Product"} />
+    <div className="row wrapper mt-3">
       <div className="col-10 col-lg-10 mt-5 mt-lg-0">
         <form className="shadow rounded bg-body" onSubmit={submitHandler}>
           <h2 className="mb-4">New Product</h2>

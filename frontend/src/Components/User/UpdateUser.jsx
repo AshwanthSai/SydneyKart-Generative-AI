@@ -47,9 +47,9 @@ const UpdateProfile = () => {
 
   return (
     <>
-    <MetaData title={"Update User"} />
+    <MetaData title={"Update Profile"} />
     <UserLayout>
-        <div className="row wrapper">
+        <div className="row wrapper mt-3">
             <div className="col-10 col-lg-8">
             <form
                 className="shadow rounded bg-body"
