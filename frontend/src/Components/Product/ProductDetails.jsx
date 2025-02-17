@@ -10,6 +10,7 @@ import MetaData from "../Layout/MetaData";
 import NewReview from "../Reviews/NewReview";
 import ListReview from "../Reviews/ListReview";
 import NotFound from "../Admin/NotFound";
+import ProductRecommendations from "./ProductRecommendations";
 
 const ProductDetails = () => {
       const {id} = useParams();
@@ -80,7 +81,7 @@ const ProductDetails = () => {
       return (
         <>
         <MetaData title={"Product Details"} />
-          <div className="row d-flex justify-content-around">
+        <div className="row d-flex justify-content-around">
         <div className="col-12 col-lg-5 img-fluid" id="product_image">
           <div className="p-3">
             {/* Carousel Primary Image */}
@@ -185,6 +186,7 @@ const ProductDetails = () => {
             )
           }
           </div>
+          <ProductRecommendations item={data}/>
       </>
       );
     };

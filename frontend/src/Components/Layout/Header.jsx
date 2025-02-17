@@ -31,7 +31,7 @@ const Header = () => {
        {/* Margin down = 3, Padding Start =  5  */}
         <div className="navbar-brand">
           <Link to="/">
-            <img src="images/shopit_logo.png" alt="Sydney Kart" />
+            <img src="images/logoSmall.png" alt="Sydney Kart" style={{width: "280px", height : "65px", borderRadius:"10px"}}/>
           </Link>
         </div>
       </div>

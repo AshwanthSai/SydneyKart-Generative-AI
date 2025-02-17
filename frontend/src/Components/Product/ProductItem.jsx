@@ -7,11 +7,17 @@ const ProductItem = ({product, columnSize}) => {
     <>
         <div className={`col-sm-12 col-md-6 col-lg-${columnSize} my-3`}>
             <div className="card p-3 rounded"> {/* Card Photo */}
-                <img
+            <img
                 className="card-img-top mx-auto"
-                src={product?.images ? `${product?.images[0]?.url}` : "/images/default_product.png"}
+                src={product?.images?.[0]?.url || "/images/default_product.png"}
                 alt={product?.name}
-                />
+                onError={(e) => {
+                    e.target.onerror = null; // Prevent infinite loop
+                    e.target.src = "/images/default_product.png";
+                }}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+            />
             <div className="card-body ps-3 d-flex justify-content-center flex-column">
             <h5 className="card-title">
                 <Link to = {`products/${product?._id}`}>{product?.name}</Link>

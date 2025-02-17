@@ -17,6 +17,7 @@ const NewProduct = () => {
         }
         if(isSuccess){
             toast.success("Product Created Successfully");
+            navigate("/admin/products")
         }
 
     }, [error, isSuccess]);
@@ -40,7 +41,6 @@ const NewProduct = () => {
     const submitHandler = async(e) => {
         e.preventDefault();
         await createNewProduct(product);
-        navigate("/admin/products")
     }
     
   return(
