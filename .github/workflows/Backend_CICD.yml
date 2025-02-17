@@ -10,7 +10,6 @@ on:
     paths:
       - 'backend/**'
 
-# Add a unique ID for the workflow
 id: backend-workflow
 
 #Meta Tag for Docker Hub
