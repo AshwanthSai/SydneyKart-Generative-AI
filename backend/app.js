@@ -18,7 +18,6 @@ dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const app = express();
 
-
 // Configure multer for file uploads
 const upload = multer({
   storage: multer.memoryStorage(),
