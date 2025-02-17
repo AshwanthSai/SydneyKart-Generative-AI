@@ -10,8 +10,6 @@ on:
     paths:
       - 'backend/**'
 
-id: backend-workflow
-
 #Meta Tag for Docker Hub
 env:
   REGISTRY: ghcr.io
