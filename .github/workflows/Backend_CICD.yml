@@ -10,11 +10,6 @@ on:
     paths:
       - 'backend/**'
 
-#Meta Tag for Docker Hub
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-backend
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest

@@ -10,10 +10,6 @@ on:
       - completed
     branches: [ feature/backend-ci ]
 
-# Environment variables for container registry
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-frontend
 
 jobs:
   # Build and push Docker image job
