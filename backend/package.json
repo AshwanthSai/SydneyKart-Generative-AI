@@ -1,0 +1,51 @@
+{
+    "name": "shopit-v2",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "Ecommerce App",
+    "main": "app.js",
+    "scripts": {
+        "start": "node backend/app.js",
+        "dev": "cross-env NODE_ENV=DEVELOPMENT nodemon backend/app.js",
+        "prod": "cross-env NODE_ENV=PRODUCTION nodemon backend/app.js",
+        "seederProducts": "node backend/seeder/DB/seeder.js",
+        "seederOrders": "node backend/seeder/DB/Orders/seeder.js",
+        "AIseeder": "node backend/seeder/AIChatHistory/seeder.js",
+        "startAI": "cd backend/AI && node index.js",
+        "eval": "cd ./AI && node evals/run.js",
+        "ingest": "cd backend/AI && node src/rag/ingest.js"
+    },
+    "author": "Ashwanth Sai",
+    "license": "ISC",
+    "dependencies": {
+        "@upstash/vector": "^1.1.7",
+        "autoevals": "^0.0.101",
+        "axios": "^1.7.9",
+        "bcryptjs": "^2.4.3",
+        "chalk": "^5.3.0",
+        "cloudinary": "^1.41.3",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "csv-parse": "^5.5.6",
+        "csv-parser": "^3.1.0",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "got": "^14.4.4",
+        "jsonwebtoken": "^9.0.2",
+        "lowdb": "^7.0.1",
+        "mongoose": "^7.5.2",
+        "multer": "^1.4.5-lts.1",
+        "node-fetch": "^3.3.2",
+        "nodemailer": "^6.9.5",
+        "openai": "^4.70.3",
+        "ora": "^8.1.1",
+        "stripe": "^17.5.0",
+        "terminal-image": "^3.0.0",
+        "uuid": "^11.0.2",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "nodemon": "^3.0.1"
+    }
+}

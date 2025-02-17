@@ -30,8 +30,9 @@ export class OpenAI {
   }
 
   static async chat(body, res, next) {
-    console.log(`${process.env.OPENAI_API_KEY}`)
     const chatBody = OpenAI.createChatBody(body)
+    console.log(chatBody)
+
     const req = https.request(
       'https://api.openai.com/v1/chat/completions',
       {
@@ -64,6 +65,7 @@ export class OpenAI {
 
   static async chatStream(body, res, next) {
     const chatBody = OpenAI.createChatBody(body, true)
+    console.log(chatBody)
     const req = https.request(
       'https://api.openai.com/v1/chat/completions',
       {

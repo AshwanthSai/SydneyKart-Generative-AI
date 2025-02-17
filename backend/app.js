@@ -1,12 +1,23 @@
 import express from "express";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import cors from 'cors'
 import multer from "multer";
+import dotenv from "dotenv";
+
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load env vars with absolute path
+dotenv.config({ path: join(__dirname, '../config/config.env') });
+
 
 const app = express();
+
 
 // Configure multer for file uploads
 const upload = multer({
@@ -25,7 +36,7 @@ process.on("uncaughtException", (err) => {
 });
 
 if(process.env.NODE_ENV !== 'PRODUCTION') {
-  dotenv.config({ path: "backend/config/config.env" });
+  dotenv.config({ path: join(__dirname, '../config/config.env') });
 }
 
 // Connecting to database

@@ -3,7 +3,14 @@ import dotenv from "dotenv";
 import Chat from "../../models/chatMessages.js";
 import chatHistory from "./chat.js";
 
-dotenv.config({path : "backend/config/.env"})
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load env vars with absolute path
+dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const seedChatHistory = async() => {
     try {

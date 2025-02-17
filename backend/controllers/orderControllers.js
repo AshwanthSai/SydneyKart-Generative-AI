@@ -275,7 +275,6 @@ export const getSales = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-
 // Route - `/admin/get_salesAI?startDate=${startDate}&endDate=${endDate}`
 // Return Sales Data for Analytics
 export const getSalesAI = catchAsyncErrors(async (req, res, next) => {

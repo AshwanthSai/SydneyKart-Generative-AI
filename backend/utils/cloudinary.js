@@ -1,7 +1,13 @@
 import cloudinary from "cloudinary";
 import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-dotenv.config({ path: "backend/config/config.env" })
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load env vars with absolute path
+dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

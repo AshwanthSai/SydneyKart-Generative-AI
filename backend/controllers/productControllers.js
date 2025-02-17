@@ -2,13 +2,24 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Order from "../models/order.js";
 import Product from "../models/product.js";
 import APIFilters from "../utils/apiFilters.js";
+import { Index } from '@upstash/vector'
 import { delete_file, upload_file } from "../utils/cloudinary.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import dotenv from "dotenv";
+
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load env vars with absolute path
+dotenv.config({ path: join(__dirname, '../config/config.env') });
+
 
 // Get all products   =>  /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
-  // TODO fix pagination logic
-  const resPerPage = 1000;
+  const resPerPage = 8;
   const apiFilters = new APIFilters(Product, req.query).search().filters();
 
   let products = await apiFilters.query;
@@ -30,6 +41,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
   req.body.user = req.user._id;
 
   const product = await Product.create(req.body);
+  indexSingleProduct(product)
 
   res.status(200).json({
     product,
@@ -66,9 +78,6 @@ export const getAdminProducts   = catchAsyncErrors(async (req, res, next) => {
 
 // Update product details   =>  /api/v1/products/:id
 export const updateProduct = catchAsyncErrors(async (req, res) => {
-  console.log(req?.params?.id)
-  console.log(req?.body)
-
   let product = await Product.findById(req?.params?.id);
 
   if (!product) {
@@ -79,7 +88,8 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
     new: true,
   });
 
-  console.log(product)
+  await indexSingleProduct(product)
+
   res.status(200).json({
     product,
   });
@@ -99,6 +109,9 @@ export const deleteProduct = catchAsyncErrors(async (req, res) => {
   }
 
   await product.deleteOne();
+
+  //Deleting Product from RAG Database
+  deleteSingleProduct(product)
 
   res.status(200).json({
     message: "Product Deleted",
@@ -267,4 +280,105 @@ export const deleteProductImages = catchAsyncErrors(async (req, res) => {
   })
 });
 
+// Get all products   =>  /api/v1/ingest/products
+export const getAllProductsForIngest = catchAsyncErrors(async (req, res) => {
+  const resPerPage = Number.MAX_SAFE_INTEGER; 
+  const apiFilters = new APIFilters(Product, req.query).search().filters();
 
+  let products = await apiFilters.query;
+  let filteredProductsCount = products.length;
+
+  apiFilters.pagination(resPerPage);
+  products = await apiFilters.query.clone();
+
+
+  return res.status(200).json({
+    resPerPage,
+    filteredProductsCount,
+    products,
+  });
+});
+
+
+// Get all products   =>  /api/v1/product/recommendations
+export const getProductRecommendationsFromRAG = catchAsyncErrors(async (req, res) => {
+  const {name, category, price, description} = req.body
+
+  const query = `${name}. ${category}. ${price}. ${description}`
+  const index = new Index({
+    url: `${process.env.UPSTASH_VECTOR_REST_URL}`,
+    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
+  })
+
+
+  let results;
+  try {
+    //Fetching the most semantically similar products
+    results = await index.query({
+      data: query,
+      includeMetadata: true,
+      topK: 5,
+    })
+
+    // results = index.query(data=query, top_k=4, include_metadata=True)
+  } catch (error) {
+    console.error(`Unable to find recommendations for ${name} from RAG Database`, error)
+  }
+
+  // Remove the first result as it is the same product
+  results.shift() 
+
+  return res.status(200).json({
+    results,
+  });
+});
+
+
+// Ingest single product into RAG Database
+export async function indexSingleProduct(product) {
+  const index = new Index({
+    url: `${process.env.UPSTASH_VECTOR_REST_URL}`,
+    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
+  })
+
+  const text = `${product.name}. ${product.category}. ${product.price}. ${product.description}`
+  try {
+    await index.upsert({
+      id: product.name, // Using Rank as unique ID
+      data: text, // Text will be automatically embedded
+      metadata: {
+          ratings: Number(product.ratings),
+          seller: product.seller,
+          category: product.category,
+          numOfReviews: Number(product.numOfReviews),
+          stock: Number(product.stock),
+          _id: product._id,
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          ratings: product.ratings,
+          images: product.images,
+          numOfReviews: product.numOfReviews
+        },
+    })
+  } catch (error) {
+    console.error(`Unable to index ${product.name} into RAG Database`, error)
+    console.error(error)
+  }
+  console.log(`Product ${product.name} indexed successfully`)
+}
+
+// Delete single product from RAG Database
+export async function deleteSingleProduct(product) {
+  const index = new Index({
+    url: `${process.env.UPSTASH_VECTOR_REST_URL}`,
+    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
+  })
+
+  try {
+    await index.delete(product.name)
+  } catch (error) {
+    console.error(`Unable to delete ${product.name} from RAG Database`, error)
+  }
+  console.log(`Product ${product.name} deleted successfully`)
+}

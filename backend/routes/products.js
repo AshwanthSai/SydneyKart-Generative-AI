@@ -6,7 +6,9 @@ import {
   deleteProductImages,
   deleteReview,
   getAdminProducts,
+  getAllProductsForIngest,
   getProductDetails,
+  getProductRecommendationsFromRAG,
   getProductReviews,
   getProducts,
   newProduct,
@@ -18,6 +20,13 @@ import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 const router = express.Router();
 
 router.route("/products").get(getProducts);
+
+// Get all products for ingestion in RAG
+router.route("/ingest/products").get(getAllProductsForIngest);
+
+// Get recommended products from vector DB
+router.route("/product/recommendations").post(getProductRecommendationsFromRAG);
+
 router
   .route("/admin/products")
   .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct)

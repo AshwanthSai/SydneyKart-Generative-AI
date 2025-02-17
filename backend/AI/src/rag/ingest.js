@@ -4,7 +4,14 @@ import ora from 'ora'
 import axios from 'axios';
 import dotenv from "dotenv";
 
-dotenv.config({ path: "../../backend/config/config.env" });
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load env vars with absolute path
+dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 // Initialize Upstash Vector client
 const index = new Index({
@@ -12,22 +19,16 @@ const index = new Index({
   token: process.env.UPSTASH_VECTOR_REST_TOKEN,
 })
 
-
-
-export async function indexMovieData() {
-  // Read the CSV file and store the results in an array
+// Ingest all product data into RAG Database
+export async function indexProductData() {
   const spinner = ora('Reading product data...').start()
-  // Read and parse CSV file
-  // process.cwd fetches the present working directory
   let response;
   try {
-    response = await axios.get(`${process.env.BACKEND_URL}/api/v1/products?`);
+    response = await axios.get(`${process.env.BACKEND_URL}/api/v1/ingest/products`);
   } catch (error){
     console.error(`There was an Error fetching the data: ${error}`);
-
   }
 
-  
   spinner.text = 'Starting product indexing...'
   for (const product of response.data.products) {
     spinner.text = `Indexing Product: ${product.name}`
@@ -42,6 +43,13 @@ export async function indexMovieData() {
           category: product.category,
           numOfReviews: Number(product.numOfReviews),
           stock: Number(product.stock),
+          _id: product._id,
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          ratings: product.ratings,
+          images: product.images,
+          numOfReviews: product.numOfReviews
         },
       })
     } catch (error) {
@@ -52,4 +60,5 @@ export async function indexMovieData() {
   spinner.succeed('Finished indexing product data')
 }
 
-indexMovieData()
+
+indexProductData()
