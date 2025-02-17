@@ -7,9 +7,9 @@
     "scripts": {
         "start": "node backend/app.js",
         "dev": "cross-env NODE_ENV=DEVELOPMENT nodemon backend/app.js",
-        "prod": "cross-env NODE_ENV=PRODUCTION nodemon backend/app.js",
-        "seederProducts": "node backend/seeder/DB/seeder.js",
-        "seederOrders": "node backend/seeder/DB/Orders/seeder.js",
+        "prod": "cross-env NODE_ENV=PRODUCTION PORT=5000 nodemon backend/app.js",
+        "seederProducts": "node seeder/DB/Products/seeder.js",
+        "seederOrders": "node seeder/DB/Orders/seeder.js",
         "AIseeder": "node backend/seeder/AIChatHistory/seeder.js",
         "startAI": "cd backend/AI && node index.js",
         "eval": "cd ./AI && node evals/run.js",

@@ -32,7 +32,7 @@ const Home = () => {
   if(category) params.category = category;
   if(ratings) params.ratings = ratings;
   const {data, isLoading, error, isError} = useGetProductsQuery(params);
-  const columnSize = keyword ? 3 : 4;
+  const columnSize = keyword ? 3 : 3
 
   useEffect(() => {
     if(isError) {

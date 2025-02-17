@@ -15,10 +15,10 @@ COPY . .
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=4000
+ENV PORT=5000
 
 # Expose the port
-EXPOSE 4000
+EXPOSE 5000
 
 # Start the application
 CMD ["npm", "run", "prod"]

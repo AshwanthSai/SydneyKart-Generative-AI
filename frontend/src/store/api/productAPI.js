@@ -86,7 +86,30 @@ export const productApi = createApi({
       }),
       invalidatesTags: ["Reviews", "Products", "SpecificProduct", "AdminProducts"],
     }),
-  })
+    ProductRecommendations: builder.mutation({
+      query: ({product}) => ({
+        url: `/product/recommendations`,
+        method: 'POST',
+        body : {product},
+      }),
+      transformResponse: (response) => {
+        return response.results.map(item => ({
+          id: item.id,
+          score: item.score,
+          // Spread metadata properties to root level
+          ...item.metadata,
+          // Transform images to use first image as main
+          image: item.metadata.images[0]?.url || '',
+          images: item.metadata.images,
+          // Format price
+          price: Number(item.metadata.price).toFixed(2),
+          // Add computed properties if needed
+          inStock: item.metadata.stock > 0,
+          formattedDate: new Date().toLocaleDateString(),
+        }));
+      },
+    })
+  }),
 })
 
 // Export hooks for usage in functional components, which are
@@ -95,4 +118,6 @@ export const { useGetProductsQuery, useGetProductDetailsQuery,
    useCanUserReviewOrderQuery, useGetAdminProductsQuery,
   useNewProductMutation, useUpdateProductMutation,
   useProductUploadImageMutation, useDeleteProductImageMutation,
-  useDeleteProductMutation, useLazyGetReviewsQuery, useDeleteReviewMutation} = productApi
+  useDeleteProductMutation, useLazyGetReviewsQuery, useDeleteReviewMutation,
+  useProductRecommendationsMutation,
+} = productApi

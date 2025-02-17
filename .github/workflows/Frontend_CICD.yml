@@ -1,0 +1,98 @@
+name: Frontend CI/CD
+
+on:
+  workflow_run:
+    workflows: [Backend CI/CD]
+    types:
+      - completed
+    branches: [ feature/backend-ci ]
+
+#Meta Tag for Docker Hub
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}-frontend
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,format=long
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            REACT_APP_BACKEND_URL = ${{ secrets.REACT_APP_BACKEND_URL }}
+            NODE_ENV=production
+            PORT=4000
+
+  deploy:
+    needs: build-and-push
+    runs-on: self-hosted
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Stop existing container
+        continue-on-error: true
+        run: |
+          docker stop sydneykart-frontend || true
+          docker rm sydneykart-frontend || true
+
+      - name: Pull and run new container
+        env:
+          REACT_APP_BACKEND_URL = ${{ secrets.REACT_APP_BACKEND_URL }}
+          NODE_ENV: production
+          PORT: 4000
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:feature-frontend-ci
+          docker run -d \
+            --name sydneykart-frontend \
+            --restart unless-stopped \
+            -p 4000:4000 \
+            -e REACT_APP_API_URL="${REACT_APP_API_URL}" \
+            -e REACT_APP_STRIPE_KEY="${REACT_APP_STRIPE_KEY}" \
+            -e NODE_ENV="${NODE_ENV}" \
+            -e PORT="${PORT}" \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:feature-frontend-ci

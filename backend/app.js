@@ -47,7 +47,7 @@ connectDatabase();
 // app.use(cors())
 app.use(cors({
    // Include cookies in the request from backend to frontend
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:4000',
   credentials: true
 }));
 

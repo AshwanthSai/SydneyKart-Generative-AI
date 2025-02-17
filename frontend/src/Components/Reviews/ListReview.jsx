@@ -4,7 +4,7 @@ import ReactStars from "react-stars";
 const ListReview = ({reviews}) => {
   const user = reviews.user;
   return (
-    <div className="reviews w-75 mt-5">
+    <div className="reviews w-75  mb-5">
     <h3>Other's Reviews:</h3>
     <hr />
     {

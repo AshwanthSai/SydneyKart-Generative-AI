@@ -58,7 +58,7 @@ const Invoice = () => {
       <div id="order_invoice" className="p-3 border border-secondary">
         <header className="clearfix">
           <div id="logo">
-            <img src="/images/invoice-logo.png" alt="Company Logo" />
+            <img src="/images/logo.png" alt="Company Logo" style={{borderRadius:"10px"}} />
           </div>
           <h1>INVOICE # ${_id}</h1>
           <div id="company" className="clearfix">
