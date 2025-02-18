@@ -36,28 +36,29 @@ jobs:
             PORT=4000
 
   deploy:
-    needs: build-and-push
-    runs-on: self-hosted
-    steps:
-      - uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Deploy Container
-        run: |
-          sudo -E docker stop sydneykart-frontend || true
-          sudo -E docker rm sydneykart-frontend || true
-          sudo -E docker pull ${{ env.IMAGE_NAME }}:feature-frontend-ci
-          sudo -E docker run -d \
-            --name sydneykart-frontend \
-            --restart unless-stopped \
-            --health-cmd="curl -f http://localhost:4000 || exit 1" \
-            --health-interval=30s \
-            --health-timeout=10s \
-            --health-retries=3 \
-            --health-start-period=30s \
-            -p 4000:4000 \
-            -e REACT_APP_BACKEND_URL="${{ secrets.REACT_APP_BACKEND_URL }}" \
-            -e NODE_ENV=production \
-            -e PORT=4000 \
-            ${{ env.IMAGE_NAME }}:feature-frontend-ci
+  needs: build-and-push
+  runs-on: self-hosted
+  steps:
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Deploy Container
+      run: |
+        sudo -E docker stop sydneykart-frontend || true
+        sudo -E docker rm sydneykart-frontend || true
+        sudo -E docker pull ${{ env.IMAGE_NAME }}:feature-frontend-ci
+        sudo -E docker run -d \
+          --name sydneykart-frontend \
+          --restart unless-stopped \
+          --health-cmd="curl -f http://localhost:4000 || exit 1" \
+          --health-interval=30s \
+          --health-timeout=10s \
+          --health-retries=3 \
+          --health-start-period=30s \
+          -p 4000:4000 \
+          -e REACT_APP_BACKEND_URL="${{ secrets.REACT_APP_BACKEND_URL }}" \
+          -e NODE_ENV=production \
+          -e PORT=4000 \
+          -e PUBLIC_URL="/sydneykart" \
+          ${{ env.IMAGE_NAME }}:feature-frontend-ci

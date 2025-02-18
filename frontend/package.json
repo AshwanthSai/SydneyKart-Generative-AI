@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "/sydneykart",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
