@@ -14,17 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
+      
       - uses: docker/metadata-action@v5
         id: meta
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
+            type=sha,format=long
             type=ref,event=branch
+      
       - uses: docker/setup-buildx-action@v3
+      
       - uses: docker/build-push-action@v6
         with:
           context: ./frontend
@@ -39,15 +44,42 @@ jobs:
     needs: build-and-push
     runs-on: self-hosted
     steps:
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          
       - name: Deploy Container
         run: |
           sudo -E docker stop sydneykart-frontend || true
           sudo -E docker rm sydneykart-frontend || true
+          sudo -E docker pull ${{ env.IMAGE_NAME }}:feature-frontend-ci
           sudo -E docker run -d \
             --name sydneykart-frontend \
             --restart unless-stopped \
+            --health-cmd="curl -f http://localhost:4000 || exit 1" \
+            --health-interval=30s \
+            --health-timeout=10s \
+            --health-retries=3 \
+            --health-start-period=30s \
             -p 4000:4000 \
             -e REACT_APP_BACKEND_URL="${{ secrets.REACT_APP_BACKEND_URL }}" \
             -e NODE_ENV=production \
             -e PORT=4000 \
             ${{ env.IMAGE_NAME }}:feature-frontend-ci
+
+      - name: Check Container Health
+        run: |
+          echo "Waiting for container to be healthy..."
+          timeout=180
+          while [ $timeout -gt 0 ]; do
+            health_status=$(sudo docker inspect --format='{{.State.Health.Status}}' sydneykart-frontend)
+            if [ "$health_status" = "healthy" ]; then
+              echo "Container is healthy!"
+              exit 0
+            fi
+            sleep 5
+            timeout=$((timeout - 5))
+          done
+          echo "Container health check failed"
+          exit 1
