@@ -1,5 +1,8 @@
+# Frontend CI/CD Workflow
+# This workflow runs after Backend CI/CD completes successfully
 name: Frontend CI/CD
 
+# Trigger on Backend CI/CD workflow completion
 on:
   workflow_run:
     workflows: [Backend CI/CD]
@@ -11,6 +14,7 @@ env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/sydneykart-frontend
 
 jobs:
+  # Build and push Docker image job
   build-and-push:
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +41,7 @@ jobs:
             NODE_ENV=production
             PORT=4000
 
+  # Deployment job
   deploy:
     needs: build-and-push
     runs-on: self-hosted
