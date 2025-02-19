@@ -13,6 +13,9 @@ RUN npm install
 # Copy project files
 COPY . .
 
+ENV PUBLIC_URL=/sydneykart
+ENV REACT_APP_PUBLIC_URL=/sydneykart
+
 # Build the project
 RUN npm run build
 
