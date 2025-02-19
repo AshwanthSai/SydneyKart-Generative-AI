@@ -38,7 +38,9 @@ jobs:
           build-args: |
             REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}
             NODE_ENV=production
-            PORT=4000
+            PORT=${{ secrets.PORT }}
+            PUBLIC_URL=${{ secrets.PUBLIC_URL }}
+            REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }}
 
   deploy:
     needs: build-and-push
@@ -61,4 +63,6 @@ jobs:
             -e REACT_APP_BACKEND_URL="${{ secrets.REACT_APP_BACKEND_URL }}" \
             -e NODE_ENV=production \
             -e PORT=4000 \
+            -e PUBLIC_URL=${{ secrets.PUBLIC_URL }} \
+            -e REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }} \
             ${{ env.IMAGE_NAME }}:feature-frontend-ci

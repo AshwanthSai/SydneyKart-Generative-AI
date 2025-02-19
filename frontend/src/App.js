@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-        <Router>
+        <Router basename={process.env.REACT_APP_PUBLIC_URL}>
         <ToastContainer autoClose={1500} position="top-center" />
           <Header/>
           <div className='container'>
