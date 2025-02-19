@@ -15,7 +15,6 @@ export const registerUser = catchAsyncErrors(async (req, res, next) => {
   }
   // Use findOne instead of find, find returns an empty array
   const existingUser = await User.findOne({ email });
-
   if (existingUser) {
       return next(new ErrorHandler("User already exists with this email", 409));
   }
