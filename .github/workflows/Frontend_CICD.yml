@@ -34,9 +34,9 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
           build-args: |
-            REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}
+            REACT_APP_PROD_BACKEND_URL=${{ secrets.REACT_APP_PROD_BACKEND_URL }}
             PUBLIC_URL=${{ secrets.PUBLIC_URL }}
-            REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }}
+            REACT_APP_PUBLIC_URL_PROD=${{ secrets.REACT_APP_PUBLIC_URL_PROD }}
 
   deploy:
     needs: build-and-push
@@ -55,7 +55,7 @@ jobs:
             -p 4000:4000 \
             --name sydneykart-frontend \
             --restart unless-stopped \
-            -e REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }} \
+            -e REACT_APP_PROD_BACKEND_URL=${{ secrets.REACT_APP_PROD_BACKEND_URL }} \
             -e PUBLIC_URL=${{ secrets.PUBLIC_URL }} \
-            -e REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }} \
+            -e REACT_APP_PUBLIC_URL_PROD=${{ secrets.REACT_APP_PUBLIC_URL_PROD }} \
             ${{ env.IMAGE_NAME }}:latest
