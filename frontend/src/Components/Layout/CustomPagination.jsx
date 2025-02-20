@@ -29,7 +29,8 @@ const CustomPagination = ({filteredProductsCount, resPerPage}) => {
     // /products, page does not exits
         searchParams.append("page", pageNumber)
     }
-    const path = window.location.pathname + "?" + searchParams.toString();
+    const path = "?" + searchParams.toString();
+    console.log(path)
     navigate(path);
   }
     

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
 
-const ProductItem = ({product, columnSize}) => {
+const ProductItem = ({recommendation, product, columnSize}) => {
   return (
     <>
         <div className={`col-sm-12 col-md-6 col-lg-${columnSize} my-3`}>
@@ -20,7 +20,7 @@ const ProductItem = ({product, columnSize}) => {
             />
             <div className="card-body ps-3 d-flex justify-content-center flex-column">
             <h5 className="card-title">
-                <Link to = {`products/${product?._id}`}>{product?.name}</Link>
+            <Link to = {recommendation ? `/products/${product?._id}` : `products/${product?._id}`}>{product?.name}</Link>
             </h5>
             <div className="ratings mt-auto d-flex"> {/* Adds Five Stars to the Product Card */}
                 <ReactStars
@@ -38,7 +38,7 @@ const ProductItem = ({product, columnSize}) => {
                 </span>
             </div>
             <p className="card-text mt-2">{product?.price}</p> {/* Price */}
-                <Link to = {`products/${product?._id}`} id="view_btn" className="btn btn-block"> {/* View Details Button */}
+                <Link to = {recommendation ? `${product?._id}` : `products/${product?._id}`} id="view_btn" className="btn btn-block"> {/* View Details Button */}
                     View Details
                 </Link>
             </div>

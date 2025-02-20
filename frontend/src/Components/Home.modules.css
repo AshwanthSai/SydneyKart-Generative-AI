@@ -1,0 +1,29 @@
+.productsContainer {
+  padding: 1rem;
+  width: 100%;
+}
+
+.productsGrid {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.desktop {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mobile {
+  grid-template-columns: 1fr;
+}
+
+.productHeading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.mobileHeading {
+  font-size: 1.2rem;
+  text-align: center;
+}

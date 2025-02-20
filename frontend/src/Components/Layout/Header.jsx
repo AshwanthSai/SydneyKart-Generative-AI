@@ -31,7 +31,11 @@ const Header = () => {
        {/* Margin down = 3, Padding Start =  5  */}
         <div className="navbar-brand">
           <Link to="/">
-            <img src="images/logoSmall.png" alt="Sydney Kart" style={{width: "280px", height : "65px", borderRadius:"10px"}}/>
+            <img 
+              src={`${process.env.PUBLIC_URL}/images/logoSmall.png`}
+              alt="Sydney Kart" 
+              style={{width: "280px", height : "65px", borderRadius:"10px"}}
+            />
           </Link>
         </div>
       </div>

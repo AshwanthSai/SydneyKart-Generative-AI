@@ -10,7 +10,7 @@ const ProductRecommendations = ({item}) => {
 
   useEffect(() => {
     productRecommendations(item)
-  },[])
+  },[item, productRecommendations])
 
   useEffect(() => {
     if(isError) {
@@ -36,7 +36,7 @@ const ProductRecommendations = ({item}) => {
               {/* my is top and bottom */}
               {data && data.map(product => {
                   //4 products per row
-                  return <ProductItem product = {product} columnSize ={3}/>
+                  return <ProductItem recommendation = {true} product = {product} columnSize ={3}/>
                 })}
               </div>
             </section>

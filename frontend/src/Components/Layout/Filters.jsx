@@ -45,7 +45,7 @@ const Filters = () => {
             } else {
                 searchParams.append(presentCheckboxName, presentCheckbox.value);
             }
-            const path = window.location.pathname + "?" + searchParams.toString();
+            const path = "?" + searchParams.toString();
             navigate(path);
         }
   }

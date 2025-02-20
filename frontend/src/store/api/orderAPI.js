@@ -1,10 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+
+const getBaseUrl = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return String(process.env.REACT_APP_PROD_BACKEND_URL);
+  }
+  return String(process.env.REACT_APP_DEV_BACKEND_URL);
+};
+
+
 // Define a service using a base URL and expected endpoints
 export const orderAPI = createApi({
   reducerPath: 'orderAPI',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: String(process.env.REACT_APP_BACKEND_URL),
+    baseUrl: getBaseUrl(),
     credentials: 'include',
   }),
   tagTypes: ['Refetch Details', "Refetch List"],

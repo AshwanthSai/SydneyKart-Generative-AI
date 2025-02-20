@@ -6,7 +6,7 @@ const NotFound = () => {
     <div className="row">
       <div className="d-flex justify-content-center page-not-found-wrapper">
         <img
-          src="../images/404.svg"
+          src={`${process.env.PUBLIC_URL}/images/404.svg`}
           height="550"
           width="550"
           alt="404_not_found"

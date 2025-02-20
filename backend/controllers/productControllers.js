@@ -302,7 +302,7 @@ export const getAllProductsForIngest = catchAsyncErrors(async (req, res) => {
 
 // Get all products   =>  /api/v1/product/recommendations
 export const getProductRecommendationsFromRAG = catchAsyncErrors(async (req, res) => {
-  const {name, category, price, description} = req.body
+  const {name, category, price, description} = req.body.product
 
   const query = `${name}. ${category}. ${price}. ${description}`
   const index = new Index({

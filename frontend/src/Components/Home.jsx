@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MetaData from "../Components/Layout/MetaData";
 import { useGetProductsQuery } from "../store/api/productAPI";
 import ProductItem from "./Product/ProductItem";
@@ -11,9 +11,10 @@ import NotFound from "./Admin/NotFound";
 
 const Home = () => {
   /* 
-    Fetch params from URL and send request
-    Aux Pagination
+  Fetch params from URL and send request
+  Aux Pagination
   */
+  const [isMobile, setIsMobile] = useState(false);
   let [searchParams] = useSearchParams();
   let page = Number(searchParams.get("page")) || 1;
   let keyword = searchParams.get("keyword") || "";
@@ -35,6 +36,19 @@ const Home = () => {
   const columnSize = keyword ? 3 : 3
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    // Initial check
+    checkMobile();
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+
+  useEffect(() => {
     if(isError) {
       toast.error(error.data.message)
     }
@@ -50,29 +64,38 @@ const Home = () => {
 
   return (
     <>
-    <MetaData title = "Buy Best Products Online "/>
-      <div className="row">
-        {keyword && (
+      <MetaData title="Buy Best Products Online" />
+      <div className={isMobile ? 'container-fluid px-0' : 'row'}>
+        {keyword && !isMobile && (
           <div className="col-6 col-md-3 mt-5">
-            <Filters/>
+            <Filters />
           </div>
         )}
-        <div className={`col-6 ${keyword ? "col-md-9" : "col-md-12"}`} >
-          <h1 id="products_heading" className="text-secondary"> 
-          {keyword
+        <div className={`col-6 ${keyword ? "col-md-9" : "col-md-12"}`}>
+          <h1 
+            id="products_heading" 
+            className={`text-secondary ${isMobile ? 'products-heading' : ''}`}
+          >
+            {keyword
               ? `${data?.products?.length} Products found with keyword: ${keyword}`
               : "Latest Products"}
           </h1>
-          <section id="products" className="mt-5">
-            <div className="row">
-            {/* my is top and bottom */}
-            {data && data.products.map(product => {
-                return <ProductItem product = {product} columnSize ={columnSize}/>
-              })}
+          <section id="products" className="products-section mt-5">
+            <div className="product-grid">
+              {data && data.products.map(product => (
+                <ProductItem 
+                  key={product._id}
+                  product={product} 
+                  columnSize={isMobile ? 12 : columnSize}
+                />
+              ))}
             </div>
           </section>
         </div>
-        <CustomPagination filteredProductsCount = {data?.filteredProductsCount} resPerPage = {data?.resPerPage} />
+        <CustomPagination 
+          filteredProductsCount={data?.filteredProductsCount} 
+          resPerPage={isMobile ? 4 : data?.resPerPage} 
+        />
       </div>
     </>
   );

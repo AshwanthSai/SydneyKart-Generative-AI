@@ -3,16 +3,24 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {userApi} from "../api/userApi"
 import { setIsAuthenticated, setUser } from '../features/authSlice'
 
+
+const getBaseUrl = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return String(process.env.REACT_APP_PROD_BACKEND_URL);
+  }
+  return String(process.env.REACT_APP_DEV_BACKEND_URL);
+};
+
+
 /* 
     Mutations are used to send data updates to the server 
     and apply the changes to the local cache. 
     Mutations can also invalidate cached data and force re-fetches.
 */
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: String(process.env.REACT_APP_BACKEND_URL),
+    baseUrl: getBaseUrl(),
     /* 
       "credentials" tells fetch or RTK Query how to handle HTTP cookies.
       By default, browsers omit credentials on cross-site requests.
