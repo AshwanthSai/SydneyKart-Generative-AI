@@ -2,68 +2,41 @@ name: Backend CI/CD
 
 on:
   push:
-    branches: [ feature/backend-ci ]
+    branches: [ main ]
     paths:
       - 'backend/**'
+      - 'frontend/**'
   pull_request:
-    branches: [ feature/backend-ci ]
+    branches: [ main ]
     paths:
       - 'backend/**'
+      - 'frontend/**'
 
-# Add a unique ID for the workflow
-id: backend-workflow
-
-#Meta Tag for Docker Hub
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-backend
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/sydneykart-backend
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Extract metadata for Docker
+      - uses: docker/metadata-action@v5
         id: meta
-        uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME }}
           tags: |
             type=sha,format=long
             type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
         with:
           context: ./backend
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           build-args: |
             NODE_ENV=production
             PORT=5000
@@ -91,67 +64,39 @@ jobs:
     needs: build-and-push
     runs-on: self-hosted
     steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Stop existing container
-        continue-on-error: true
+      - name: Deploy Container
         run: |
-          docker stop sydneykart-backend || true
-          docker rm sydneykart-backend || true
-
-      - name: Pull and run new container
-        env:
-          NODE_ENV: production
-          PORT: 5000
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          JWT_EXPIRES_TIME: ${{ secrets.JWT_EXPIRES_TIME }}
-          COOKIE_EXPIRES_TIME: ${{ secrets.COOKIE_EXPIRES_TIME }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
-          SMTP_FROM_NAME: ${{ secrets.SMTP_FROM_NAME }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          PRICE_API_KEY: ${{ secrets.PRICE_API_KEY }}
-          UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
-          UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
-        run: |
-          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:feature-backend-ci
-          docker run -d \
+          sudo -E docker stop sydneykart-backend || true
+          sudo -E docker rm sydneykart-backend || true
+          sudo -E docker pull ${{ env.IMAGE_NAME }}:feature-backend-ci
+          sudo -E docker run -d \
             --name sydneykart-backend \
             --restart unless-stopped \
-            -p 4000:4000 \
-            -e NODE_ENV="${NODE_ENV}" \
-            -e PORT="${PORT}" \
-            -e MONGODB_URI="${MONGODB_URI}" \
-            -e JWT_SECRET="${JWT_SECRET}" \
-            -e JWT_EXPIRES_TIME="${JWT_EXPIRES_TIME}" \
-            -e COOKIE_EXPIRES_TIME="${COOKIE_EXPIRES_TIME}" \
-            -e CLOUDINARY_CLOUD_NAME="${CLOUDINARY_CLOUD_NAME}" \
-            -e CLOUDINARY_API_KEY="${CLOUDINARY_API_KEY}" \
-            -e CLOUDINARY_API_SECRET="${CLOUDINARY_API_SECRET}" \
-            -e STRIPE_KEY="${STRIPE_KEY}" \
-            -e STRIPE_WEBHOOK_SECRET="${STRIPE_WEBHOOK_SECRET}" \
-            -e SMTP_HOST="${SMTP_HOST}" \
-            -e SMTP_PORT="${SMTP_PORT}" \
-            -e SMTP_EMAIL="${SMTP_EMAIL}" \
-            -e SMTP_PASSWORD="${SMTP_PASSWORD}" \
-            -e SMTP_FROM_EMAIL="${SMTP_FROM_EMAIL}" \
-            -e SMTP_FROM_NAME="${SMTP_FROM_NAME}" \
-            -e OPENAI_API_KEY="${OPENAI_API_KEY}" \
-            -e PRICE_API_KEY="${PRICE_API_KEY}" \
-            -e UPSTASH_VECTOR_REST_URL="${UPSTASH_VECTOR_REST_URL}" \
-            -e UPSTASH_VECTOR_REST_TOKEN="${UPSTASH_VECTOR_REST_TOKEN}" \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:feature-backend-ci
+            -p 5000:5000 \
+            -e NODE_ENV=production \
+            -e PORT=5000 \
+            -e MONGODB_URI="${{ secrets.MONGODB_URI }}" \
+            -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            -e JWT_EXPIRES_TIME="${{ secrets.JWT_EXPIRES_TIME }}" \
+            -e COOKIE_EXPIRES_TIME="${{ secrets.COOKIE_EXPIRES_TIME }}" \
+            -e CLOUDINARY_CLOUD_NAME="${{ secrets.CLOUDINARY_CLOUD_NAME }}" \
+            -e CLOUDINARY_API_KEY="${{ secrets.CLOUDINARY_API_KEY }}" \
+            -e CLOUDINARY_API_SECRET="${{ secrets.CLOUDINARY_API_SECRET }}" \
+            -e STRIPE_KEY="${{ secrets.STRIPE_KEY }}" \
+            -e STRIPE_WEBHOOK_SECRET="${{ secrets.STRIPE_WEBHOOK_SECRET }}" \
+            -e SMTP_HOST="${{ secrets.SMTP_HOST }}" \
+            -e SMTP_PORT="${{ secrets.SMTP_PORT }}" \
+            -e SMTP_EMAIL="${{ secrets.SMTP_EMAIL }}" \
+            -e SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}" \
+            -e SMTP_FROM_EMAIL="${{ secrets.SMTP_FROM_EMAIL }}" \
+            -e SMTP_FROM_NAME="${{ secrets.SMTP_FROM_NAME }}" \
+            -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
+            -e PRICE_API_KEY="${{ secrets.PRICE_API_KEY }}" \
+            -e UPSTASH_VECTOR_REST_URL="${{ secrets.UPSTASH_VECTOR_REST_URL }}" \
+            -e UPSTASH_VECTOR_REST_TOKEN="${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}" \
+            ${{ env.IMAGE_NAME }}:feature-backend-ci
+      

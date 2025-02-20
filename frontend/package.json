@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "https://portfoliosai.link/sydneykart/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
@@ -23,6 +24,7 @@
     "react-scripts": "5.0.1",
     "react-stars": "^2.2.5",
     "react-toastify": "^11.0.2",
+    "serve": "^14.2.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

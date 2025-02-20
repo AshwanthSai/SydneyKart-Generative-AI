@@ -28,7 +28,6 @@ const seedProducts = async() => {
 
         await Product.insertMany(productsWithUser, { validateBeforeSave: false })
         console.log("Products are inserted")
-
         process.exit();
     } catch(error) {
         console.error(error.message) 

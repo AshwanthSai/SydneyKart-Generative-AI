@@ -15,7 +15,6 @@ const __dirname = dirname(__filename);
 // Load env vars with absolute path
 dotenv.config({ path: join(__dirname, '../config/config.env') });
 
-
 const app = express();
 
 
@@ -43,11 +42,9 @@ if(process.env.NODE_ENV !== 'PRODUCTION') {
 connectDatabase();
 
 
-// When using RTK Mutations, Wildcard CORS policy is not accepted
-// app.use(cors())
+// Wildcard CORS policy is not accepted when using credentials, app.use(cors())
 app.use(cors({
-   // Include cookies in the request from backend to frontend
-  origin: 'http://localhost:4000',
+  origin: true,  // Allow any origin
   credentials: true
 }));
 

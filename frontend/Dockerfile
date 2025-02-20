@@ -13,6 +13,17 @@ RUN npm install
 # Copy project files
 COPY . .
 
+
+# Declare build arguments
+ARG PUBLIC_URL
+ARG REACT_APP_PUBLIC_URL
+ARG REACT_APP_BACKEND_URL
+
+# Set environment variables from build args with defaults
+ENV PUBLIC_URL=$PUBLIC_URL
+ENV REACT_APP_PUBLIC_URL=$REACT_APP_PUBLIC_URL
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
 # Build the project
 RUN npm run build
 
