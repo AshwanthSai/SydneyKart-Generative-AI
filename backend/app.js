@@ -5,7 +5,7 @@ import errorMiddleware from "./middlewares/errors.js";
 import cors from 'cors'
 import multer from "multer";
 import dotenv from "dotenv";
-
+import setupSocket from './routes/chat.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -16,7 +16,6 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const app = express();
-
 
 // Configure multer for file uploads
 const upload = multer({
@@ -63,8 +62,10 @@ app.use(
     }
   })
 );
+
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
+
 
 // Import all routes
 import productRoutes from "./routes/products.js";
@@ -73,24 +74,12 @@ import orderRoutes from "./routes/order.js";
 import paymentRoutes from "./routes/payment.js";
 import { OpenAI } from "./controllers/AI_Controller.js";
 
+
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoutes);
 
-// ------------------ OPENAI API ------------------
-app.post('/api/v1/openai-chat', async (req, res, next) => {
-  OpenAI.chat(req.body, res, next)
-})
-
-app.post('/api/v1/openai-chat-stream', async (req, res, next) => {
-  OpenAI.chatStream(req.body, res, next)
-})
-
-app.post('/api/v1/openai-image', upload.array('files'), async (req, res, next) => {
-  OpenAI.imageVariation(req, res, next)
-})
-// ------------------ OPENAI API ------------------
 
 // Using error middleware
 app.use(errorMiddleware);
@@ -100,6 +89,9 @@ const server = app.listen(process.env.PORT, () => {
     `Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
   );
 });
+
+/* Setting up Socket IO Server for AI Chat Assistant  */
+const io = setupSocket(server);
 
 //Handle Unhandled Promise rejections
 process.on("unhandledRejection", (err) => {

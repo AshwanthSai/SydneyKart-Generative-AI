@@ -4,6 +4,7 @@
   "homepage": "https://portfoliosai.link/sydneykart/",
   "private": true,
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^2.0.3",
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -25,6 +26,7 @@
     "react-stars": "^2.2.5",
     "react-toastify": "^11.0.2",
     "serve": "^14.2.4",
+    "socket.io-client": "^4.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

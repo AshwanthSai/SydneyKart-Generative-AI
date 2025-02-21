@@ -50,13 +50,14 @@ export const handleImageApprovalFlow = async ({ userMessage }) => {
     // Not Approval State, Add user message to db within runAgent
     return false
   }
-  loader.stop()
+  // loader.stop()
+  showLoader({status: "stop", socket})
   // Approval State, We have already added tool call result to DB
   // Does not need any user message to be added to db.
   return true
 }
 
-export const runAgent = async ({ userMessage, tools }) => {
+export const runAgent = async ({ userMessage, tools, socket}) => {
   // If in a Generate Image tool call state, we will send in a Yes or No as prompt to restart Chat
   const isApprovalState = await handleImageApprovalFlow({ userMessage })
 
@@ -68,7 +69,8 @@ export const runAgent = async ({ userMessage, tools }) => {
     await addMessagesToDb({userId, messages:[{ role: 'user', content: userMessage }]})
   }
 
-  const loader = showLoader('Thinking...\n')
+  // const loader = showLoader('Thinking...\n')
+  showLoader({status: "status", text : "Thinking ...", socket})
 
   while (true) {
     // Add present user message to database.
@@ -79,32 +81,39 @@ export const runAgent = async ({ userMessage, tools }) => {
     await addMessagesToDb({messages: [response], userId})
 
     if (response.content) {
-      loader.stop()
-      logMessage(response)
+      // loader.stop()
+      showLoader({status: "stop", socket})
+      logMessage({message: response, socket})
       await getMessagesFromDb(userId)
       process.exit(0)
     }
 
     if (response.tool_calls) {
-      loader.update(`executing: ${response.tool_calls[0].function.name}`)
+      // loader.update(`executing: ${response.tool_calls[0].function.name}`)
+      showLoader({status: "status", text : `executing: ${response.tool_calls[0].function.name}`, socket})
       // If response.tool call is generateImages, UI.js will
       // automatically prompt for an approval
-      logMessage(response)
-
+      // logMessage(response)
+      logMessage({message: response, socket})
       // If the tool call is generateImages, Go to top of While Loop
       // to handle the approval flow
       if (
         response.tool_calls[0].function.name === generateImagesDefinition.name
       ) {
-        loader.update(`Sending for Approval`)
-        loader.stop()
+        // loader.update(`Sending for Approval`)
+        showLoader({status: "status", text : `Sending for Approval`, socket})
+        // loader.stop()
+        showLoader({status: "stop", socket})
+
         return getMessagesFromDb(userId)
       }
       // Run the first suggested tool
-      const toolCallResult = await runTool(userMessage, response.tool_calls[0])
+      const toolCallResult = await runTool(userMessage, response.tool_calls[0], socket)
       await saveToolResponse(userId, response, toolCallResult)
-      loader.update(`done: ${response.tool_calls[0].function.name}`)
+      // loader.update(`done: ${response.tool_calls[0].function.name}`)
+      showLoader({status: "status", text : `done: ${response.tool_calls[0].function.name}`, socket})
     }
-    loader.stop()
+    // loader.stop()
+    showLoader({status: "stop", socket})
   }
 }

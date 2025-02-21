@@ -18,17 +18,17 @@ dotenv.config({ path: join(__dirname, '../config/config.env') });
 // Connecting to database
 await connectDatabase();
 
-const userMessage = process.argv[2]
+// const userMessage = process.argv[2]
 /* 
 - Adding our present prompt to memory(db)
 - Remember, all that the model is doing, is extrapolating 
   text from the last sentence, which is our prompt 
 */
 
-if (!userMessage) {
-  console.error('Please provide a message')
-  process.exit(1)
-}
+// if (!userMessage) {
+//   console.error('Please provide a message')
+//   process.exit(1)
+// }
 
 export const tools = [
   {
@@ -53,7 +53,19 @@ export const tools = [
   },
 ]
 
-const response = await runAgent({
-  userMessage,
-  tools,
-})
+/* 
+  const response = await runAgent({
+    userMessage,
+    tools,
+  })
+*/
+
+export const invokeAI =  async(userMessage, socket) => {
+  console.log(`Invoke Called`)
+  const response = await runAgent({
+    userMessage,
+    tools,
+    socket
+  })
+  return response
+}
