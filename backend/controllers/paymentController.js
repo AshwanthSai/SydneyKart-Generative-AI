@@ -59,11 +59,12 @@ export const stripeCheckoutSession = catchAsyncErrors(async (req, res, next) => 
     Bad Request Error
     Need to investigate here
   */
-
+    const redirectURL = process.env.NODE_ENV === "PRODUCTION" ? process.env.FRONTEND_URL : process.env.FRONTEND_URL_DEV;
+    
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`,
+        success_url: `${redirectURL}/me/orders?order_success=true`,
         cancel_url: `${process.env.FRONTEND_URL}`,
         customer_email: req?.user?.email,
         client_reference_id: req?.user?._id?.toString(),

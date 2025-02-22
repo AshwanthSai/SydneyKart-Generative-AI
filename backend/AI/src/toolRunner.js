@@ -10,18 +10,16 @@ export const runTool = (userMessage, tool, socket) => {
     tool,
   }
   
-  //* Start from here
   switch (tool.function.name) {
     case 'priceComparisonFromInternet':
-      //* Need to fix
-      return priceComparisonFromInternet({tools : tool.function.arguments, socket})
+      return priceComparisonFromInternet(tool.function.arguments, socket)
     case 'analyzeSales':
       // GPT rewrites your request as a descriptive prompt for your Tool Call Parameter.
-      return analyzeSales({tools : tool.function.arguments, socket})
+      return analyzeSales(tool.function.arguments, socket)
     case 'getRedditPost':
-      return getRedditPost({tools : tool.function.arguments, socket})
+      return getRedditPost(tool.function.arguments, socket)
     case 'generateSalesChart':
-      return generateSalesChart({tools : tool.function.arguments, socket})
+      return generateSalesChart(tool.function.arguments, socket)
     default:
       throw new Error(`Tool not found ${tool.function.type}`)
   }

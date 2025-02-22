@@ -1,6 +1,6 @@
 import { generateImagesDefinition } from './tools/generateImages.js'
 
-export const showLoader = ({status, text, socket}) => {
+export const showLoader = ({status, message, socket}) => {
  /*  const spinner = ora({
     text,
     color: 'cyan',
@@ -12,7 +12,7 @@ export const showLoader = ({status, text, socket}) => {
     fail: () => spinner.fail(text),
     update: () => (spinner.text = text),
   } */
-    socket.emit(status, text)
+    socket.emit(status, message)
 }
 
 export const logMessage = ({message, socket}) => {
@@ -37,7 +37,7 @@ export const logMessage = ({message, socket}) => {
   if (role === 'user') {
     /* console.log(`\n${color}[USER]${reset}`)
     console.log(`${message.content}\n`) */
-    socket.emit(status, "[USER]")
+    // socket.emit(status, "[USER]")
     socket.emit(status, message.content)
     return
   }
@@ -49,8 +49,8 @@ export const logMessage = ({message, socket}) => {
       message.tool_calls.forEach((tool) => {
         // console.log(`\n${color}[ASSISTANT]${reset}`)
         // console.log(`${tool.function.name}\n`)
-        socket.emit(status, "[ASSISTANT]")
-        socket.emit(status, `${tool.function.name}\n`)
+        // socket.emit(status, "[ASSISTANT]")
+        socket.emit(status, `Tool Calling : ${tool.function.name}\n`)
 
         if (tool.function.name === generateImagesDefinition.name) {
           // console.log('\nDo you approve generating an image? (yes/no)\n')
@@ -65,7 +65,7 @@ export const logMessage = ({message, socket}) => {
     if (message.content) {
       // console.log(`\n${color}[ASSISTANT]${reset}`)
       // console.log(`${message.content}\n`)
-      socket.emit(status, "[ASSISTANT]")
+      // socket.emit(status, "[ASSISTANT]")
       socket.emit(status, `${message.content}\n`)
     }
   }

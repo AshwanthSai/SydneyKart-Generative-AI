@@ -1,6 +1,5 @@
 import axios from 'axios';
 import 'dotenv/config'
-import e from 'express';
 
 export const analyzeSalesDefinition = {
   name: 'analyzeSales',

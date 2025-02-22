@@ -2,6 +2,8 @@ import fetch from 'node-fetch'
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { log } from 'console';
+import { logMessage } from '../ui.js';
 
 export const priceComparisonDefinition = {
   name: 'priceComparisonFromInternet',
@@ -145,8 +147,9 @@ const fetchJobResults = async (jobId, token) => {
 };
 
 
-export const priceComparisonFromInternet = async (productName) => {
-  const options = {
+export const priceComparisonFromInternet = async (productName, socket) => {
+
+  const options = { 
     method: 'POST',
     headers: {accept: 'application/json', 'content-type': 'application/json'},
     body: JSON.stringify({
@@ -177,12 +180,12 @@ export const priceComparisonFromInternet = async (productName) => {
     */
       if (finalResult) {
         const jobData = await fetchJobResults(jobResult.job_id, process.env.PRICE_API_KEY);
+        // logMessage({message: 'Price comparison results found', socket})
         console.log('📊 Price comparison results found');
         
         const formattedResults = formatPriceResults(jobData);
-        console.log(formattedResults)
-        console.log(`Found ${formattedResults.totalOffers} offers for ${productName}`);
-
+        // console.log(`Found ${formattedResults.totalOffers} offers for ${productName}`);
+        logMessage({message: `Found ${formattedResults.totalOffers} offers for ${productName}`, socket})
         return formattedResults.summary;
       }
   } catch (error) {

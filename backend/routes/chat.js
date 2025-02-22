@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import { invokeAI } from "../AI/index.js";
 
 
-const setupSocket = (server) => {
+const setupSocket = (server, userId) => {
   const io = new Server(server, {
     cors: {
       origin: ["http://localhost:3000", "https://portfoliosai.link"],

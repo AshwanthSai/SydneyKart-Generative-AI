@@ -21,10 +21,16 @@ import { showLoader, logMessage } from './ui.js'
   AI structures our response and sends it back to us
 */
 
-var userId = '67a8d8d68305f334b067d89c'
+// var userId = '67a8d8d68305f334b067d89c'
+let userId;
+
+const setUserId = (id) => {
+  userId = id
+  console.log("UserId Set")
+}
 
 
-export const handleImageApprovalFlow = async ({ userMessage }) => {
+export const handleImageApprovalFlow = async ({ userMessage, socket}) => {
   // The UI Spinner on logging the name of the Tool during a Tool Call message by AI
   // Automatically console.logs an approval prompt.
   const history = await getMessagesFromDb(userId)
@@ -34,12 +40,15 @@ export const handleImageApprovalFlow = async ({ userMessage }) => {
   if (!toolCall || toolCall.function.name != generateImagesDefinition.name) {
     return
   }
-  const loader = showLoader('Processing Approval')
+  // const loader = showLoader('Processing Approval')
+  showLoader({status: "status", message : 'Processing Approval', socket})
   const approval = await runApprovalCheck(userMessage)
   if (approval) {
-    loader.update(`Executing Tool, ${toolCall.function.name}`)
+    // loader.update(`Executing Tool, ${toolCall.function.name}`)
+    showLoader({status: "status", message : `Executing Tool, ${toolCall.function.name}`, socket})
     const toolCallResult = await runTool(userMessage, toolCall)
-    loader.update(`Completed Tool Call, ${toolCall.function.name}`)
+    // loader.update(`Completed Tool Call, ${toolCall.function.name}`)
+    showLoader({status: "status", message : `Completed Tool Call, ${toolCall.function.name}`, socket})
     await saveToolResponse(userId, toolCall.id, toolCallResult)
   } else {
     await saveToolResponse(
@@ -57,9 +66,30 @@ export const handleImageApprovalFlow = async ({ userMessage }) => {
   return true
 }
 
+
+/* 
+  RunAgent Entire Flow
+    - Check if in Approval State -> 
+      Find last message, check the name of the tool call,
+        If anything else than Generate Images, Return
+      Pass User Message to Approval Check LLM 
+    - Add present user message to DB
+    - Run LLM with entire context
+    - Save Response to DB
+      If content response, then return and exit while loop
+      If tool call response
+        If it is a Generate Image, Ask for Approval, Exit the function
+          - On user message, Yes or No then function is triggered again.
+        If tool call, 
+          Run and save result to DB, Go to Top of While Loop
+        Send Tool call result to LLM
+        Expect Content Message and Exit Function
+*/
+
 export const runAgent = async ({ userMessage, tools, socket}) => {
+
   // If in a Generate Image tool call state, we will send in a Yes or No as prompt to restart Chat
-  const isApprovalState = await handleImageApprovalFlow({ userMessage })
+  const isApprovalState = await handleImageApprovalFlow({ userMessage, socket})
 
   /* 
     If our present state is not a Generate Image Tool Call State, 
@@ -70,7 +100,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
   }
 
   // const loader = showLoader('Thinking...\n')
-  showLoader({status: "status", text : "Thinking ...", socket})
+  showLoader({status: "status", message : "Thinking ...", socket})
 
   while (true) {
     // Add present user message to database.
@@ -84,13 +114,13 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
       // loader.stop()
       showLoader({status: "stop", socket})
       logMessage({message: response, socket})
-      await getMessagesFromDb(userId)
-      process.exit(0)
+      return await getMessagesFromDb(userId)
+      // process.exit(0)
     }
 
     if (response.tool_calls) {
       // loader.update(`executing: ${response.tool_calls[0].function.name}`)
-      showLoader({status: "status", text : `executing: ${response.tool_calls[0].function.name}`, socket})
+      showLoader({status: "status", message : `executing: ${response.tool_calls[0].function.name}`, socket})
       // If response.tool call is generateImages, UI.js will
       // automatically prompt for an approval
       // logMessage(response)
@@ -101,7 +131,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
         response.tool_calls[0].function.name === generateImagesDefinition.name
       ) {
         // loader.update(`Sending for Approval`)
-        showLoader({status: "status", text : `Sending for Approval`, socket})
+        showLoader({status: "status", message : `Sending for Approval`, socket})
         // loader.stop()
         showLoader({status: "stop", socket})
 
@@ -111,7 +141,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
       const toolCallResult = await runTool(userMessage, response.tool_calls[0], socket)
       await saveToolResponse(userId, response, toolCallResult)
       // loader.update(`done: ${response.tool_calls[0].function.name}`)
-      showLoader({status: "status", text : `done: ${response.tool_calls[0].function.name}`, socket})
+      showLoader({status: "status", message : `done: ${response.tool_calls[0].function.name}`, socket})
     }
     // loader.stop()
     showLoader({status: "stop", socket})

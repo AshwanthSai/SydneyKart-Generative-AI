@@ -8,6 +8,7 @@ import { productSearchDefinition } from './src/tools/productSearch.js';
 import { analyzeSalesDefinition } from './src/tools/analyzeSales.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { showLoader } from './src/ui.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -60,8 +61,7 @@ export const tools = [
   })
 */
 
-export const invokeAI =  async(userMessage, socket) => {
-  console.log(`Invoke Called`)
+export const invokeAI =  async(userMessage, socket, userId) => {
   const response = await runAgent({
     userMessage,
     tools,

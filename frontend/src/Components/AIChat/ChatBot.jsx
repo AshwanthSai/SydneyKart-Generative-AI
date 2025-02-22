@@ -17,7 +17,8 @@ const ChatBot = () => {
     // For preventing render of Intro Message for 3 seconds
     const [showGreeting, setShowGreeting] = useState(false);
     const [initialTyping, setInitialTyping] = useState(true);
-
+    const [isMinimized, setIsMinimized] = useState(true);
+    
     useEffect(() => {
       /* Only show intro after 2 seconds */
       setTimeout(() => {
@@ -73,6 +74,10 @@ const ChatBot = () => {
       };
     }, []);
   
+    useEffect(() => {
+       console.log(isTyping)
+       console.log(isTypingContent)
+    }, [isTyping,isTypingContent])
 
     const handleSend = (innerHtml, textContent, innerText, nodes) => {
       if (socketRef.current) {
@@ -94,7 +99,7 @@ const ChatBot = () => {
       setInputMessage('');
     };
 
-  const [isMinimized, setIsMinimized] = useState(false);
+
 
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized);
@@ -147,7 +152,7 @@ const ChatBot = () => {
                     model={msg}
                   />
                 ))}
-              {isTyping && <TypingIndicator content="Sai is thinking..." />}
+              {isTyping && <TypingIndicator content={isTypingContent}/>}
               </MessageList>
               <MessageInput 
                 placeholder="Type a message..."
