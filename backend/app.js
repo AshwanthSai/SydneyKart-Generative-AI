@@ -8,6 +8,8 @@ import dotenv from "dotenv";
 import setupSocket from './routes/chat.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,6 +18,42 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const app = express();
+
+/* 
+  Prevent DDOS and Bots
+*/
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200 // limit each IP to 200 requests per windowMs
+});
+
+app.use(limiter)
+
+/* 
+  Compress responses for 
+  -  Reduced Response Size 
+  -  Reduced Bandwidth Usage
+  -  Faster Page Load Times
+*/
+app.use(compression({
+  level: 6, // Compression level (0-9, default: 6)
+  threshold: 1024, // Only compress responses above 1KB
+  memLevel: 8, // Memory level (1-9, default: 8)
+  filter: function(req, res) {
+    // Don't compress already compressed content types
+    const contentType = res.getHeader('Content-Type');
+    if (contentType && (
+      contentType.includes('image') ||
+      contentType.includes('video') ||
+      contentType.includes('audio')
+    )) {
+      return false;
+    }
+    return compression.filter(req, res);
+  }
+}));
+
+
 
 // Configure multer for file uploads
 const upload = multer({

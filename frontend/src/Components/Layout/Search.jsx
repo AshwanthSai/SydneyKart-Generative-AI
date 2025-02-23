@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+/* 
+  - We are not debouncing because, search is initiated only on Enter Key Press
+*/
 const Search = () => {
   const[keyword, setKeyword] = useState("");
   const navigate = useNavigate()

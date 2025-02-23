@@ -22,6 +22,9 @@ const Login = () => {
         password,
     }
     try {
+      // unwrap() will:
+      // - Return the successful response data
+      // - Throw an error if the request fails
       await login(loginData).unwrap();
       console.log("Calling Completed")
     } catch (err){

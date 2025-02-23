@@ -9,7 +9,19 @@ const setupSocket = (server, userId) => {
       methods: ["GET", "POST"],
       credentials: true,
       allowedHeaders: ["my-custom-header"],
-    }
+    },
+    /* 
+      Server sends a ping every pingInterval (25s)
+      Client must respond within pingTimeout (60s)
+      If no response, connection is considered dead
+      Server automatically closes dead connections
+      Helps with
+        - Resource Management
+        - Connection Reliability
+        - Performance
+    */
+    pingTimeout: 60000, // 60 seconds
+    pingInterval: 25000, // 25 seconds
   });
 
   io.on("connection", (socket) => {

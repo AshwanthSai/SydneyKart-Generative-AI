@@ -267,6 +267,17 @@ export const getSales = catchAsyncErrors(async (req, res, next) => {
 
   const result = await getSalesData(startDate, endDate);
 
+  // Trigger GC after heavy computation
+  // GC = Garbage Collection
+  if (global.gc) {
+    try {
+      global.gc();
+    } catch (e) {
+      console.log('Garbage collection not enabled');
+    }
+  }
+  
+
   res.status(200).json({
     salesData: result.finalSalesData,
     totalSales: result.totalSales,

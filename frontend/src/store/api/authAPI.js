@@ -19,6 +19,7 @@ const getBaseUrl = () => {
 */
 export const authApi = createApi({
   reducerPath: 'authApi',
+  keepUnusedDataFor: 300, // Cache for 5 minutes
   baseQuery: fetchBaseQuery({ 
     baseUrl: getBaseUrl(),
     /* 

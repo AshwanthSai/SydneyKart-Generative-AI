@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
 
@@ -48,4 +48,24 @@ const ProductItem = ({recommendation, product, columnSize}) => {
   )
 };
 
-export default ProductItem;
+/* 
+    Unless the prop values change for the component, do not re-render
+    Use previous cached value from the virtual DOM
+
+    Prevents re-rendering all items when one changes
+    Improves scrolling performance
+    
+*/
+const areEqual = (prevProps, nextProps) => {
+    return (
+      prevProps.product?._id === nextProps.product?._id &&
+      prevProps.product?.price === nextProps.product?.price &&
+      prevProps.product?.ratings === nextProps.product?.ratings &&
+      prevProps.columnSize === nextProps.columnSize &&
+      prevProps.recommendation === nextProps.recommendation &&
+      prevProps.product?.images?.[0]?.url === nextProps.product?.images?.[0]?.url
+    );
+  };
+  
+// Export memoized version of the component
+export default memo(ProductItem, areEqual);

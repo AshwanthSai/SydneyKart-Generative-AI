@@ -4,6 +4,8 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      // Add index for frequently searched fields
+      index: true ,
       required: [true, "Please enter product name"],
       maxLength: [200, "Product name cannot exceed 200 characters"],
     },

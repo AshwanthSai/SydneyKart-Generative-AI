@@ -26,8 +26,7 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
   let filteredProductsCount = products.length;
 
   apiFilters.pagination(resPerPage);
-  products = await apiFilters.query.clone();
-
+  products = await apiFilters.query.clone().lean();
 
   return res.status(200).json({
     resPerPage,
@@ -43,6 +42,18 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
   const product = await Product.create(req.body);
   indexSingleProduct(product)
 
+  /* 
+    Garbage Collect after adding a product to RAG DB
+  */
+  if (global.gc) {
+    try {
+      global.gc();
+    } catch (e) {
+      console.log('Garbage collection not enabled');
+    }
+  }
+  
+
   res.status(200).json({
     product,
   });
@@ -53,7 +64,7 @@ export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
 
   const product = await Product.findById(req?.params?.id).populate(
     "reviews.user" // Go one level deeper and retrieve this object
-  );
+  ).lean();
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -67,6 +78,7 @@ export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
 // Get single product Admin   =>  /api/v1/Admin/products
 export const getAdminProducts   = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find()
+  
   if (!products) {
     return next(new ErrorHandler("Product not found", 404));
   }

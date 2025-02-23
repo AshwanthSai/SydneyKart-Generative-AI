@@ -16,6 +16,7 @@ export const productApi = createApi({
     baseUrl: getBaseUrl(),
     credentials: 'include',
   }),
+  keepUnusedDataFor: 300, // Cache for 5 minutes
   tagTypes: ["AdminProducts", "Products", "SpecificProduct", "Reviews"],
   endpoints: (builder) => ({
     getProducts: builder.query({

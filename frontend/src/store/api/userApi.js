@@ -12,6 +12,7 @@ const getBaseUrl = () => {
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
   reducerPath: 'userApi',
+  keepUnusedDataFor: 300, // Cache for 5 minutes
   baseQuery: fetchBaseQuery({
     baseUrl: getBaseUrl(),
     // If you do not include credentials, Cookies will not be sent

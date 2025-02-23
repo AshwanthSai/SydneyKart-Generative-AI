@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 
 
 const ChatBot = () => {
+    const socketURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_PROD_BACKEND_URL : process.env.REACT_APP_DEV_BACKEND_URL;
     // useRef does no re-render on value change + updates synchronously 
     const socketRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
@@ -27,7 +28,7 @@ const ChatBot = () => {
       }, 3000);
 
       // Connect Socket on Component Load
-      socketRef.current = io("http://localhost:4000", {
+      socketRef.current = io((socketURL), {
         withCredentials: true,
         transports: ['websocket', 'polling']
       });

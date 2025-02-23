@@ -12,6 +12,7 @@ const getBaseUrl = () => {
 // Define a service using a base URL and expected endpoints
 export const orderAPI = createApi({
   reducerPath: 'orderAPI',
+  keepUnusedDataFor: 300, // Cache for 5 minutes
   baseQuery: fetchBaseQuery({ 
     baseUrl: getBaseUrl(),
     credentials: 'include',
