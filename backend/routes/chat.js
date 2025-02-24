@@ -36,7 +36,6 @@ const setupSocket = (server, userId) => {
       await invokeAI(message, socket)
     });
 
-
   });
 
   return io;

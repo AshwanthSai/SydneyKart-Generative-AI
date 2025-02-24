@@ -123,7 +123,7 @@ export const deleteProduct = catchAsyncErrors(async (req, res) => {
   await product.deleteOne();
 
   //Deleting Product from RAG Database
-  deleteSingleProduct(product)
+  await deleteSingleProduct(product)
 
   res.status(200).json({
     message: "Product Deleted",

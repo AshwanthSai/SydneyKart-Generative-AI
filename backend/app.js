@@ -40,12 +40,16 @@ app.use(compression({
   threshold: 1024, // Only compress responses above 1KB
   memLevel: 8, // Memory level (1-9, default: 8)
   filter: function(req, res) {
+    if (req.headers['upgrade'] === 'websocket') {
+      return false;
+    }
     // Don't compress already compressed content types
     const contentType = res.getHeader('Content-Type');
     if (contentType && (
       contentType.includes('image') ||
       contentType.includes('video') ||
-      contentType.includes('audio')
+      contentType.includes('audio') ||
+      contentType.includes('application/octet-stream')
     )) {
       return false;
     }

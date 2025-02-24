@@ -24,7 +24,8 @@ export async function indexProductData() {
   const spinner = ora('Reading product data...').start()
   let response;
   try {
-    response = await axios.get(`${process.env.BACKEND_URL}/api/v1/ingest/products`);
+    // response = await axios.get(`${process.env.BACKEND_URL}/api/v1/ingest/products`);
+    response = await axios.get(`${process.env.BACKEND_URL}/ingest/products`);
   } catch (error){
     console.error(`There was an Error fetching the data: ${error}`);
   }

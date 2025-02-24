@@ -34,7 +34,6 @@ export const analyzeSalesDefinition = {
 // Implementation function
 export const analyzeSales = async (prompt) => {
   let data = JSON.parse(prompt)
-  console.log(typeof data)
   const startDate = data?.startData
   const endDate = data?.endDate
   const analysisType = data?.analysisType

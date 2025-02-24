@@ -1,5 +1,4 @@
 import { runAgent } from './src/agent.js'
-import { priceComparisonDefinition } from './src/tools/priceComparison.js'
 import { generateImagesDefinition } from './src/tools/generateImages.js'
 import { redditToolDefinition } from './src/tools/reddit.js'
 import { connectDatabase } from "../config/dbConnect.js";
@@ -8,7 +7,13 @@ import { productSearchDefinition } from './src/tools/productSearch.js';
 import { analyzeSalesDefinition } from './src/tools/analyzeSales.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { showLoader } from './src/ui.js';
+import { getAllProductsDefinition } from './src/tools/getAllProducts.js';
+import { customerSentimentAnalysisDefinition } from './src/tools/customerSentimentAnalysis.js';
+import { competitorAnalysisDefinition } from './src/tools/CompetitiveAnalysis.js';
+import { marketSegmentationDefinition } from './src/tools/customerSegmentation.js';
+import { getProductInformationDefinition } from './src/tools/getProductInformation.js';
+import { getUserAndOrderInformationDefinition } from './src/tools/getUserAndOrderInformation.js';
+import { sendEmailDefinition } from './src/tools/sendEmail.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,10 +39,6 @@ await connectDatabase();
 export const tools = [
   {
     type: 'function',
-    function: priceComparisonDefinition,
-  },
-  {
-    type: 'function',
     function: analyzeSalesDefinition,
   },
   {
@@ -52,6 +53,34 @@ export const tools = [
     type: 'function',
     function: productSearchDefinition,
   },
+  {
+    type: 'function',
+    function: getAllProductsDefinition,
+  },
+  {
+    type: 'function',
+    function: customerSentimentAnalysisDefinition,
+  },
+  {
+    type: 'function',
+    function: competitorAnalysisDefinition,
+  },
+  {
+    type: 'function',
+    function: marketSegmentationDefinition,
+  },
+  {
+    type: 'function',
+    function: getProductInformationDefinition,
+  },
+  {
+    type: 'function',
+    function: getUserAndOrderInformationDefinition,
+  },
+  {
+    type: 'function',
+    function: sendEmailDefinition,
+  }
 ]
 
 /* 

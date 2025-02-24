@@ -13,7 +13,7 @@ import { z } from 'zod'
     Each run of LLM, we check for a summary, if not present we do not add it. 
 */
 
-var userId = '67a8d8d68305f334b067d89c'
+var userId = '67a86ba37b3eedd85094120e'
 
 export const runLLM = async (messages, tools) => {
   const summary = await getSummaryFromDb(userId)

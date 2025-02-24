@@ -447,14 +447,18 @@ export const getResetPasswordTemplate = (username, resetUrl) => `
           >
             <tr>
               <td class="email-masthead">
-                <a
-                  href="https://shopit.com"
+               <a
+                  href="https://portfoliosai.link/sydneykart/"
                   class="f-fallback email-masthead_name"
                 >
-                  ShopIT
-                </a>
+                <img 
+                src="https://portfoliosai.link/sydneykart/images/logo.png"
+                alt="Sydney Kart" 
+                style="width: 270px; height: 200px; border-radius: 10px;"
+                />
+              </a>
               </td>
-            </tr>
+          </tr>
 
             <tr>
               <td
@@ -521,7 +525,7 @@ export const getResetPasswordTemplate = (username, resetUrl) => `
                           <a href="{{support_url}}">contact support</a> if you
                           have questions.
                         </p>
-                        <p>Thanks, <br />The ShopIT team</p>
+                        <p>Thanks, <br />The SydneyKart Team</p>
 
                         <table class="body-sub" role="presentation">
                           <tr>
@@ -556,7 +560,7 @@ export const getResetPasswordTemplate = (username, resetUrl) => `
                   <tr>
                     <td class="content-cell" align="center">
                       <p class="f-fallback sub align-center">
-                        ShopIT
+                        SydneyKart
                         <br />1234 Street Rd. <br />Suite 1234
                       </p>
                     </td>

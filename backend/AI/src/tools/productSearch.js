@@ -36,5 +36,6 @@ export const productSearch = async (prompt) => {
     return { ...metadata, description: data }
   })
 
+  console.log(formattedResults)
   return JSON.stringify(formattedResults, null, 2)
 }
