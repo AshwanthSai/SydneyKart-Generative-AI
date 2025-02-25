@@ -1,5 +1,7 @@
 import Order from '../../../models/order.js';
 import User from '../../../models/user.js';
+import { logMessage } from '../ui.js';
+import {showLoader} from "../ui.js"
 
 export const marketSegmentationDefinition = {
     name: 'marketSegmentation',
@@ -144,6 +146,8 @@ const segmentCustomers = (rfmScores) => {
 };
 
 export const marketSegmentation = async (prompt) => {
+    showLoader({status: "stop",socket})
+    showLoader({status: "status", message : 'Analyzing..', socket})
     /* 
         Timeframe will be overwritten as per prompt, 365 days is the default value.
     */
@@ -221,7 +225,7 @@ export const marketSegmentation = async (prompt) => {
 4. At Risk: Re-engagement campaign needed
 5. Lost: Win-back campaign with special offers
 `;
-
+        showLoader({status: "stop",socket})
         return analysis;
 
     } catch (error) {

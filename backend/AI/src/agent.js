@@ -110,6 +110,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
     //Save response to memory
     await addMessagesToDb({messages: [response], userId})
 
+    
     if (response.content) {
       // loader.stop()
       showLoader({status: "stop", socket})

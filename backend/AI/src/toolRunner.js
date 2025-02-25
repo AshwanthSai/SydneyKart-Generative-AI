@@ -1,13 +1,16 @@
 import { analyzeSales } from './tools/analyzeSales.js'
+import { churnAnalysis } from './tools/churnUserAnalysis.js'
 import { competitorAnalysis } from './tools/CompetitiveAnalysis.js'
 import { marketSegmentation } from './tools/customerSegmentation.js'
 import { customerSentimentAnalysis } from './tools/customerSentimentAnalysis.js'
 import { generateSalesChart } from './tools/generateImages.js'
 import { getProductInformation } from './tools/getProductInformation.js'
 import { getUserAndOrderInformation } from './tools/getUserAndOrderInformation.js'
-import { productSearch } from './tools/productSearch.js'
+import { checkInventory } from './tools/inventoryManagement.js'
+import { productRecommendations } from './tools/productRecommendations.js'
 import { getRedditPost } from './tools/reddit.js'
 import { sendEmail } from './tools/sendEmail.js'
+
 
 export const runTool = (userMessage, tool, socket) => {
   let input = {
@@ -33,14 +36,20 @@ export const runTool = (userMessage, tool, socket) => {
       return competitorAnalysis(tool.function.arguments, socket)
     case 'marketSegmentation':
       return marketSegmentation(tool.function.arguments, socket)
-    case 'productSearch':
-      return productSearch(tool.function.arguments, socket)
+    case 'productRecommendations':
+      return productRecommendations(tool.function.arguments, socket)
     case 'getProductInformation':
       return getProductInformation(tool.function.arguments, socket)
     case 'getUserAndOrderInformation':
       return getUserAndOrderInformation(tool.function.arguments, socket)
+    case 'checkInventory':
+      return checkInventory(tool.function.arguments, socket)
     case 'sendEmail':
       return sendEmail(tool.function.arguments, socket)
+    case 'productRecommendations':
+      return productRecommendations(tool.function.arguments, socket)
+    case 'churnAnalysis':
+      return churnAnalysis(tool.function.arguments, socket)
     default:
       throw new Error(`Tool not found ${tool.function.type}`)
   }

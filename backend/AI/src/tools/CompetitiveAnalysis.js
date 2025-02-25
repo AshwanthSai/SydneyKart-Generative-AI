@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import { logMessage } from '../ui.js';
+import {showLoader} from "../ui.js"
 
 export const competitorAnalysisDefinition = {
   name: 'competitorAnalysis',
@@ -135,6 +136,8 @@ const fetchJobResults = async (jobId, token) => {
 };
 
 export const competitorAnalysis = async (prompt, socket) => {
+  showLoader({status: "stop",socket})
+  showLoader({status: "status", message : 'Analyzing..', socket})
   const { productName, analysisType = 'overall' } = JSON.parse(prompt);
 
   const options = {
@@ -170,12 +173,9 @@ export const competitorAnalysis = async (prompt, socket) => {
     if (finalResult) {
       const jobData = await fetchJobResults(jobResult.job_id, process.env.PRICE_API_KEY);
       const analysis = formatCompetitorAnalysis(jobData);
+
       
-      logMessage({
-        message: `📊 Analyzed ${analysis.metrics.totalCompetitors} competitors`,
-        socket
-      });
-      
+      showLoader({status: "stop",socket})
       return analysis.summary;
     }
   } catch (error) {

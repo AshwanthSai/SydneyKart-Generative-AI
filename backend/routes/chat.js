@@ -1,6 +1,8 @@
 import { Server } from 'socket.io';
 import { invokeAI } from "../AI/index.js";
-
+import cookieParser from 'cookie-parser';
+import jwt from "jsonwebtoken";
+import User from '../models/user.js';
 
 const setupSocket = (server, userId) => {
   const io = new Server(server, {
@@ -22,6 +24,40 @@ const setupSocket = (server, userId) => {
     */
     pingTimeout: 60000, // 60 seconds
     pingInterval: 25000, // 25 seconds
+  });
+
+
+  // Middleware to extract and verify token from cookies
+  io.use(async (socket, next) => {
+    console.log(`Here -1`)
+    try {
+      // Get token from cookies
+      const token = socket.handshake.headers.cookie
+        ?.split(';')
+        ?.find(c => c.trim().startsWith('token='))
+        ?.split('=')[1];
+
+      if (!token) {
+        return next(new Error('Authentication required'));
+      }
+
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id).select('role email').lean();
+      const email = user?.email;
+      const isAdmin = Boolean(user?.role === 'admin');
+      decoded["isAdmin"] = isAdmin
+      decoded["email"] = email
+
+      // Attach user data to socket
+      console.log(decoded)
+      socket.user = decoded;
+      next();
+
+    } catch (error) {
+      console.error('Socket authentication error:', error);
+      next(new Error('Invalid token'));
+    }
   });
 
   io.on("connection", (socket) => {

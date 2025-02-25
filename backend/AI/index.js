@@ -3,7 +3,7 @@ import { generateImagesDefinition } from './src/tools/generateImages.js'
 import { redditToolDefinition } from './src/tools/reddit.js'
 import { connectDatabase } from "../config/dbConnect.js";
 import dotenv from "dotenv";
-import { productSearchDefinition } from './src/tools/productSearch.js';
+import { productRecommendationsDefinition } from './src/tools/productRecommendations.js';
 import { analyzeSalesDefinition } from './src/tools/analyzeSales.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -14,6 +14,9 @@ import { marketSegmentationDefinition } from './src/tools/customerSegmentation.j
 import { getProductInformationDefinition } from './src/tools/getProductInformation.js';
 import { getUserAndOrderInformationDefinition } from './src/tools/getUserAndOrderInformation.js';
 import { sendEmailDefinition } from './src/tools/sendEmail.js';
+import { inventoryManagementDefinition } from './src/tools/inventoryManagement.js';
+import { churnAnalysisDefinition } from './src/tools/churnUserAnalysis.js';
+import { logMessage, showLoader } from './src/ui.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -24,17 +27,6 @@ dotenv.config({ path: join(__dirname, '../config/config.env') });
 // Connecting to database
 await connectDatabase();
 
-// const userMessage = process.argv[2]
-/* 
-- Adding our present prompt to memory(db)
-- Remember, all that the model is doing, is extrapolating 
-  text from the last sentence, which is our prompt 
-*/
-
-// if (!userMessage) {
-//   console.error('Please provide a message')
-//   process.exit(1)
-// }
 
 export const tools = [
   {
@@ -51,7 +43,7 @@ export const tools = [
   },
   {
     type: 'function',
-    function: productSearchDefinition,
+    function: productRecommendationsDefinition,
   },
   {
     type: 'function',
@@ -80,17 +72,19 @@ export const tools = [
   {
     type: 'function',
     function: sendEmailDefinition,
+  },
+  {
+    type: 'function',
+    function: inventoryManagementDefinition,
+  },
+  {
+    type: 'function',
+    function: churnAnalysisDefinition,
   }
 ]
 
-/* 
-  const response = await runAgent({
-    userMessage,
-    tools,
-  })
-*/
-
-export const invokeAI =  async(userMessage, socket, userId) => {
+export const invokeAI =  async(userMessage, socket) => {
+  console.log(`Here 0`)
   const response = await runAgent({
     userMessage,
     tools,

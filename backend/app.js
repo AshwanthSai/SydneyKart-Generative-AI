@@ -34,7 +34,9 @@ app.use(limiter)
   -  Reduced Response Size 
   -  Reduced Bandwidth Usage
   -  Faster Page Load Times
-*/
+
+Turned off to increase page load speed.
+
 app.use(compression({
   level: 6, // Compression level (0-9, default: 6)
   threshold: 1024, // Only compress responses above 1KB
@@ -56,6 +58,7 @@ app.use(compression({
     return compression.filter(req, res);
   }
 }));
+ */
 
 
 

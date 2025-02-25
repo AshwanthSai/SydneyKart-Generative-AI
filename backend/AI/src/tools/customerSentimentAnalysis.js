@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Product from '../../../models/product.js';
+import { logMessage } from '../ui.js';
+import {showLoader} from "../ui.js"
 
 export const customerSentimentAnalysisDefinition = {
     name: 'customerSentimentAnalysis',
@@ -30,7 +32,8 @@ export const customerSentimentAnalysisDefinition = {
 export const customerSentimentAnalysis = async (prompt) => {
     const parameters = JSON.parse(prompt)
     const {productName, aspectAnalysis} = parameters
-
+    showLoader({status: "stop",socket})
+    showLoader({status: "status", message : 'Analyzing..', socket})
     try {
          // 1. First try exact match
         let product = await Product.findOne({ 
@@ -45,7 +48,7 @@ export const customerSentimentAnalysis = async (prompt) => {
                 } 
             }).select('_id reviews');
         }
-
+        showLoader({status: "stop",socket})
         return JSON.stringify(product.reviews, null, 2);
     } catch (error) {
         if (error.response) {

@@ -1,8 +1,8 @@
 import { openai } from './ai.js'
 import { getMessagesFromDb, getSummaryFromDb } from './memory.js'
-import { systemPrompt } from './systemPrompt.js'
 import { zodResponseFormat } from 'openai/helpers/zod'
 import { z } from 'zod'
+import { systemPrompt } from './systemPrompt.js'
 
 /* 
   - Remember the summarization flow

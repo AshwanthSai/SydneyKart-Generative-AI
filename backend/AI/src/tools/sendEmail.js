@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import { generateEmailTemplate } from './utils/genericEmailTemplate.js';
 import sendEmailViaNodemailer from "../../../utils/sendEmail.js";
+import { logMessage } from '../ui.js';
+import {showLoader} from "../ui.js"
 
 export const sendEmailDefinition = {
   name: 'sendEmail',
@@ -35,7 +37,7 @@ export const sendEmailDefinition = {
           },
           mainContent: {
             type: 'string',
-            description: 'Main email content this is injected into an HTML Template'
+            description: 'Main email content, this is injected into an HTML Template'
           },
           button: {
             type: 'object',
@@ -68,10 +70,21 @@ export const sendEmailDefinition = {
   }
 };
 
+// Add this constant at the top of the file after imports
+const DEFAULT_COMPANY_INFO = {
+  name: 'SydneyKart',
+  logo: 'https://portfoliosai.link/sydneykart/images/logo.png',
+  website: 'https://portfoliosai.link/sydneykart/',
+  address: 'Sydney',
+  suite: 'Sydney CBD, Suite 1'
+};
+
 
 export const sendEmail = async (prompt) => {
+  showLoader({status: "stop",socket})
+  showLoader({status: "status", message : 'Analyzing..', socket})
   try {
-    const { recipient, emailContent, companyInfo } = JSON.parse(prompt);
+    const { recipient, emailContent, companyInfo = DEFAULT_COMPANY_INFO} = JSON.parse(prompt);
 
     // Format mainContent by replacing \n with HTML line breaks
     const formattedContent = emailContent.mainContent
@@ -93,7 +106,8 @@ export const sendEmail = async (prompt) => {
       subject: emailContent?.subject,
       message: htmlEmail,
     });
-
+    
+    showLoader({status: "stop",socket})
     return JSON.stringify({
       success: true,
       message: `Email sent successfully to ${recipient.email}`
