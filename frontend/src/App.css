@@ -722,6 +722,21 @@ footer {
   overflow: hidden;
 }
 
+.responsive-logo {
+  width: clamp(180px, 25vw, 280px);
+  transition: width 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .ps-5 {
+    padding-left: 0 !important;
+  }
+}
 
 /* 
 BootStrap Testing Classes

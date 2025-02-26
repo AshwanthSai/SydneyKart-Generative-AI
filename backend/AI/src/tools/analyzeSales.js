@@ -53,10 +53,9 @@ export const analyzeSalesDefinition = {
 };
 
 export const analyzeSales = async (prompt, socket) => {
-  console.log(`Here`)
-  console.log(socket.user)
-
-  return
+  if(socket?.user?.role !== "admin"){
+    return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
+  }
   // Stop any existing status
   showLoader({status: "stop",socket})
   showLoader({status: "status", message : 'Analyzing..', socket})

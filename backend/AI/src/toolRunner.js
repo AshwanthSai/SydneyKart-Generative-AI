@@ -1,6 +1,7 @@
 import { analyzeSales } from './tools/analyzeSales.js'
 import { churnAnalysis } from './tools/churnUserAnalysis.js'
 import { competitorAnalysis } from './tools/CompetitiveAnalysis.js'
+import { createSupportTicket } from './tools/createSupportTicket.js'
 import { marketSegmentation } from './tools/customerSegmentation.js'
 import { customerSentimentAnalysis } from './tools/customerSentimentAnalysis.js'
 import { generateSalesChart } from './tools/generateImages.js'
@@ -30,6 +31,8 @@ export const runTool = (userMessage, tool, socket) => {
       return generateSalesChart(tool.function.arguments, socket)
     case 'getAllProducts':
       return getAllProducts(tool.function.arguments, socket)
+    case 'createSupportTicket':
+      return createSupportTicket(tool.function.arguments, socket)
     case 'customerSentimentAnalysis':
       return customerSentimentAnalysis(tool.function.arguments, socket)
     case 'competitorAnalysis':
@@ -50,6 +53,8 @@ export const runTool = (userMessage, tool, socket) => {
       return productRecommendations(tool.function.arguments, socket)
     case 'churnAnalysis':
       return churnAnalysis(tool.function.arguments, socket)
+    case 'createSupportTicket':
+      return createSupportTicket(tool.function.arguments, socket)
     default:
       throw new Error(`Tool not found ${tool.function.type}`)
   }

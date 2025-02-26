@@ -60,7 +60,7 @@ export const authApi = createApi({
     }),
     async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
-          //Checking if request is fullfilled
+          //Checking if request is fulfilled
           await queryFulfilled
           // `onSuccess` side-effect
           await dispatch(userApi.endpoints.getUserDetails.initiate(null))

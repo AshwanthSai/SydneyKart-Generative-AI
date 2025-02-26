@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator, StatusList, Status, InputToolbox, AttachmentButton, SendButton, Avatar } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { io } from "socket.io-client";
+import { getBaseUrl } from '../../utils/helper';
+import { useSelector } from 'react-redux';
 
 
 const ChatBot = () => {
-    const socketURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_PROD_BACKEND_URL : process.env.REACT_APP_DEV_BACKEND_URL;
+    const socketURL = getBaseUrl();
+    const credentials = useSelector(state => state.auth.user);
     // useRef does no re-render on value change + updates synchronously 
     const socketRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
@@ -19,13 +22,22 @@ const ChatBot = () => {
     const [showGreeting, setShowGreeting] = useState(false);
     const [initialTyping, setInitialTyping] = useState(true);
     const [isMinimized, setIsMinimized] = useState(true);
-    
+  
+  
+
     useEffect(() => {
       /* Only show intro after 2 seconds */
       setTimeout(() => {
         setInitialTyping(false);
         setShowGreeting(true);
       }, 3000);
+      
+      // On credential change or socketURL change, reconnect socket
+      // Disconnect existing socket if any
+      // If user logs out, disconnect socket
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
 
       // Connect Socket on Component Load
       socketRef.current = io((socketURL), {
@@ -35,6 +47,7 @@ const ChatBot = () => {
       
       // Current.on is basically an event listener
       socketRef.current.on('message', (message) => {
+          console.log(message)
           setIsTyping(false);
           setIsTypingContent("")
           // Add received message to primary list
@@ -73,7 +86,7 @@ const ChatBot = () => {
           socketRef.current.disconnect();
         }
       };
-    }, []);
+    }, [credentials, socketURL]);
   
     useEffect(() => {
        console.log(isTyping)

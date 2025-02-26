@@ -17,6 +17,7 @@ import { sendEmailDefinition } from './src/tools/sendEmail.js';
 import { inventoryManagementDefinition } from './src/tools/inventoryManagement.js';
 import { churnAnalysisDefinition } from './src/tools/churnUserAnalysis.js';
 import { logMessage, showLoader } from './src/ui.js';
+import { createSupportTicketDefinition } from './src/tools/createSupportTicket.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -80,11 +81,14 @@ export const tools = [
   {
     type: 'function',
     function: churnAnalysisDefinition,
+  },
+  {
+    type: 'function',
+    function: createSupportTicketDefinition,
   }
 ]
 
 export const invokeAI =  async(userMessage, socket) => {
-  console.log(`Here 0`)
   const response = await runAgent({
     userMessage,
     tools,

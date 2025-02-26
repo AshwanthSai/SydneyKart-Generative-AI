@@ -29,12 +29,17 @@ const Header = () => {
       {/* Brand Logo Div*/}
       <div className="col-12 col-md-3 ps-5"> 
        {/* Margin down = 3, Padding Start =  5  */}
-        <div className="navbar-brand">
+       <div className="navbar-brand d-flex justify-content-center justify-content-md-start">
           <Link to="/">
             <img 
               src={`${process.env.PUBLIC_URL}/images/logoSmall.png`}
               alt="Sydney Kart" 
-              style={{width: "280px", height : "65px", borderRadius:"10px"}}
+              className="responsive-logo"
+              style={{
+                borderRadius: "10px",
+                maxWidth: "100%",
+                height: "auto"
+              }}
             />
           </Link>
         </div>
@@ -65,14 +70,16 @@ const Header = () => {
             aria-expanded="false"
           >
             <figure className="avatar avatar-nav">
+            {console.log(user)}
+            {console.log(user?.avatar)}
+            {console.log(user?.avatar?.url)}
               <img
                 src={
-                    user?.avatar
-                      ? user?.avatar?.url
-                      : "/images/default_avatar.jpg"
-                  }
-                alt="User Avatar"
+                  user?.avatar?.url || 
+                  `${process.env.REACT_APP_PUBLIC_URL_PROD}/images/default_avatar.jpg`
+                }
                 className="rounded-circle"
+                alt={user?.name || "User Avatar"}
               />
             </figure>
             <span>{user?.name}</span>

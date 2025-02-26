@@ -6,6 +6,7 @@ import {
 } from './memory.js'
 import { runTool } from './toolRunner.js'
 import { generateImagesDefinition } from './tools/generateImages.js'
+import { sendEmailDefinition } from './tools/sendEmail.js'
 import { showLoader, logMessage } from './ui.js'
 
 /* 
@@ -21,27 +22,29 @@ import { showLoader, logMessage } from './ui.js'
   AI structures our response and sends it back to us
 */
 
-// var userId = '67a8d8d68305f334b067d89c'
-let userId;
+export let userId;
 
 const setUserId = (id) => {
-  userId = id
-  console.log("UserId Set")
+  userId = id?.toString();
+  console.log(`user Id changed`, userId)
+  return;
 }
 
 
-export const handleImageApprovalFlow = async ({ userMessage, socket}) => {
+export const handleApprovalFlow = async ({ userMessage, socket}) => {
   // The UI Spinner on logging the name of the Tool during a Tool Call message by AI
   // Automatically console.logs an approval prompt.
   const history = await getMessagesFromDb(userId)
   const latestMessage = history.at(-1)
   const toolCall = latestMessage?.tool_calls?.[0] // Grab the tool call
   // We only need approval for generateImages tool
-  if (!toolCall || toolCall.function.name != generateImagesDefinition.name) {
+  if (!toolCall || toolCall.function.name != sendEmailDefinition.name) {
     return
   }
   // const loader = showLoader('Processing Approval')
   showLoader({status: "status", message : 'Processing Approval', socket})
+  console.log(`User Message`,userMessage)
+  // You are using a specific LLM to process approval. Yes or No -> Returns True or False
   const approval = await runApprovalCheck(userMessage)
   if (approval) {
     // loader.update(`Executing Tool, ${toolCall.function.name}`)
@@ -87,10 +90,12 @@ export const handleImageApprovalFlow = async ({ userMessage, socket}) => {
 */
 
 export const runAgent = async ({ userMessage, tools, socket}) => {
-
+  if(!userId || userId !== socket?.user?.id) {
+    setUserId(socket?.user?.id)
+  }
   // If in a Generate Image tool call state, we will send in a Yes or No as prompt to restart Chat
-  const isApprovalState = await handleImageApprovalFlow({ userMessage, socket})
-
+  const isApprovalState = await handleApprovalFlow({ userMessage, socket})
+  console.log(`Here 2`)
   /* 
     If our present state is not a Generate Image Tool Call State, 
     Continue Normal Flow, Add user message to Context and runLLM 
@@ -106,7 +111,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
     // Add present user message to database.
     // Retrieve all messages from memory to pass as context
     const messages = await getMessagesFromDb(userId)
-    const response = await runLLM(messages, tools)
+    const response = await runLLM(messages, tools, userId)
     //Save response to memory
     await addMessagesToDb({messages: [response], userId})
 
@@ -129,13 +134,11 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
       // If the tool call is generateImages, Go to top of While Loop
       // to handle the approval flow
       if (
-        response.tool_calls[0].function.name === generateImagesDefinition.name
+        response.tool_calls[0].function.name === sendEmailDefinition.name
       ) {
         // loader.update(`Sending for Approval`)
         showLoader({status: "status", message : `Sending for Approval`, socket})
         // loader.stop()
-        showLoader({status: "stop", socket})
-
         return getMessagesFromDb(userId)
       }
       // Run the first suggested tool

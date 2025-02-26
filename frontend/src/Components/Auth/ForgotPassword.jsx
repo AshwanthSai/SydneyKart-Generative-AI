@@ -6,7 +6,7 @@ import MetaData from "../Layout/MetaData";
 
 const ForgotPassword = () => {
   const[email, setEmail] = useState("");    
-  const [forgotPassword, {isSuccess, isError, error}] = useForgotPasswordMutation();
+  const [forgotPassword, {isLoading, isSuccess, isError, error}] = useForgotPasswordMutation();
   
   const submitHandler = async(e) => {
     e.preventDefault(); 
@@ -47,8 +47,9 @@ const ForgotPassword = () => {
             id="forgot_password_button"
             type="submit"
             className="btn w-100 py-2"
+            disabled={isLoading}
           >
-            Send Email
+           {isLoading ? "Sending..."  : "Send Email"}
           </button>
         </form>
       </div>

@@ -14,7 +14,6 @@ const Register = () => {
             If authentication, passes
             Error will be set to false. Triggering useEffect
         */
-        console.log({isAuthenticated})
         if(isAuthenticated) {
             navigate("/")
         }
@@ -87,7 +86,7 @@ const Register = () => {
                 />
             </div>
             <button id="register_button" type="submit" className="btn w-100 py-2" disabled={isLoading}>
-                REGISTER
+                {isLoading ? "REGISTERING..." : "REGISTER"} 
             </button>
             </form>
         </div>

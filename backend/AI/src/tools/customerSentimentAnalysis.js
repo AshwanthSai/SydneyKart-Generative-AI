@@ -29,7 +29,12 @@ export const customerSentimentAnalysisDefinition = {
 /* 
 - Returns all the reviews of a Product via its Name in Natural Language.
 */
-export const customerSentimentAnalysis = async (prompt) => {
+export const customerSentimentAnalysis = async (prompt, socket) => {
+
+    if(socket?.user?.role !== "admin"){
+      return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
+    }
+
     const parameters = JSON.parse(prompt)
     const {productName, aspectAnalysis} = parameters
     showLoader({status: "stop",socket})

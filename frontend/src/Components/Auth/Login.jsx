@@ -77,7 +77,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <Link to="/password/htmlForgot" className="float-end mb-4">Forgot Password?</Link>
+            <Link to="/password/forgot" className="float-end mb-4">Forgot Password?</Link>
             <button id="login_button" type="submit" className="btn w-100 py-2" disabled={isLoading}>
                 {isLoading ? "Authenticating..." : "Login"}
             </button>

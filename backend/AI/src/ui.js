@@ -1,4 +1,5 @@
 import { generateImagesDefinition } from './tools/generateImages.js'
+import { sendEmailDefinition } from './tools/sendEmail.js'
 
 export const showLoader = ({status, message, socket}) => {
     socket.emit(status, message)
@@ -33,8 +34,8 @@ export const logMessage = ({message, socket}) => {
       message.tool_calls.forEach((tool) => {
         socket.emit(status, `Tool Calling : ${tool.function.name}\n`)
 
-        if (tool.function.name === generateImagesDefinition.name) {
-          socket.emit(status, '\nDo you approve generating an image? (yes/no)\n')
+        if (tool.function.name === sendEmailDefinition.name) {
+          socket.emit(status, '\nDo you approve sending an Email? (yes/no)\n')
         }
       })
       return

@@ -29,7 +29,6 @@ const setupSocket = (server, userId) => {
 
   // Middleware to extract and verify token from cookies
   io.use(async (socket, next) => {
-    console.log(`Here -1`)
     try {
       // Get token from cookies
       const token = socket.handshake.headers.cookie
@@ -43,14 +42,15 @@ const setupSocket = (server, userId) => {
 
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.findById(decoded.id).select('role email').lean();
+      const user = await User.findById(decoded.id).select('role email name').lean();
       const email = user?.email;
+      const name = user?.name;
       const isAdmin = Boolean(user?.role === 'admin');
       decoded["isAdmin"] = isAdmin
       decoded["email"] = email
+      decoded["name"] = name
 
       // Attach user data to socket
-      console.log(decoded)
       socket.user = decoded;
       next();
 

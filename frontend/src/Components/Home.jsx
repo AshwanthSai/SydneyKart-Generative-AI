@@ -80,7 +80,7 @@ const Home = () => {
               ? `${data?.products?.length} Products found with keyword: ${keyword}`
               : "Latest Products"}
           </h1>
-          <section id="products" className="products-section mt-5">
+          <section id="products" className="products-section mt-2 ms-2">
             <div className="product-grid">
               {data && data.products.map(product => (
                 <ProductItem 

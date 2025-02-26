@@ -33,3 +33,19 @@ export const calculateOrderCost  = (cartItems) => {
    totalAmount
  }
 }
+
+/* 
+   Fetch Base URLs for Sockets
+*/
+export const getBaseUrl = () => {
+  const url = process.env.NODE_ENV === 'production' 
+    ? process.env.REACT_APP_PROD_BACKEND_URL
+    : process.env.REACT_APP_DEV_BACKEND_URL;
+
+  // Split URL by '/' and reconstruct up to port
+  const urlParts = url.split('/');
+  const protocol = urlParts[0];
+  const domain = urlParts[2];
+  
+  return `${protocol}//${domain}/`;
+};

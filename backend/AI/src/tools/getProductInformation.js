@@ -29,7 +29,7 @@ export const getProductInformationDefinition = {
 - Supports different types of information retrieval (full, basic, specs, etc.)
 - Includes fuzzy search for product names
 */
-export const getProductInformation = async (prompt) => {
+export const getProductInformation = async (prompt, socket) => {
     const parameters = JSON.parse(prompt);
     const { productName, infoType = 'full' } = parameters;
 

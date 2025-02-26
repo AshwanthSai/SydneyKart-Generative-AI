@@ -13,9 +13,9 @@ import { systemPrompt } from './systemPrompt.js'
     Each run of LLM, we check for a summary, if not present we do not add it. 
 */
 
-var userId = '67a86ba37b3eedd85094120e'
 
-export const runLLM = async (messages, tools) => {
+
+export const runLLM = async (messages, tools, userId) => {
   const summary = await getSummaryFromDb(userId)
   const response = await openai.chat.completions.create({
     // Prefer using 4o-mini
@@ -62,7 +62,7 @@ export const runApprovalCheck = async (userMessage) => {
     messages: [
       {
         role: 'system',
-        content: `Determine if the user approved the image generation. If you are not sure, then it is not approved.`,
+        content: `Determine if the user approved sending the Email. If you are not sure, then it is not approved.`,
       },
       { role: 'user', content: userMessage },
     ],

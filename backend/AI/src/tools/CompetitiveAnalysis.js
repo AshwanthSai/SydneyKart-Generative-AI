@@ -136,6 +136,10 @@ const fetchJobResults = async (jobId, token) => {
 };
 
 export const competitorAnalysis = async (prompt, socket) => {
+  if(socket?.user?.role !== "admin"){
+    return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
+  }
+  
   showLoader({status: "stop",socket})
   showLoader({status: "status", message : 'Analyzing..', socket})
   const { productName, analysisType = 'overall' } = JSON.parse(prompt);
