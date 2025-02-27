@@ -1,19 +1,12 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const getBaseUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return String(process.env.REACT_APP_PROD_BACKEND_URL);
-  }
-  return String(process.env.REACT_APP_DEV_BACKEND_URL);
-};
-
 
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: getBaseUrl(),
+    baseUrl: process.env.REACT_APP_ENV === "production" ? process.env.REACT_APP_PROD_BACKEND_URL : process.env.REACT_APP_DEV_BACKEND_URL,
     credentials: 'include',
   }),
   keepUnusedDataFor: 300, // Cache for 5 minutes

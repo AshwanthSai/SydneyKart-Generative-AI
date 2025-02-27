@@ -15,6 +15,7 @@ import ProductRecommendations from "./ProductRecommendations";
 const ProductDetails = () => {
       const {id} = useParams();
       const {data, isLoading, error, isError} = useGetProductDetailsQuery(id);
+      console.log(data)
       const {data: userPurchased } = useCanUserReviewOrderQuery(id)
       const canReview = userPurchased?.canReview || false;
 

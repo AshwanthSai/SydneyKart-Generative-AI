@@ -37,6 +37,7 @@ jobs:
             REACT_APP_PROD_BACKEND_URL=${{ secrets.REACT_APP_PROD_BACKEND_URL }}
             PUBLIC_URL=${{ secrets.PUBLIC_URL }}
             REACT_APP_PUBLIC_URL_PROD=${{ secrets.REACT_APP_PUBLIC_URL_PROD }}
+            REACT_APP_ENV=${{ secrets.REACT_APP_ENV }}
 
   deploy:
     needs: build-and-push
@@ -52,10 +53,11 @@ jobs:
       - name: Run Docker Container
         run: |
           sudo docker run -d \
-            -p 4000:4000 \
+            -p 4000:80 \
             --name sydneykart-frontend \
             --restart unless-stopped \
             -e REACT_APP_PROD_BACKEND_URL=${{ secrets.REACT_APP_PROD_BACKEND_URL }} \
             -e PUBLIC_URL=${{ secrets.PUBLIC_URL }} \
+            -e REACT_APP_ENV=${{ secrets.REACT_APP_ENV }} \
             -e REACT_APP_PUBLIC_URL_PROD=${{ secrets.REACT_APP_PUBLIC_URL_PROD }} \
             ${{ env.IMAGE_NAME }}:latest

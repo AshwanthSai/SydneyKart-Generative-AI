@@ -6,36 +6,55 @@ import User from '../models/user.js';
 
 const setupSocket = (server, userId) => {
   const io = new Server(server, {
+    path: '/socket.io/',
     cors: {
-      origin: ["http://localhost:3000", "https://portfoliosai.link"],
+      origin: function(origin, callback) {
+        console.log('Origin attempt:', origin);
+        callback(null, origin || true);
+      },
       methods: ["GET", "POST"],
       credentials: true,
-      allowedHeaders: ["my-custom-header"],
+      allowedHeaders: ["my-custom-header", "cookie"],
     },
-    /* 
-      Server sends a ping every pingInterval (25s)
-      Client must respond within pingTimeout (60s)
-      If no response, connection is considered dead
-      Server automatically closes dead connections
-      Helps with
-        - Resource Management
-        - Connection Reliability
-        - Performance
-    */
-    pingTimeout: 60000, // 60 seconds
-    pingInterval: 25000, // 25 seconds
+    pingTimeout: 60000,
+    pingInterval: 25000,
+    debug: true  // Enable debug mode
   });
 
+  // Add connection error logging
+  io.engine.on("connection_error", (err) => {
+    console.log("Connection Error:", {
+      code: err.code,
+      message: err.message,
+      context: err.context
+    });
+  });
+
+
+  io.use((socket, next) => {
+    console.log('Socket connection attempt:', {
+      id: socket.id,
+      handshake: {
+        headers: socket.handshake.headers,
+        query: socket.handshake.query,
+        auth: socket.handshake.auth
+      }
+    });
+    next();
+  });
 
   // Middleware to extract and verify token from cookies
   io.use(async (socket, next) => {
     try {
+      console.log('Headers:', socket.handshake.headers);
       // Get token from cookies
       const token = socket.handshake.headers.cookie
         ?.split(';')
         ?.find(c => c.trim().startsWith('token='))
         ?.split('=')[1];
 
+      console.log('Token found:', !!token);
+      
       if (!token) {
         return next(new Error('Authentication required'));
       }

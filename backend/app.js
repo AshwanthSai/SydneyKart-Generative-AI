@@ -137,6 +137,7 @@ const server = app.listen(process.env.PORT, () => {
 
 /* Setting up Socket IO Server for AI Chat Assistant  */
 const io = setupSocket(server);
+console.log('Socket.IO initialized:', !!io);
 
 //Handle Unhandled Promise rejections
 process.on("unhandledRejection", (err) => {

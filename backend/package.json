@@ -7,14 +7,14 @@
     "scripts": {
         "start": "node backend/app.js",
         "dev": "cross-env NODE_ENV=DEVELOPMENT nodemon --expose-gc app.js",
-        "prod": "cross-env NODE_ENV=PRODUCTION PORT=5000 node --expose-gc app.js",
+        "prod": "cross-env DEBUG=socket.io:* NODE_ENV=PRODUCTION PORT=5000 node --expose-gc app.js",
         "tree": "node scripts/directoryTree.js",
-        "seederProducts": "node seeder/DB/Products/seeder.js",
-        "seederOrders": "node seeder/DB/Orders/seeder.js",
-        "AIseeder": "node backend/seeder/AIChatHistory/seeder.js",
-        "startAI": "cd backend/AI && node index.js",
-        "eval": "cd ./AI && node evals/run.js",
-        "ingest": "cd backend/AI && node src/rag/ingest.js"
+        "seederProducts": "cross-env NODE_ENV=DEVELOPMENT node seeder/DB/Products/seeder.js",
+        "seederOrders": "cross-env NODE_ENV=DEVELOPMENT node seeder/DB/Orders/seeder.js",
+        "AIseeder": "cross-env NODE_ENV=DEVELOPMENT node ./seeder/AIChatHistory/seeder.js",
+        "startAI": "cross-env NODE_ENV=DEVELOPMENT cd backend/AI && node index.js",
+        "eval": "cross-env NODE_ENV=DEVELOPMENT cd ./AI && node evals/run.js",
+        "ingest": "cross-env NODE_ENV=DEVELOPMENT cd backend/AI && node src/rag/ingest.js"
     },
     "author": "Ashwanth Sai",
     "license": "ISC",

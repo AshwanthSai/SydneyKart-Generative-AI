@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 const ChatBot = () => {
     const socketURL = getBaseUrl();
+    console.log(socketURL)
     const credentials = useSelector(state => state.auth.user);
     // useRef does no re-render on value change + updates synchronously 
     const socketRef = useRef(null);
@@ -38,13 +39,38 @@ const ChatBot = () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
-
       // Connect Socket on Component Load
       socketRef.current = io((socketURL), {
         withCredentials: true,
-        transports: ['websocket', 'polling']
+        transports: ['websocket', 'polling'],
+        ...(process.env.REACT_APP_ENV === 'production' && {
+          path: '/sydneykart/socket.io/',
+          reconnectionAttempts: 5,
+          reconnectionDelay: 1000,
+          debug: true // Added to debug
+        })
       });
       
+      socketRef.current.on('connect_error', (error) => {
+        console.error('Socket connection error:', error);
+      });
+      
+      socketRef.current.on('connect', () => {
+        console.log('Socket connected:', socketRef.current.id);
+      });
+
+
+      // Log socket configuration
+      console.log('Socket Config:', {
+        url: socketURL,
+        path: socketRef.current.io.opts.path,
+        transport: socketRef.current.io.engine.transport.name
+      });
+
+      socketRef.current.onAny((event, ...args) => {
+        console.log(`[Socket Event] ${event}:`, args);
+      });
+
       // Current.on is basically an event listener
       socketRef.current.on('message', (message) => {
           console.log(message)

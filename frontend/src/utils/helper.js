@@ -38,7 +38,7 @@ export const calculateOrderCost  = (cartItems) => {
    Fetch Base URLs for Sockets
 */
 export const getBaseUrl = () => {
-  const url = process.env.NODE_ENV === 'production' 
+  const url = process.env.REACT_APP_ENV === 'production' 
     ? process.env.REACT_APP_PROD_BACKEND_URL
     : process.env.REACT_APP_DEV_BACKEND_URL;
 
@@ -47,5 +47,9 @@ export const getBaseUrl = () => {
   const protocol = urlParts[0];
   const domain = urlParts[2];
   
-  return `${protocol}//${domain}/`;
+  // Change localhost:4000/api/v1 to Change localhost:4000
+  // return `${protocol}//${domain}/`;
+  // For WebSocket, we need to use wss:// in production
+  const wsProtocol = process.env.REACT_APP_ENV === 'production' ? 'wss://' : 'ws://';
+  return `${wsProtocol}${domain}`;
 };

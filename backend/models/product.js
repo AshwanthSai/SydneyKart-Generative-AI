@@ -91,4 +91,7 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Add index on createdAt field for sorting
+productSchema.index({ createdAt: -1 });
+
 export default mongoose.model("Product", productSchema);

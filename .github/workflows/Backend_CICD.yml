@@ -72,7 +72,7 @@ jobs:
         run: |
           sudo -E docker stop sydneykart-backend || true
           sudo -E docker rm sydneykart-backend || true
-          sudo -E docker pull ${{ env.IMAGE_NAME }}:feature-backend-ci
+          sudo -E docker pull ${{ env.IMAGE_NAME }}:main
           sudo -E docker run -d \
             --name sydneykart-backend \
             --restart unless-stopped \

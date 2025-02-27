@@ -10,7 +10,10 @@ const ProductRecommendations = ({item}) => {
 
   useEffect(() => {
     productRecommendations(item)
-  },[item, productRecommendations])
+    console.log(item)
+    console.log("Call Triggered")
+    console.log(data)
+  },[item,productRecommendations])
 
   useEffect(() => {
     if(isError) {
@@ -32,7 +35,6 @@ const ProductRecommendations = ({item}) => {
           <h1 align="center">AI Product Recommendations</h1>
             <section id="products" className="mt-5">
               <div className="row">
-              {console.log(data)}
               {/* my is top and bottom */}
               {data && data.map(product => {
                   //4 products per row

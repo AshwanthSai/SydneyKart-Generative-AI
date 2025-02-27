@@ -1,46 +1,31 @@
 # Build stage
 FROM node:20-alpine as builder
 
-# Set working directory
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy project files
 COPY . .
 
-
-# Declare build arguments
+# Build arguments and env vars
+ARG REACT_APP_PROD_BACKEND_URL
+ARG REACT_APP_PUBLIC_URL_PROD
 ARG PUBLIC_URL
-ARG REACT_APP_PUBLIC_URL
-ARG REACT_APP_BACKEND_URL
-
-# Set environment variables from build args with defaults
+ENV REACT_APP_PROD_BACKEND_URL=$REACT_APP_PROD_BACKEND_URL
+ENV REACT_APP_PUBLIC_URL_PROD=$REACT_APP_PUBLIC_URL_PROD
 ENV PUBLIC_URL=$PUBLIC_URL
-ENV REACT_APP_PUBLIC_URL=$REACT_APP_PUBLIC_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # Build the project
 RUN npm run build
 
 # Serve stage
-FROM node:20-alpine
+FROM nginx:alpine
 
-# Install serve globally
-RUN npm install -g serve
+# Copy built assets
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Set working directory
-WORKDIR /app
+# Copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built assets from builder stage
-COPY --from=builder /app/build ./build
+EXPOSE 80
 
-# Expose port 4000
-EXPOSE 4000
-
-# Start serve
-CMD ["serve", "-s", "build", "-l", "4000"]
+CMD ["nginx", "-g", "daemon off;"]

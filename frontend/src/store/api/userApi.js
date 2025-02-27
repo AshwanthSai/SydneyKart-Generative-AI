@@ -2,19 +2,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setIsAuthenticated, setUser } from '../features/authSlice';
 
-const getBaseUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return String(process.env.REACT_APP_PROD_BACKEND_URL);
-  }
-  return String(process.env.REACT_APP_DEV_BACKEND_URL);
-};
-
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
   reducerPath: 'userApi',
   keepUnusedDataFor: 300, // Cache for 5 minutes
   baseQuery: fetchBaseQuery({
-    baseUrl: getBaseUrl(),
+    baseUrl: process.env.REACT_APP_ENV === "production" ? process.env.REACT_APP_PROD_BACKEND_URL : process.env.REACT_APP_DEV_BACKEND_URL,
     // If you do not include credentials, Cookies will not be sent
     credentials: 'include',
   }),

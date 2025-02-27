@@ -24,7 +24,7 @@ function App() {
             <Route path="*" element={<NotFound/>} />
             </Routes>
           </div>
-          <ChatBot/>
+          <ChatBot/> 
           <Footer/>
         </Router>
     </>

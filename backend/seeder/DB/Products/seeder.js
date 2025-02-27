@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv";
 import Product from "../../../models/product.js";
-import {products} from "./product.js";
+import {products} from "./products.js";
 
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const seedProducts = async() => {
     try {
-        await mongoose.connect(`mongodb://127.0.0.1:27017/SydneyKart`)
+        await mongoose.connect(process.env.DB_URI)
         console.log("Database Connected")
 
         await Product.deleteMany();

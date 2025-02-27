@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import { toast } from "react-toastify";
 
 const UploadImages = () => {
-
     const navigate = useNavigate();
     const fileInputRef = useRef();
     const{id} = useParams()

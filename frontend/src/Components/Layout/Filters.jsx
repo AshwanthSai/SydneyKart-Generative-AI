@@ -36,7 +36,7 @@ const Filters = () => {
             console.log(presentCheckboxName)
             if(searchParams.has(presentCheckboxName)) {
                 searchParams.delete(presentCheckboxName);
-                const path = window.location.pathname + "?" + searchParams.toString();
+                const path = "?" + searchParams.toString();
                 navigate(path);
             }
         } else {
@@ -61,7 +61,7 @@ const Filters = () => {
         keyword=Apple&min=10&max=150
     */
     
-    const path = window.location.pathname + "?" + searchParams.toString();
+    const path = "?" + searchParams.toString();
     navigate(path);
   }
 

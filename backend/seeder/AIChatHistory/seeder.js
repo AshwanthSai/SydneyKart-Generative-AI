@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const seedChatHistory = async() => {
     try {
-        await mongoose.connect(`mongodb://127.0.0.1:27017/SydneyKart`)
+        await mongoose.connect(process.env.DB_URI)
         console.log("Database Connected")
 
         await Chat.deleteMany();
