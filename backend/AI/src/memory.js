@@ -63,7 +63,14 @@ export const getDb = async (userId) => {
       // Convert the newly created document to plain object
       db = db.toObject();
     }
-    
+    /* 
+      Self Healing Mechanism
+        - If DB is saved in a state, where the last call is a unfullfilled tool call
+        - It will break the LLM Context
+    */
+    if(db?.messages?.at(-1)?.role === 'tool') {
+      db.messages.pop()
+    }
     return db;
   } catch (error) {
     console.error('Error in getDb:', error);

@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import dotenv from "dotenv";
 import { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { dirname } from 'path'
@@ -7,6 +7,7 @@ import { readdir } from 'fs/promises'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+dotenv.config({ path: join(__dirname, '../../config/config.env') });
 /* 
 - If $1 then run all .eval scripts
 - Else run the script with the appropriate eval names
@@ -33,6 +34,7 @@ const main = async () => {
         console.log(evalPath)
         await import(evalPath)
       }
+      
     }
   } catch (error) {
     console.error(

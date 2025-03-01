@@ -25,10 +25,10 @@ export const runTool = (userMessage, tool, socket) => {
     case 'analyzeSales':
       // GPT rewrites your request as a descriptive prompt for your Tool Call Parameter.
       return analyzeSales(tool.function.arguments, socket)
-    case 'getRedditPost':
-      return getRedditPost(tool.function.arguments, socket)
-    case 'generateSalesChart':
-      return generateSalesChart(tool.function.arguments, socket)
+/*     case 'getRedditPost':
+      return getRedditPost(tool.function.arguments, socket) */
+/*     case 'generateSalesChart':
+      return generateSalesChart(tool.function.arguments, socket) */
     case 'getAllProducts':
       return getAllProducts(tool.function.arguments, socket)
     case 'createSupportTicket':
@@ -39,8 +39,6 @@ export const runTool = (userMessage, tool, socket) => {
       return competitorAnalysis(tool.function.arguments, socket)
     case 'marketSegmentation':
       return marketSegmentation(tool.function.arguments, socket)
-    case 'productRecommendations':
-      return productRecommendations(tool.function.arguments, socket)
     case 'getProductInformation':
       return getProductInformation(tool.function.arguments, socket)
     case 'getUserAndOrderInformation':
@@ -53,8 +51,6 @@ export const runTool = (userMessage, tool, socket) => {
       return productRecommendations(tool.function.arguments, socket)
     case 'churnAnalysis':
       return churnAnalysis(tool.function.arguments, socket)
-    case 'createSupportTicket':
-      return createSupportTicket(tool.function.arguments, socket)
     default:
       throw new Error(`Tool not found ${tool.function.type}`)
   }

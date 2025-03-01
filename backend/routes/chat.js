@@ -3,6 +3,7 @@ import { invokeAI } from "../AI/index.js";
 import cookieParser from 'cookie-parser';
 import jwt from "jsonwebtoken";
 import User from '../models/user.js';
+import { logMessage } from '../AI/src/ui.js';
 
 const setupSocket = (server, userId) => {
   const io = new Server(server, {
@@ -56,21 +57,23 @@ const setupSocket = (server, userId) => {
       console.log('Token found:', !!token);
       
       if (!token) {
-        return next(new Error('Authentication required'));
+          logMessage({message: "Initiating non admin mode :)", socket})
       }
 
-      // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.findById(decoded.id).select('role email name').lean();
-      const email = user?.email;
-      const name = user?.name;
-      const isAdmin = Boolean(user?.role === 'admin');
-      decoded["isAdmin"] = isAdmin
-      decoded["email"] = email
-      decoded["name"] = name
+      if(token) {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id).select('role email name').lean();
+        const email = user?.email;
+        const name = user?.name;
+        const isAdmin = Boolean(user?.role === 'admin');
+        decoded["isAdmin"] = isAdmin
+        decoded["email"] = email
+        decoded["name"] = name
+        // Attach user data to socket
+        console.log(decoded)
+        socket.user = decoded;
+      }
 
-      // Attach user data to socket
-      socket.user = decoded;
       next();
 
     } catch (error) {

@@ -1,0 +1,2552 @@
+{
+  "experiments": [
+    {
+      "name": "Customer Sentiment Analysis",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_0shA7U14ZMyebeyPXrjxLXX3",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:38:53.948Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:38:53.948Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_hGD46JnLtxgONdkyuJRPIp56",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.532Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:44:12.532Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_BpTrwkcFvVRYXbrHIkWiMopm",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:36.083Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:56:36.083Z"
+        }
+      ]
+    },
+    {
+      "name": "Get Product Information",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_yOnC9tmeKsIzxcfFFN0iyQSs",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:38:54.083Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:38:54.083Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_S4CmzG5FcOTDxGqs1uDZFSYO",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.327Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:44:12.327Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_6f5FeWHDMAICjxu4T9ime7Ji",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:34.857Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:56:34.857Z"
+        }
+      ]
+    },
+    {
+      "name": "Get User And Order Information",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_uE6Rh28hdkkeSfOtRMqaC9Qt",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:38:54.186Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:38:54.186Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_o7oZBnRHcCwcrnbtA8V6VJ27",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:50.128Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:44:50.128Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_2zLKf858tXO0YLXICTzKBsWy",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:34.956Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:56:34.956Z"
+        }
+      ]
+    },
+    {
+      "name": "Check Inventory",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:38:54.247Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:38:54.247Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.196Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:44:12.196Z"
+        }
+      ]
+    },
+    {
+      "name": "Send Email",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_FmwVThw2uexnQDjAc0dMkjtR",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:38:54.849Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:38:54.849Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_p6bylAIZblMaF6roZUpgPiPV",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:13.564Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:44:13.564Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_CejggxUiIl0ytQ2Hvn299Sr8",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"},\"companyInfo\":{\"name\":\"SydneyKart\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.591Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:56:35.591Z"
+        }
+      ]
+    },
+    {
+      "name": "Churn Analysis",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with this default, or do you have a different number in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:15.250Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:39:15.250Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with that, or do you have a different timeframe in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:13.202Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:44:13.202Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with that, or do you have a different timeframe in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:34.781Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:56:34.781Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know the number of inactive days to consider a customer at risk of churning. The default is 30 days. Would you like to proceed with this default setting, or do you have a different number of inactive days in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:58:08.547Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:58:08.547Z"
+        }
+      ]
+    },
+    {
+      "name": "Create Support Ticket",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_WlGq91j9KXOsQXvJCQ7b2uZZ",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for order ID 5151+15 for the product CAN USB FD Adapter (GC-CAN-USB-FD). Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:15.902Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:39:15.902Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_oZ11MPT49VLyKiEYYw15kuUL",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.643Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:44:12.643Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_bftGFajgixFJdFEAZhwoAxg4",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.021Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:56:35.021Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_wXSAB8vd7naHrnOUGxBSN3XC",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:58:10.012Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:58:10.012Z"
+        }
+      ]
+    },
+    {
+      "name": "Market Segmentation",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The available options are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, let me know if you have a specific timeframe in mind for the analysis, such as 30 days, 90 days, 180 days, or 365 days. If no timeframe is specified, I will use the default of 365 days.",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:16.190Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:39:16.190Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The options available are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, if you have a specific timeframe in mind for the analysis, please let me know. The available options for the timeframe are:\n\n- 30 days\n- 90 days\n- 180 days\n- 365 days (default)",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.724Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:44:12.724Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The available options are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, let me know if you have a specific timeframe in mind for the analysis, such as 30 days, 90 days, 180 days, or 365 days. If not, I will proceed with the default timeframe of 365 days.",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.240Z"
+            }
+          ],
+          "score": 0,
+          "createdAt": "2025-02-28T14:56:35.240Z"
+        }
+      ]
+    },
+    {
+      "name": "Product Recommendations",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_R2fCkIS5AOyNX4ml9UQywibF",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.284Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:39:37.284Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_CqfMGgIqPUfVljOsItCUJoq1",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:12.107Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:44:12.108Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_n5EazmeeyGXBdWBWRTSTrCkb",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:34.549Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-02-28T14:56:34.549Z"
+        }
+      ]
+    },
+    {
+      "name": "Integration Tests",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_C1gQsXK2D1MHRd01vURbUPQZ",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_YpyONHdwfUDYZrjLXdjM5Z5f",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Perform Competitor Analysis on CHARMOUNT Full Motion TV Wall Mount Swivel",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_2kAKopUqczwJ90dfGeiMbR16",
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis",
+                      "arguments": "{\"productName\":\"CHARMOUNT Full Motion TV Wall Mount Swivel\",\"analysisType\":\"overall\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The options available are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, let me know if you have a specific timeframe in mind for the analysis, such as 30 days, 90 days, 180 days, or 365 days. If not, I will proceed with the default timeframe of 365 days.",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Get me details of the product CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_u46I1yNURDKl5TfEC9ljmsrd",
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_4UD7c1AYH3Fb4MCJ8V4HiCqG",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_GL2KTBe8FGTWPjEEtzK5riGI",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"},\"companyInfo\":{\"name\":\"SydneyKart\",\"website\":\"www.sydneykart.com\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_7XCHvMGuZUK4k4YW1MGD3oIB",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            },
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know the number of inactive days to consider a customer at risk of churning. The default is 30 days. Would you like to proceed with this default setting, or do you have a different number in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:39:37.505Z"
+            }
+          ],
+          "score": 0.7,
+          "createdAt": "2025-02-28T14:39:37.505Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_RpY8SlnybQvesNiIlBeropMG",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_V5rjxXLGvUj3B7oxOhtIcHVT",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Perform Competitor Analysis on CHARMOUNT Full Motion TV Wall Mount Swivel",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_5E0NSlbDdaQbD7ZaxYxzFKEu",
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis",
+                      "arguments": "{\"productName\":\"CHARMOUNT Full Motion TV Wall Mount Swivel\",\"analysisType\":\"overall\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The available options are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, if you have a specific timeframe in mind for the analysis, please let me know. The options for the timeframe are:\n\n- 30 days\n- 90 days\n- 180 days\n- 365 days (default)",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Get me details of the product CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_sZsUSKXVbARA2DwELT1XYFMZ",
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"infoType\":\"full\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_BPtT4TLVrvKTF8VVzlBpYDGr",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_YigLnwrKEv2Ur2N8sHhWYndW",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and skies so blue.\\nMay your dreams take flight, and your heart be light,\\nHappy birthday to you, may your future be bright!\"},\"companyInfo\":{\"name\":\"SydneyKart\",\"website\":\"www.sydneykart.com\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_9lZuWU5ekNBoLprzWTNce8K6",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            },
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with that, or do you have a different timeframe in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:44:33.184Z"
+            }
+          ],
+          "score": 0.7,
+          "createdAt": "2025-02-28T14:44:33.184Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_tZspTV3FMyckN6fFwFO7kSlN",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for order ID 5151+15 for the product CAN USB FD Adapter (GC-CAN-USB-FD). Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_VhwTgANy1WvDWBjKdQVfsRZk",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Perform Competitor Analysis on CHARMOUNT Full Motion TV Wall Mount Swivel",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_ZDkbu0cvQ0ArM3Di1DllWuwH",
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis",
+                      "arguments": "{\"productName\":\"CHARMOUNT Full Motion TV Wall Mount Swivel\",\"analysisType\":\"overall\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The options available are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, if you have a specific timeframe in mind for the analysis, please let me know. The available options for the timeframe are:\n\n- 30 days\n- 90 days\n- 180 days\n- 365 days (default)",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Get me details of the product CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_pNqUT4ooiMP7b6lnuxtdoOtX",
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_cM8DY6Id4JKHZ7KZSdL0FG9v",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_Qy0CfoaxrEsu5DBDdS677JoG",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"},\"companyInfo\":{\"name\":\"SydneyKart\",\"website\":\"www.sydneykart.com\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_zKF04KiIiJ108h8OrtioZDI3",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            },
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with that, or do you have a different number in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:56:35.893Z"
+            }
+          ],
+          "score": 0.7,
+          "createdAt": "2025-02-28T14:56:35.893Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_rKgktr7DpgQbsAqrp1hPxU5o",
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket",
+                      "arguments": "{\"ticketDetails\":{\"type\":\"complaint\",\"subject\":\"Refund request for order ID 5151+15\",\"description\":\"Requesting a refund for the product CAN USB FD Adapter (GC-CAN-USB-FD) associated with order ID 5151+15. Please respond immediately.\",\"priority\":\"urgent\",\"category\":\"product\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "createSupportTicket"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Perform Sentiment Analysis on CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_zyJwYlwwIATb8J8uIUBqpzjQ",
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\",\"aspectAnalysis\":\"overall_sentiment\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "customerSentimentAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Perform Competitor Analysis on CHARMOUNT Full Motion TV Wall Mount Swivel",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_BKAby49tz7zaVzCyu86nmbtB",
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis",
+                      "arguments": "{\"productName\":\"CHARMOUNT Full Motion TV Wall Mount Swivel\",\"analysisType\":\"overall\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "competitorAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Perform Market Segmentation on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "Please specify the type of segmentation analysis you would like to perform. The options available are:\n\n- RFM (Recency, Frequency, Monetary)\n- Spending\n- Category Preference\n- Overall\n\nAdditionally, if you have a specific timeframe in mind for the analysis, please let me know. The available options for the timeframe are:\n\n- 30 days\n- 90 days\n- 180 days\n- 365 days (default)",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "marketSegmentation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Get me details of the product CAN USB FD Adapter (GC-CAN-USB-FD)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_ZPapsTsFZAeJiKYciVKyXpGk",
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation",
+                      "arguments": "{\"productName\":\"CAN USB FD Adapter (GC-CAN-USB-FD)\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getProductInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Get use purchase history and order details for user with email ashwanth.saie@gmail.com",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_hhUL1E45xBPMJ6EgsCqtRKgl",
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation",
+                      "arguments": "{\"searchQuery\":\"ashwanth.saie@gmail.com\",\"searchType\":\"email\",\"infoType\":\"orders\"}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "getUserAndOrderInformation"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Perform Inventory Management",
+              "output": {
+                "role": "assistant",
+                "content": "To perform inventory management, I will check the inventory levels for all products and identify any items that are out of stock. Please hold on for a moment while I gather that information. \n\nIf you have any specific products or categories in mind that you want me to focus on, please let me know!",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "checkInventory"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Send email to ashwanth.saie@gmail.com saying happy birthday as subject and a small poem within content.",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_t4WA1vH58rY0YDdjkCkJDKQR",
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail",
+                      "arguments": "{\"recipient\":{\"name\":\"Ashwanth\",\"email\":\"ashwanth.saie@gmail.com\"},\"emailContent\":{\"subject\":\"Happy Birthday\",\"preheaderText\":\"Wishing you a wonderful birthday!\",\"mainContent\":\"On this special day, we celebrate you,\\nWith joy and laughter, and wishes so true.\\nMay your year ahead be filled with delight,\\nHappy birthday to you, shine ever so bright!\"}}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "sendEmail"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Give me product recommendations forApple AirPods with Charging Case (Wired)",
+              "output": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "id": "call_rg8CQXDnl3HRxjJwL8OznnbW",
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations",
+                      "arguments": "{\"products\":[{\"name\":\"Apple AirPods with Charging Case (Wired)\"}]}"
+                    }
+                  }
+                ],
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "productRecommendations"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            },
+            {
+              "input": "Perform Churn Analysis on our Customer Base",
+              "output": {
+                "role": "assistant",
+                "content": "To perform the churn analysis, I need to know how many days of inactivity you would like to consider for identifying customers at risk of churning. The default is 30 days. Would you like to proceed with that, or do you have a different timeframe in mind?",
+                "refusal": null
+              },
+              "expected": {
+                "role": "assistant",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "churnAnalysis"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-02-28T14:57:30.838Z"
+            }
+          ],
+          "score": 0.7,
+          "createdAt": "2025-02-28T14:57:30.838Z"
+        }
+      ]
+    }
+  ]
+}

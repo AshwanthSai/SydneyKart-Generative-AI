@@ -117,8 +117,6 @@ import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/auth.js";
 import orderRoutes from "./routes/order.js";
 import paymentRoutes from "./routes/payment.js";
-import { OpenAI } from "./controllers/AI_Controller.js";
-
 
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
@@ -137,7 +135,6 @@ const server = app.listen(process.env.PORT, () => {
 
 /* Setting up Socket IO Server for AI Chat Assistant  */
 const io = setupSocket(server);
-console.log('Socket.IO initialized:', !!io);
 
 //Handle Unhandled Promise rejections
 process.on("unhandledRejection", (err) => {

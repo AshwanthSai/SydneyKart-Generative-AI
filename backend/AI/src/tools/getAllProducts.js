@@ -7,9 +7,10 @@ export const getAllProductsDefinition = {
 }
 
 export const getAllProducts = async (prompt, socket) => {
-  if(socket?.user?.role !== "admin"){
+  if(socket?.user?.isAdmin === false) {
     return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   }
+  
   try {
     const response = await axios.get(`${process.env.BACKEND_URL}/ingest/products`);
     // Clean up and supply only relevant product data

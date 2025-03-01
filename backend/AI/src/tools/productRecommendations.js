@@ -41,9 +41,9 @@ export const productRecommendationsDefinition = {
 };
 
 export const productRecommendations = async (prompt, socket) => {
-  if(socket?.user?.role !== "admin"){
-    return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
-  }
+  // if(socket?.user?.role !== "admin"){
+  //   return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
+  // }
   showLoader({status: "stop",socket})
   showLoader({status: "status", message : 'Analyzing..', socket})
   try {
@@ -69,7 +69,10 @@ export const productRecommendations = async (prompt, socket) => {
           image: metadata.images?.[0]?.url
         }))
         .filter(item => item.name.toLowerCase() !== product.name.toLowerCase())
-        .slice(0, 2); // Get top 2 after filtering out original product
+        .slice(0, 4); // Get top 2 after filtering out original product
+
+      similarItems.shift() // First Item will be same item from RAG
+      showLoader({status: "stop",socket})
 
       return {
         originalProduct: product.name,

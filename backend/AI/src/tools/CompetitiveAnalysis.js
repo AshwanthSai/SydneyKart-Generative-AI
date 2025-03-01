@@ -136,7 +136,7 @@ const fetchJobResults = async (jobId, token) => {
 };
 
 export const competitorAnalysis = async (prompt, socket) => {
-  if(socket?.user?.role !== "admin"){
+  if(socket?.user?.isAdmin === false) {
     return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   }
   

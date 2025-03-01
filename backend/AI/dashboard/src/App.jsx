@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ExperimentGraph from './components/ExperimentGraph'
-import resultsData from '../../results.json'
+import resultsData from "../../evals/testResults.json"
 import './App.css'
 
 const App = () => {

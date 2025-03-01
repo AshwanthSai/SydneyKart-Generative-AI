@@ -11,7 +11,7 @@ import { showLoader, logMessage } from './ui.js'
 
 /* 
   If this function is being run, then the history is at the state of 
-  an Image generation tool call, all other tool calls do not need an approval and will 
+  an send email tool call, all other tool calls do not need an approval and will 
   follow the normal flow
   Since it is in a tool call state, we have to add a tool call result before normal execution
   Remember the Tool Call Flow
@@ -73,9 +73,9 @@ export const handleApprovalFlow = async ({ userMessage, socket}) => {
 /* 
   RunAgent Entire Flow
     - Check if in Approval State -> 
-      Find last message, check the name of the tool call,
-        If anything else than Generate Images, Return
-      Pass User Message to Approval Check LLM 
+        Find last message, check the name of the tool call,
+          If anything else than Generate Images, Return
+        Pass User Message to Approval Check LLM 
     - Add present user message to DB
     - Run LLM with entire context
     - Save Response to DB
@@ -95,7 +95,6 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
   }
   // If in a Generate Image tool call state, we will send in a Yes or No as prompt to restart Chat
   const isApprovalState = await handleApprovalFlow({ userMessage, socket})
-  console.log(`Here 2`)
   /* 
     If our present state is not a Generate Image Tool Call State, 
     Continue Normal Flow, Add user message to Context and runLLM 

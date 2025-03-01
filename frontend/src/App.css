@@ -795,3 +795,54 @@ BootStrap Testing Classes
     content: "XXL";
   }
 } */
+
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-button {
+    color:#FFFFFF;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.control-button:hover {
+    color: #FF0000;
+}
+
+.chatWrapper.expanded {
+    width: 40vw;
+    height: 60vh;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+}
+
+.clear-button {
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-button:hover {
+    color: #ff4444;
+}

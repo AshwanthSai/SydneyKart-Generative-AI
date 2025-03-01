@@ -2,7 +2,7 @@ import { tools as allTools } from '../../index.js'
 import { runLLM } from '../../src/llm.js'
 import { ToolCallMatch } from '../scorer.js'
 import { runEval } from '../evalTools.js'
-import { getDadJokes } from '../../src/tools/dadJokes.js'
+import { createSupportTicket } from '../../src/tools/createSupportTicket.js'
 
 const createToolCallMessage = (toolName) => {
   return {
@@ -19,12 +19,12 @@ const createToolCallMessage = (toolName) => {
   }
 }
 
-runEval('Dad Joke', {
+runEval('Create Support Ticket', {
   task: (input) => runLLM([{ role: 'user', content: input }], allTools),
   data: [
     {
-      input: 'Tell me a dad joke',
-      expected: createToolCallMessage(getDadJokes),
+      input: 'Create a supportTicket, asking for Refund of order ID5151+15 for product CAN USB FD Adapter (GC-CAN-USB-FD), Mention immediate response',
+      expected: createToolCallMessage(createSupportTicket),
     },
   ],
   scorers: [ToolCallMatch],

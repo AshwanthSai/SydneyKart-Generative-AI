@@ -5,12 +5,10 @@ on:
     branches: [ main ]
     paths:
       - 'backend/**'
-      - 'frontend/**'
   pull_request:
     branches: [ main ]
     paths:
       - 'backend/**'
-      - 'frontend/**'
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/sydneykart-backend
@@ -98,5 +96,5 @@ jobs:
             -e PRICE_API_KEY="${{ secrets.PRICE_API_KEY }}" \
             -e UPSTASH_VECTOR_REST_URL="${{ secrets.UPSTASH_VECTOR_REST_URL }}" \
             -e UPSTASH_VECTOR_REST_TOKEN="${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}" \
-            ${{ env.IMAGE_NAME }}:feature-backend-ci
+            ${{ env.IMAGE_NAME }}:main
       

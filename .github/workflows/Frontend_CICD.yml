@@ -1,10 +1,14 @@
 name: Frontend CI/CD
 
 on:
-  workflow_run:
-    workflows: ["Backend CI/CD"]  # Name of your backend workflow
-    types: [completed]
-    branches: [main]
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/sydneykart-frontend

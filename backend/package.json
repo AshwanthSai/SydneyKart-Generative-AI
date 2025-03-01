@@ -13,7 +13,7 @@
         "seederOrders": "cross-env NODE_ENV=DEVELOPMENT node seeder/DB/Orders/seeder.js",
         "AIseeder": "cross-env NODE_ENV=DEVELOPMENT node ./seeder/AIChatHistory/seeder.js",
         "startAI": "cross-env NODE_ENV=DEVELOPMENT cd backend/AI && node index.js",
-        "eval": "cross-env NODE_ENV=DEVELOPMENT cd ./AI && node evals/run.js",
+        "eval": "cross-env NODE_ENV=DEVELOPMENT node ./AI/evals/run.js",
         "ingest": "cross-env NODE_ENV=DEVELOPMENT cd backend/AI && node src/rag/ingest.js"
     },
     "author": "Ashwanth Sai",

@@ -34,14 +34,14 @@ export const tools = [
     type: 'function',
     function: analyzeSalesDefinition,
   },
-  {
+/*   {
     type: 'function',
     function: redditToolDefinition,
-  },
-  {
+  }, */
+/*   {
     type: 'function',
     function: generateImagesDefinition,
-  },
+  }, */
   {
     type: 'function',
     function: productRecommendationsDefinition,

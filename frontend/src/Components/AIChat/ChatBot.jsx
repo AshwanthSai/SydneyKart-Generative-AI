@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator, StatusList, Status, InputToolbox, AttachmentButton, SendButton, Avatar } from '@chatscope/chat-ui-kit-react';
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator, StatusList, Status, InputToolbox, AttachmentButton, SendButton, Avatar, Button } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { io } from "socket.io-client";
 import { getBaseUrl } from '../../utils/helper';
@@ -8,7 +8,11 @@ import { useSelector } from 'react-redux';
 
 const ChatBot = () => {
     const socketURL = getBaseUrl();
-    console.log(socketURL)
+    const [isFullScreen, setIsFullScreen] = useState(false);
+
+    const toggleFullScreen = () => {
+        setIsFullScreen(!isFullScreen);
+    };
     const credentials = useSelector(state => state.auth.user);
     // useRef does no re-render on value change + updates synchronously 
     const socketRef = useRef(null);
@@ -24,7 +28,7 @@ const ChatBot = () => {
     const [initialTyping, setInitialTyping] = useState(true);
     const [isMinimized, setIsMinimized] = useState(true);
   
-  
+
 
     useEffect(() => {
       /* Only show intro after 2 seconds */
@@ -73,7 +77,6 @@ const ChatBot = () => {
 
       // Current.on is basically an event listener
       socketRef.current.on('message', (message) => {
-          console.log(message)
           setIsTyping(false);
           setIsTypingContent("")
           // Add received message to primary list
@@ -149,29 +152,57 @@ const ChatBot = () => {
     setInputMessage(textContent);
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setShowGreeting(false);
+    // Optionally show a system message
+    setMessages([{
+        message: "Chat history cleared",
+        sentTime: new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+        }),
+        sender: "System",
+        direction: "incoming"
+    }]);
+  };
 
   return (
-    <div className={`chatWrapper ${isMinimized ? 'minimized' : ''}`}>
-      <div className="chat-header" onClick={toggleMinimize}>
-        <h5>Sai - AI Assistant </h5>
-          {isMinimized ? 
-            (
-              <Avatar
-                name="Sai"
-                size="md"
-                src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                status="eager"
-              />
-            ) : (
-              <Avatar
-                name="Sai"
-                size="md"
-                src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                status="available"
-              />
-            )
-          }
-      </div>
+    <div className={`chatWrapper ${isMinimized ? 'minimized' : ''} ${isFullScreen ? 'expanded' : ''}`}
+    >
+        <div className="chat-header" >
+            <div className="header-left">
+                <h5>Sai - AI Assistant</h5>
+            </div>
+            <div className="header-right">
+                {!isMinimized && (
+                  <>
+                    <button 
+                        className="clear-button"
+                        onClick={handleClearChat}
+                        title="Clear chat history"
+                            >
+                        🗑️
+                    </button>
+                    <button 
+                        className="control-button"
+                        onClick={toggleFullScreen}
+                        title={isFullScreen ? "Reduce Size" : "Expand Size"}
+                    >
+                        {isFullScreen ? '⊟' : '⊞'}
+                    </button>
+                  </>
+                )}
+                <Avatar
+                    name="Sai"
+                    size="md"
+                    src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
+                    status={isMinimized ? "eager" : "available"}
+                    onClick={toggleMinimize}
+                />
+            </div>
+        </div>
       <div className="chat-content">
           <MainContainer>
             <ChatContainer>
@@ -201,6 +232,7 @@ const ChatBot = () => {
                 value={inputMessage}
                 attachButton={false}
                 autoFocus={true} 
+                fancyScroll={true}
               />
             </ChatContainer>
           </MainContainer>

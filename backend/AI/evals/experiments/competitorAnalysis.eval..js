@@ -1,8 +1,9 @@
 import { tools as allTools } from '../../index.js'
 import { runLLM } from '../../src/llm.js'
-import { getRedditPost, redditToolDefinition } from '../../src/tools/reddit.js'
 import { ToolCallMatch } from '../scorer.js'
 import { runEval } from '../evalTools.js'
+import { generateImages } from '../../src/tools/generateImages.js'
+import { competitorAnalysis } from '../../src/tools/CompetitiveAnalysis.js'
 
 const createToolCallMessage = (toolName) => {
   return {
@@ -19,12 +20,12 @@ const createToolCallMessage = (toolName) => {
   }
 }
 
-runEval('Reddit', {
+runEval('Competitor Analysis', {
   task: (input) => runLLM([{ role: 'user', content: input }], allTools),
   data: [
     {
-      input: 'Show me the last 5 posts from Reddit',
-      expected: createToolCallMessage(getRedditPost),
+      input: 'Perform Competitor Analysis on CHARMOUNT Full Motion TV Wall Mount Swivel',
+      expected: createToolCallMessage(competitorAnalysis),
     },
   ],
   scorers: [ToolCallMatch],

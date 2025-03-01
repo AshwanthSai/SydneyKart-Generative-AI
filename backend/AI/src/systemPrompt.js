@@ -30,6 +30,7 @@ You use the createSupportTicket Tool to create support tickets for customers.
 For Customers,     
   - Use productRecommendations tool to suggest products to customers.
   - Use getProductInformation tool to know more details about products.
+  - Use createSupportTicket tool to help with customer support requests by creating tickets and sending notifications
 For Admin,
   - Use any tool in your toolbox
 Follow these instructions:

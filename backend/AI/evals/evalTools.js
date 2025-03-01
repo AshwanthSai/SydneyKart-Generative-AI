@@ -1,19 +1,45 @@
 import 'dotenv/config'
 import chalk from 'chalk'
 import { JSONFilePreset } from 'lowdb/node'
+import { fileURLToPath, pathToFileURL } from 'url'
+import { dirname, join } from 'path'
+import { existsSync, mkdirSync } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /* 
-  We store eval results in results.json
+  We store eval results in results.json, not the database
   In order to plot a graph, we need present result + old results
 */
+
 const getDb = async () => {
   const defaultData = {
-    experiments: [],
+    experiments: []
   }
-  const db = await JSONFilePreset('results.json', defaultData)
-  return db
+  
+  try {
+    // Ensure directory exists
+    const dir = dirname(__dirname);
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
+    }
+    
+    // Create results.json in the evals directory
+    const resultsPath = join(__dirname, './testResults.json');
+    const db = await JSONFilePreset(resultsPath, defaultData);
+    
+    // Initialize file if it doesn't exist
+    if (!db.data) {
+      await db.write();
+    }
+    
+    return db;
+  } catch (error) {
+    console.error('Error creating/accessing database:', error);
+    throw error;
+  }
 }
-
 /* 
   Calculate average score of a run
   To show in CLI
@@ -46,17 +72,17 @@ export const saveSet = async (experimentName, runs) => {
     ...run,
     createdAt: new Date().toISOString(),
   }))
-
+  
   const newSet = {
     runs: runsWithTimestamp,
     score: calculateAvgScore(runsWithTimestamp),
     createdAt: new Date().toISOString(),
   }
-
+  
   const existingExperiment = db.data.experiments.find(
     (e) => e.name === experimentName
   )
-
+  
   if (existingExperiment) {
     existingExperiment.sets.push(newSet)
   } else {
@@ -65,7 +91,7 @@ export const saveSet = async (experimentName, runs) => {
       sets: [newSet],
     })
   }
-  await db.write()
+  return await db.write()
 }
 
 /*
@@ -139,7 +165,6 @@ export const runEval = async (experiment, { task, data, scorers }) => {
     `Difference: ${scoreDiff > 0 ? '+' : ''}${color(scoreDiff.toFixed(2))}`
   )
   console.log()
-
   // Save results to results.json
   await saveSet(experiment, results)
   return results
