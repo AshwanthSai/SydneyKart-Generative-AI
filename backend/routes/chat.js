@@ -32,17 +32,20 @@ const setupSocket = (server, userId) => {
   });
 
 
+  /*   
+  Use for Debugging
   io.use((socket, next) => {
-    console.log('Socket connection attempt:', {
-      id: socket.id,
-      handshake: {
-        headers: socket.handshake.headers,
-        query: socket.handshake.query,
-        auth: socket.handshake.auth
-      }
-    });
-    next();
-  });
+      console.log('Socket connection attempt:', {
+        id: socket.id,
+        handshake: {
+          headers: socket.handshake.headers,
+          query: socket.handshake.query,
+          auth: socket.handshake.auth
+        }
+      });
+      next();
+    }); 
+  */
 
   // Middleware to extract and verify token from cookies
   io.use(async (socket, next) => {
