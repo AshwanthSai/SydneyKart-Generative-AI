@@ -1,7 +1,6 @@
 
 # SydneyKart
-
-
+![image](https://github.com/user-attachments/assets/2a72ba79-e75d-4324-b493-3385ab545e11)
 
 
 ![contributions](https://img.shields.io/badge/all_contributors-1-orange.svg)
@@ -28,12 +27,15 @@ Welcome to my project! Here, I'll provide you with a brief overview of what insp
         2. Instant Information: Quickly access detailed product specifications, pricing, and availability.
         3. Effortless Support: Seamlessly create support tickets for inquiries or issues, ensuring fast resolution.
     
-        For Sellers
+        For Sellers / Admins
         1. Sales & Sentiment Analysis: Uncover actionable insights from sales trends and customer feedback.
         2. Targeted Strategies: Leverage market segmentation for effective, data-driven marketing campaigns.
         3. Smart Inventory Management: Receive real-time low-stock alerts and optimize inventory levels.
         4. Competitor Monitoring: Stay ahead by tracking competitor activities and market shifts.
         5. Automated Support Management: Streamline customer support operations to reduce manual workload.
+        6. Perform Churn Analysis: Analyze customer churn to understand trends and reasons.
+        7. Retrieve User and Order Information: Get detailed user and order history via Natural Language.
+        8. Send Targeted Emails: Send proactive emails to customers, with recommendations, offers or replies to support tickets.
 
 - **What I Learned** : Throughout the development process, I learned:
 
