@@ -18,7 +18,6 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '../config/config.env') });
 
 const app = express();
-
 /* 
   Prevent DDOS and Bots
 */
