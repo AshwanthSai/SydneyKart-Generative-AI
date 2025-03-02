@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import MetaData from "../Layout/MetaData";
 
 const Login = () => {
-  const[email, setEmail] = useState("");
-  const[password, setPassword] = useState("");
+  const[email, setEmail] = useState("test@admin.com");
+  const[password, setPassword] = useState("test@admin.com");
   const { user, isAuthenticated } = useSelector((state) => state.auth); 
   const navigate = useNavigate();
 
@@ -26,7 +26,8 @@ const Login = () => {
       // - Return the successful response data
       // - Throw an error if the request fails
       await login(loginData).unwrap();
-      console.log("Calling Completed")
+      navigate('/', { replace: true });  // Replace current entry in history
+      window.location.reload();  // Reload after navigation
     } catch (err){
       console.error(err)
     }
