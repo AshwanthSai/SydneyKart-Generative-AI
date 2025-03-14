@@ -151,8 +151,7 @@ export const marketSegmentation = async (prompt, socket) => {
         return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
     }
 
-    showLoader({status: "stop",socket})
-    showLoader({status: "status", message : 'Analyzing..', socket})
+    showLoader({status: "status", message : 'Thinking..', socket})
     /* 
         Timeframe will be overwritten as per prompt, 365 days is the default value.
     */
@@ -230,7 +229,6 @@ export const marketSegmentation = async (prompt, socket) => {
 4. At Risk: Re-engagement campaign needed
 5. Lost: Win-back campaign with special offers
 `;
-        showLoader({status: "stop",socket})
         return analysis;
 
     } catch (error) {

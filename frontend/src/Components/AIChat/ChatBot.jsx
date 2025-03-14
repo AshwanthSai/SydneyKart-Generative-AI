@@ -123,6 +123,7 @@ const ChatBot = () => {
     }, [isTyping,isTypingContent])
 
     const handleSend = (innerHtml, textContent, innerText, nodes) => {
+      setIsTypingContent("Thinking..")
       if (socketRef.current) {
         // Add user message to chat
         setMessages(prev => [...prev, {

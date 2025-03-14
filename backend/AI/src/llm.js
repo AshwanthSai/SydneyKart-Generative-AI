@@ -13,8 +13,6 @@ import { systemPrompt } from './systemPrompt.js'
     Each run of LLM, we check for a summary, if not present we do not add it. 
 */
 
-
-
 export const runLLM = async (messages, tools, userId) => {
   const summary = await getSummaryFromDb(userId)
   const response = await openai.chat.completions.create({

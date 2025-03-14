@@ -15,8 +15,11 @@ const Header = () => {
   const logoutHandler = async() => {
     try {
       await triggerLogout().unwrap();
+      /* Removing any Shipping Information */
+      localStorage.clear();
+      // sessionStorage might also contain sensitive data
+      sessionStorage.clear();
       navigate("/");  // Navigate after successful logout
-      console.log("Logout successful");
     } catch (err) {
       console.error("Logout failed:", err);
     }

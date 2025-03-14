@@ -11,7 +11,6 @@ import { setIsAuthenticated, setUser } from '../features/authSlice'
 */
 export const authApi = createApi({
   reducerPath: 'authApi',
-  keepUnusedDataFor: 300, // Cache for 5 minutes
   baseQuery: fetchBaseQuery({ 
     baseUrl: process.env.REACT_APP_ENV === "production" ? process.env.REACT_APP_PROD_BACKEND_URL : process.env.REACT_APP_DEV_BACKEND_URL,
     /* 
@@ -33,10 +32,19 @@ export const authApi = createApi({
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
-          //Checking if request is fullfilled
-          await queryFulfilled
-          // `onSuccess` side-effect
-          await dispatch(userApi.endpoints.getUserDetails.initiate(null))
+        //Checking if request is fullfilled
+        await queryFulfilled
+        // `onSuccess` side-effect
+
+        await dispatch(setIsAuthenticated(true));
+        // Then fetch user details
+        try {
+          await dispatch(userApi.endpoints.getUserDetails.initiate(null));
+        } catch (userError) {
+          console.error('Failed to fetch user details:', userError);
+          // Optionally reset auth state if user details fetch fails
+          await dispatch(setIsAuthenticated(false));
+        }
         } catch (err) {
           console.log("Something Wrong")
           // `onError` side-effect

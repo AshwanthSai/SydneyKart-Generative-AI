@@ -79,8 +79,7 @@ const DEFAULT_COMPANY_INFO = {
 };
 
 export const createSupportTicket = async (prompt, socket) => {
-  showLoader({ status: "status", message: 'Processing your feedback...', socket })
-
+  showLoader({status: "status", message : 'Thinking..', socket})
   try {
     const { ticketDetails } = JSON.parse(prompt);
     

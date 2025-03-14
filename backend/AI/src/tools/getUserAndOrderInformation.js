@@ -33,6 +33,7 @@ export const getUserAndOrderInformation = async (prompt, socket) => {
     if(socket?.user?.isAdmin === false) {
         return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
     }
+    showLoader({status: "status", message : 'Thinking..', socket})
     const parameters = JSON.parse(prompt);
     const { searchQuery, searchType = 'email', infoType = 'basic' } = parameters;
 

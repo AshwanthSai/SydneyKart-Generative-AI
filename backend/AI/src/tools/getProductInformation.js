@@ -30,6 +30,7 @@ export const getProductInformationDefinition = {
 - Includes fuzzy search for product names
 */
 export const getProductInformation = async (prompt, socket) => {
+    showLoader({status: "status", message : 'Thinking..', socket})
     const parameters = JSON.parse(prompt);
     const { productName, infoType = 'full' } = parameters;
 

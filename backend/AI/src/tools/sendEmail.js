@@ -84,8 +84,7 @@ export const sendEmail = async (prompt, socket) => {
   if(socket?.user?.isAdmin === false) {
     return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   }
-  showLoader({status: "stop",socket})
-  showLoader({status: "status", message : 'Analyzing..', socket})
+  showLoader({status: "status", message : 'Thinking..', socket})
   try {
     const { recipient, emailContent, companyInfo = DEFAULT_COMPANY_INFO} = JSON.parse(prompt);
 
@@ -110,7 +109,6 @@ export const sendEmail = async (prompt, socket) => {
       message: htmlEmail,
     });
     
-    showLoader({status: "stop",socket})
     return JSON.stringify({
       success: true,
       message: `Email sent successfully to ${recipient.email}`

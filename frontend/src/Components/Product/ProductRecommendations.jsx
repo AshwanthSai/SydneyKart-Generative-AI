@@ -6,10 +6,11 @@ import NotFound from "../Admin/NotFound";
 import { Loader } from "../Layout/Loader";
 
 const ProductRecommendations = ({item}) => {
+  console.log(item)
   const [productRecommendations, {data, isLoading, error, isError}] = useProductRecommendationsMutation();
 
-  useEffect(() => {
-    productRecommendations(item)
+  useEffect(async() => {
+    await productRecommendations(item)
     console.log(item)
     console.log("Call Triggered")
     console.log(data)
@@ -18,6 +19,7 @@ const ProductRecommendations = ({item}) => {
   useEffect(() => {
     if(isError) {
       toast.error(error.data.message)
+      console.log(error)
     }
   }, [isError,error])
 
@@ -25,7 +27,7 @@ const ProductRecommendations = ({item}) => {
     return <Loader/>
   }
 
-  if (error && error?.status == 404) {
+  if (error && error?.status === 404) {
     return <NotFound />;
   }
 

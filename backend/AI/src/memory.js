@@ -63,19 +63,41 @@ export const getDb = async (userId) => {
       // Convert the newly created document to plain object
       db = db.toObject();
     }
-    /* 
-      Self Healing Mechanism
-        - If DB is saved in a state, where the last call is a unfullfilled tool call
-        - It will break the LLM Context
-    */
-    if(db?.messages?.at(-1)?.role === 'tool') {
-      db.messages.pop()
-    }
     return db;
   } catch (error) {
     console.error('Error in getDb:', error);
     throw error;
   }
+}
+
+// Add this function before getDb
+export const performSelfHealing = async (userId) => {
+  const db = await getDb(userId)
+  if (db?.messages?.length > 0) {
+    const lastMessage = db.messages[db.messages.length - 1];
+    
+    const needsHealing = 
+      lastMessage?.role === 'tool' || 
+      (lastMessage?.role === 'assistant' && 
+       (lastMessage.content === null || 
+        lastMessage.content === '' ||
+        lastMessage?.tool_calls?.length > 0));
+
+    if (needsHealing) {
+      console.log('Self-healing: Removing incomplete message:', lastMessage);
+      db.messages.pop();
+      // Update using findOneAndUpdate
+      return await Chat.findOneAndUpdate(
+        { user: userId },
+        { messages: db.messages },
+        { 
+          new: true,
+          runValidators: true
+        }
+      );
+    }
+  }
+  return db;
 }
 
 // For saving, create a separate function

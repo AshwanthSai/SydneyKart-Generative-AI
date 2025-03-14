@@ -5,15 +5,18 @@ import { createSupportTicket } from './tools/createSupportTicket.js'
 import { marketSegmentation } from './tools/customerSegmentation.js'
 import { customerSentimentAnalysis } from './tools/customerSentimentAnalysis.js'
 import { generateSalesChart } from './tools/generateImages.js'
+import { getAllProducts } from './tools/getAllProducts.js'
 import { getProductInformation } from './tools/getProductInformation.js'
 import { getUserAndOrderInformation } from './tools/getUserAndOrderInformation.js'
 import { checkInventory } from './tools/inventoryManagement.js'
 import { productRecommendations } from './tools/productRecommendations.js'
 import { getRedditPost } from './tools/reddit.js'
 import { sendEmail } from './tools/sendEmail.js'
+import { showLoader } from './ui.js'
 
 
 export const runTool = (userMessage, tool, socket) => {
+  showLoader({status: "status", message : 'Thinking..', socket})
   let input = {
     userMessage,
     tool,

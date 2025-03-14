@@ -2,6 +2,7 @@ import { runApprovalCheck, runLLM } from './llm.js'
 import {
   addMessagesToDb,
   getMessagesFromDb,
+  performSelfHealing,
   saveToolResponse,
 } from './memory.js'
 import { runTool } from './toolRunner.js'
@@ -39,7 +40,7 @@ export const handleApprovalFlow = async ({ userMessage, socket}) => {
   const toolCall = latestMessage?.tool_calls?.[0] // Grab the tool call
   // We only need approval for generateImages tool
   if (!toolCall || toolCall.function.name != sendEmailDefinition.name) {
-    return
+    return false;
   }
   // const loader = showLoader('Processing Approval')
   showLoader({status: "status", message : 'Processing Approval', socket})
@@ -100,6 +101,7 @@ export const runAgent = async ({ userMessage, tools, socket}) => {
     Continue Normal Flow, Add user message to Context and runLLM 
   */
   if (!isApprovalState) {
+    await performSelfHealing(userId)
     await addMessagesToDb({userId, messages:[{ role: 'user', content: userMessage }]})
   }
 

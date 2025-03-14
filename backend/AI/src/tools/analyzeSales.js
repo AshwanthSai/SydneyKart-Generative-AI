@@ -53,14 +53,10 @@ export const analyzeSalesDefinition = {
 };
 
 export const analyzeSales = async (prompt, socket) => {
-  console.log(`Here 5`)
-  console.log(socket?.user)
   if(socket?.user?.isAdmin === false) {
     return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   }
-  // Stop any existing status
-  showLoader({status: "stop",socket})
-  showLoader({status: "status", message : 'Analyzing..', socket})
+  showLoader({status: "status", message : 'Thinking..', socket})
   try {
     let data = JSON.parse(prompt);
     
@@ -110,11 +106,8 @@ export const analyzeSales = async (prompt, socket) => {
     const salesData = response.data;
       // Stop any existing status
     // Stop any existing status
-    logMessage({
-      message:  `📊 Analysis Complete`,
-      socket
-    });
     showLoader({status: "stop",socket})
+    
     return JSON.stringify(salesData, null, 2);
   } catch (error) {
     console.error('Error analyzing sales:', error);

@@ -94,7 +94,16 @@ export const productApi = createApi({
         method: 'POST',
         body : {product},
       }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log('Request completed successfully:', data);
+        } catch (error) {
+          console.error('Request failed:', error);
+        }
+      },
       transformResponse: (response) => {
+        console.log(response)
         return response.results.map(item => ({
           id: item.id,
           score: item.score,

@@ -44,9 +44,8 @@ export const productRecommendations = async (prompt, socket) => {
   // if(socket?.user?.role !== "admin"){
   //   return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   // }
-  showLoader({status: "stop",socket})
-  showLoader({status: "status", message : 'Analyzing..', socket})
   try {
+    showLoader({status: "status", message : 'Thinking..', socket})
     const { products, sendEmail = false, adminEmail = 'ashwanth.saie@gmail.com' } = JSON.parse(prompt);
     
     // Process each product using RAG
@@ -72,7 +71,6 @@ export const productRecommendations = async (prompt, socket) => {
         .slice(0, 4); // Get top 2 after filtering out original product
 
       similarItems.shift() // First Item will be same item from RAG
-      showLoader({status: "stop",socket})
 
       return {
         originalProduct: product.name,
@@ -138,7 +136,6 @@ export const productRecommendations = async (prompt, socket) => {
         })
       });
     }
-    showLoader({status: "stop",socket})
     
     return JSON.stringify({
       status: 'success',

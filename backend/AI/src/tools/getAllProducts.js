@@ -11,6 +11,7 @@ export const getAllProducts = async (prompt, socket) => {
     return "You do not have an Admin role to perform this action, Kindly log in with the correct credentials"
   }
   
+  showLoader({status: "status", message : 'Thinking..', socket})
   try {
     const response = await axios.get(`${process.env.BACKEND_URL}/ingest/products`);
     // Clean up and supply only relevant product data
