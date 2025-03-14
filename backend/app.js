@@ -17,6 +17,9 @@ const __dirname = dirname(__filename);
 // Load env vars with absolute path
 dotenv.config({ path: join(__dirname, '../config/config.env') });
 
+
+console.log(process.env)
+
 const app = express();
 /* 
   Prevent DDOS and Bots
