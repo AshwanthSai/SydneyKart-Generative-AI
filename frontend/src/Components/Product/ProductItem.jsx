@@ -38,7 +38,7 @@ const ProductItem = ({recommendation, product, columnSize}) => {
                 </span>
             </div>
             <p className="card-text mt-2">{product?.price}</p> {/* Price */}
-                <Link to = {recommendation ? `${product?._id}` : `products/${product?._id}`} id="view_btn" className="btn btn-block"> {/* View Details Button */}
+                <Link to = {recommendation ? `/products/${product?._id}` : `products/${product?._id}`} id="view_btn" className="btn btn-block"> {/* View Details Button */}
                     View Details
                 </Link>
             </div>

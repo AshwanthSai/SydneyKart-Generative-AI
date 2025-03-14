@@ -15,7 +15,6 @@ import ProductRecommendations from "./ProductRecommendations";
 const ProductDetails = () => {
       const {id} = useParams();
       const {data, isLoading, error, isError} = useGetProductDetailsQuery(id);
-      console.log(data)
       const {data: userPurchased } = useCanUserReviewOrderQuery(id)
       const canReview = userPurchased?.canReview || false;
 
@@ -24,6 +23,10 @@ const ProductDetails = () => {
       const [productCount, setProductCount] = useState(1);
       const isAuthenticated = useSelector(store => store.auth.isAuthenticated);
     
+      useEffect(() => {
+        console.log("Component Rendered")
+      }, [])
+
       useEffect(() => {
         if(isError) {
           toast.error(error?.data?.message)

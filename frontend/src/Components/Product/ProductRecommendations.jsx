@@ -6,20 +6,24 @@ import NotFound from "../Admin/NotFound";
 import { Loader } from "../Layout/Loader";
 
 const ProductRecommendations = ({item}) => {
-  console.log(item)
   const [productRecommendations, {data, isLoading, error, isError}] = useProductRecommendationsMutation();
 
-  useEffect(async() => {
-    await productRecommendations(item)
-    console.log(item)
-    console.log("Call Triggered")
-    console.log(data)
-  },[item,productRecommendations])
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      try {
+        await productRecommendations(item);
+        console.log("Call Triggered", item);
+      } catch (err) {
+        console.error("Failed to fetch recommendations:", err);
+      }
+    };
 
+    fetchRecommendations();
+  }, [item, productRecommendations]);
+  
   useEffect(() => {
     if(isError) {
       toast.error(error.data.message)
-      console.log(error)
     }
   }, [isError,error])
 
